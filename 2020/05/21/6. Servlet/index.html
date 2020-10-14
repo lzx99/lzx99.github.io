@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="Web服务器和应用服务器web服务器狭义上就是指HTTP服务器，单独用来处理静态页面，用来处理HTTP请求。如Apache，Nginx 应用服务器是web应用执行的容器，一般也能处理HTTP请求。如Tomcat（Servlet&#x2F;JSP容器）等，应用服务器通常放在web服务器的后面，强化对静态页面的处理。通过web服务器的CGI、FastCGI（PHP，php-form实现）、ISAPI（微软）接口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lee&#39;s Blog">
+<meta property="og:url" content="http://example.com/2020/05/21/6.%20Servlet/index.html">
+<meta property="og:site_name" content="Lee&#39;s Blog">
+<meta property="og:description" content="Web服务器和应用服务器web服务器狭义上就是指HTTP服务器，单独用来处理静态页面，用来处理HTTP请求。如Apache，Nginx 应用服务器是web应用执行的容器，一般也能处理HTTP请求。如Tomcat（Servlet&#x2F;JSP容器）等，应用服务器通常放在web服务器的后面，强化对静态页面的处理。通过web服务器的CGI、FastCGI（PHP，php-form实现）、ISAPI（微软）接口">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.ibm.com/developerworks/cn/java/j-lo-tomcat1/image001.gif">
+<meta property="article:published_time" content="2020-05-21T02:43:42.000Z">
+<meta property="article:modified_time" content="2020-10-13T02:42:09.120Z">
+<meta property="article:author" content="李柱新">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.ibm.com/developerworks/cn/java/j-lo-tomcat1/image001.gif">
+
+
+<link rel="canonical" href="http://example.com/2020/05/21/6.%20Servlet/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | Lee's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Lee's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">Web服务器和应用服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tomcat%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">tomcat的结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tomcat%E7%9A%84%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">tomcat的请求过程</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaWeb"><span class="nav-number">2.</span> <span class="nav-text">JavaWeb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet"><span class="nav-number">2.1.</span> <span class="nav-text">Servlet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter"><span class="nav-number">2.2.</span> <span class="nav-text">Filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Listener"><span class="nav-number">2.3.</span> <span class="nav-text">Listener</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jsp%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">2.4.</span> <span class="nav-text">Jsp基本语法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSP"><span class="nav-number">3.</span> <span class="nav-text">JSP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP%E4%B9%9D%E5%A4%A7%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.1.</span> <span class="nav-text">JSP九大内置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-response%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">1. response对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-request%E5%AF%B9%E8%B1%A1%EF%BC%88HttpServletRequest%EF%BC%89"><span class="nav-number">3.1.0.2.</span> <span class="nav-text">2. request对象（HttpServletRequest）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-ServletContext"><span class="nav-number">3.1.0.3.</span> <span class="nav-text">3. ServletContext</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-session%EF%BC%88HttpSession%EF%BC%89"><span class="nav-number">3.1.0.4.</span> <span class="nav-text">4. session（HttpSession）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.1.0.5.</span> <span class="nav-text">内置对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSP%E4%B8%89%E5%A4%A7%E6%8C%87%E4%BB%A4%E5%85%83%E7%B4%A0"><span class="nav-number">3.1.0.6.</span> <span class="nav-text">JSP三大指令元素</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EL%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text">EL表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%9F%9F%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.2.0.1.</span> <span class="nav-text">1. 域对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-param"><span class="nav-number">3.2.0.2.</span> <span class="nav-text">2. param</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-pageContext%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.2.0.3.</span> <span class="nav-text">3. pageContext对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-EL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.2.0.4.</span> <span class="nav-text">4. EL表达式运算符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSTL"><span class="nav-number">3.3.</span> <span class="nav-text">JSTL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#forEach%EF%BC%88%E8%BF%AD%E4%BB%A3%E6%A0%87%E7%AD%BE%EF%BC%89"><span class="nav-number">3.3.0.1.</span> <span class="nav-text">forEach（迭代标签）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lt-c-if-gt-%EF%BC%88%E6%9D%A1%E4%BB%B6%E6%A0%87%E7%AD%BE%EF%BC%89"><span class="nav-number">3.3.0.2.</span> <span class="nav-text">&lt;c:if&gt;（条件标签）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lt-c-choose-when-otherwise-gt"><span class="nav-number">3.3.0.3.</span> <span class="nav-text">&lt;c:choose-when-otherwise&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A0%87%E7%AD%BE%E5%BA%93"><span class="nav-number">3.3.0.4.</span> <span class="nav-text">格式化标签库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E7%AD%BE"><span class="nav-number">3.3.0.5.</span> <span class="nav-text">自定义标签</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">李柱新</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/05/21/6.%20Servlet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="李柱新">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lee's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-21 10:43:42" itemprop="dateCreated datePublished" datetime="2020-05-21T10:43:42+08:00">2020-05-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-10-13 10:42:09" itemprop="dateModified" datetime="2020-10-13T10:42:09+08:00">2020-10-13</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Web服务器和应用服务器"><a href="#Web服务器和应用服务器" class="headerlink" title="Web服务器和应用服务器"></a>Web服务器和应用服务器</h1><p><strong>web服务器狭义上就是指HTTP服务器，单独用来处理静态页面</strong>，用来处理HTTP请求。如<strong>Apache，Nginx</strong></p>
+<p><strong>应用服务器是web应用执行的容器</strong>，一般也能处理HTTP请求。如<strong>Tomcat</strong>（Servlet/JSP容器）等，<strong>应用服务器通常放在web服务器的后面</strong>，强化对静态页面的处理。通过web服务器的CGI、FastCGI（PHP，php-form实现）、ISAPI（微软）接口将JSP，ASP，PHP交给应用服务器解释并动态输出。</p>
+<p>主流的Java应用服务器（web容器）：Tomcat、jetty、Resin、开源的Jboss（EJB容器）、Sun公司的Glassfish、Weblogic+Websphere：商业，支持多种JavaEE标准</p>
+<p>相比于apache，nginx有更强的<strong>静态页面处理能力</strong>，适合通过反向代理来负载均衡。企业开发中常常使用Nginx+tomcat</p>
+<h4 id="tomcat的结构"><a href="#tomcat的结构" class="headerlink" title="tomcat的结构"></a>tomcat的结构</h4><p><img src="https://www.ibm.com/developerworks/cn/java/j-lo-tomcat1/image001.gif" alt="图 1.Tomcat 的总体结构"></p>
+<p>tomcat里有<strong>一个server</strong>，在Tomcat的server.xml中配置server标签的信息来配置server。</p>
+<p>server有<strong>一个至多个service</strong>（默认一个），service的核心组件是connector和container</p>
+<ul>
+<li><p><strong>connector</strong>：解析请求，并封装request和response两个对象。（底层创建socket接收请求）</p>
+<p>默认service自带两个connector，一个解析HTTP请求，一个解析AJP请求，与Apache服务器集成时，会采用AJP解析。</p>
+<p>tomcat不设置编码时，默认编码是iso8859-1，即tomcat默认以iso8859-1编码接收get参数。在connector中可以设置tomcat服务器的编码，这样请求</p>
+</li>
+<li><p><strong>container</strong>：servlet容器，有四种父子关系的container。connector过来的request根据容器pipiline-valve模式下到达请求service方法。</p>
+<p><strong>—engine</strong></p>
+<p><strong>—host</strong>：存放所有web项目的文件夹，appBase属性指定哪个文件夹为host容器，默认webapps：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">&quot;&quot;</span> <span class="attr">docBase</span>=<span class="string">&quot;webapps/web&quot;</span> <span class="attr">reloadable</span>=<span class="string">&quot;true&quot;</span>/&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p><strong>—contex</strong>t：一个web应用，初始化后就会初始化</p>
+<p><strong>—wrapper</strong>：对应一个servlet类，开启FilterChain对request和response对象过滤处理</p>
+</li>
+</ul>
+<h4 id="tomcat的请求过程"><a href="#tomcat的请求过程" class="headerlink" title="tomcat的请求过程"></a>tomcat的请求过程</h4><ul>
+<li><p>服务器启动后会依次初始化各容器，Context容器会读取项目中web.xml的映射来初始化wrapper。servlet的wrapper会封装一个InvokerServlet，jsp会封装JspServlet，静态资源封装一个DefaultServlet对象</p>
+</li>
+<li><p>收到请求后，connector根据请求信息创建request和response对象</p>
+</li>
+</ul>
+<ul>
+<li><p>请求在container层层根据请求的信息定位到wrapper，并通过里面的Filter</p>
+</li>
+<li><p>访问到service方法 / 取到静态页面</p>
+<p>当service方法中有输出流时，则会用response封装返回，connector发送到客户端</p>
+</li>
+</ul>
+<h1 id="JavaWeb"><a href="#JavaWeb" class="headerlink" title="JavaWeb"></a>JavaWeb</h1><p>JavaWeb开发的三大组件：Servlet，Filter和Listener，大部分web开发框架或者技术，底层都是这三大组件。</p>
+<p>Servlet设计之初定义为响应各种网络请求规范的接口，后来一直只实现在http协议上，即HttpServlet类。</p>
+<h2 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h2><p>创建类并继承HttpServlet类我们就创建了一个Servlet。</p>
+<p>映射原则：多个URL可以映射到一个Servlet上，但一个URL只能映射一个servlet，映射路径必须是绝对路径</p>
+<ul>
+<li><p>@WebServlet ( name=”testServlet”,vaule=”/test” loadonstart=1 , </p>
+<p>​                         initparam=@WebInitParam(name=”name”, value=”小明”) )</p>
+</li>
+<li><p>web.xml</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>name<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>jackson<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>TestServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.oracle.servlet.TestServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">init-param</span>&gt;</span> </span><br><span class="line">   		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>remoteAddress<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>202.97.233.50<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span> </span><br><span class="line">  	<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span> </span><br><span class="line">		<span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line">  </span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>TestServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  	<span class="comment">&lt;!-- 自定义的URL  建议带/servlet/ --&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/servlet/test<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>获取初始化参数，先获取<strong>ServletConfig</strong>对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String servletParam = <span class="keyword">this</span>.getServletConfig.getInitParameter(<span class="string">&quot;servletParam&quot;</span>)</span><br><span class="line">String contextParam = request.getServletContext().getInitParameter(<span class="string">&quot;contextParam&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>获取session对象：HttpSession session = request.getSession()</p>
+<p>获取servletContext对象：SerlvletContext application = request.getServletContext()</p>
+<p>​                                          request.getSession.getServletContext()</p>
+<p>​                                          this.getServletConfig.getServletContext()</p>
+<p>请求转发跳转：</p>
+<ul>
+<li>request.getRequestDispatcher(url).forward(request,response)，对应JSP动作中&lt;jsp:forward page=””/&gt;</li>
+<li>request.getRequestDispatcher(url).include(request,response)，对应JSP动作&lt;jsp:include page=””/&gt;</li>
+</ul>
+<p>重定向跳转（返回301）：response.sendRedirect(request.getContextPath+”/b.jsp”) </p>
+<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p>实现Filter接口就成为了过滤器，重写doFilter，拦截jsp和servlet请求，包括重定向请求，请求转发跳转请求</p>
+<ul>
+<li><p>使用web.xml配置，类似servlet</p>
+</li>
+<li><p>使用注解配置（实际开发）</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebFilter(&#123;&quot;*.jsp&quot;,&quot;/controller/*&quot;&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重写doFilter方法，filterchain.doFilter(request, response)写在最后放行，不放行，进行重定向跳转或者请求转发跳转就可以了</li>
+</ul>
+<h2 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a>Listener</h2><p>用一个类实现这些Listener接口就生成了对应的监听器</p>
+<ul>
+<li>HttpSessionListener接口</li>
+</ul>
+<p>当服务器创建了一个Session对象，执行实现类的createSession方法。通常用来坚挺在线人数</p>
+<p>最常见用处：<strong>统计当前在线人数</strong>，</p>
+<p>简易统计在线人数（不太行，一般用redis计数可以）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sessionCreated</span><span class="params">(HttpSessionEvent httpSessionEvent)</span> </span>&#123;</span><br><span class="line">   count++;</span><br><span class="line">   <span class="comment">//用这个监听器提供的event获取到session，再获取到application对象存入</span></span><br><span class="line">	httpSessonEvent.getSession().getServletContext().setAttribute(<span class="string">&quot;count&quot;</span>, count);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sessionDestroy</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ServletContextListener</li>
+</ul>
+<p>监听application对象的创建和销毁（服务器启动和销毁），服务器启动时想要启动一些多线程，放置数据，可以配置这个对象</p>
+<ul>
+<li>ServletContextAttributeListener</li>
+</ul>
+<p>监听application对象的属性操作，如新建，删除，修改一个Attribute属性触发</p>
+<h2 id="Jsp基本语法"><a href="#Jsp基本语法" class="headerlink" title="Jsp基本语法"></a>Jsp基本语法</h2><ol>
+<li><p><strong>&lt;%  java  %&gt; 自动放在生成servlet的service方法中</strong></p>
+</li>
+<li><p><strong>&lt;%!  java   %&gt;自动放在生成servlet中</strong> ，很少使用，因为很少定义全局变量，比如要写新的方法给service调用就写这里面，但是没必要把方法封装在jsp中，单独写一个类就行</p>
+</li>
+<li><p>**&lt;%= 有返回值Java代码 %&gt;**，等于 &lt;%  out.print( 返回值代码);  %&gt;，将值打印到HTML中</p>
+</li>
+<li><p>JSP支持注释：jsp注释：&lt;%–  –%&gt;、html注释（会生成到html代码中）：<!-- -->   </p>
+<p>​                        Java注释（会生成在servlet中）：//，/*  */</p>
+</li>
+</ol>
+<h1 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h1><h2 id="JSP九大内置对象"><a href="#JSP九大内置对象" class="headerlink" title="JSP九大内置对象"></a>JSP九大内置对象</h2><p><strong>内置对象</strong>：jsp生成的servlet中的service方法中，生成了已经赋完值的一些对象，这些变量引用的对象叫内置对象，可以在jsp的Java代码中使用，很少使用</p>
+<p>容器对象：attribute是一个Map（String，Object）：setAttribute()、getAttribute(key)、<strong>removeAttribute(key)</strong></p>
+<h4 id="1-response对象"><a href="#1-response对象" class="headerlink" title="1. response对象"></a>1. response对象</h4><p>是HttpServletResponse接口的实例，封装了传给客户端的响应信息</p>
+<p>getWriter()、getOutputStream()、setContentType()</p>
+<p>setHeader(“Cache-Control”,”no-cache”)。SSM代替：&lt;mvc:cache-control max-age=”3600” cache-public=”true”/&gt;</p>
+<p><strong>addCoodie( Cookie对象 )</strong></p>
+<p>response.setStatus(302)：向response对象中设置HTTP状态码</p>
+<p>response.sendError(404)：并且会向web.xml中设置的错误页面跳转</p>
+<h4 id="2-request对象（HttpServletRequest）"><a href="#2-request对象（HttpServletRequest）" class="headerlink" title="2. request对象（HttpServletRequest）"></a>2. request对象（HttpServletRequest）</h4><p>生命周期：HTTP请求到达Servlet，就创建一个request对象，当servlet返回response时，request生命周期结束</p>
+<p>getParameter(key) 、getParameterValues(key)、getParemeterNames()  、getParemeterMap() </p>
+<p> <strong>request.getCookies();</strong></p>
+<p>获取请求方式：getmethod()、获取IP：getRemoteAddr()、获取客户端主机名：getRemoteHost()</p>
+<ul>
+<li>URL全路径（包含域名）：getRequestURL()</li>
+<li>URI资源路径（不包含域名）：getRequestURI()，相比ServeletPath()带项目名，一般使用这个来获取</li>
+<li>当前这个controller的路径：getServletPath()。如/test，war包和jar包项目都一样，不带项目名字</li>
+<li>获取ServletContext对象：getServletContext</li>
+</ul>
+<h4 id="3-ServletContext"><a href="#3-ServletContext" class="headerlink" title="3. ServletContext"></a>3. ServletContext</h4><ul>
+<li>上下文路径：request.getServletjContext().get<strong>ContextPath</strong>() ，一般来说就是项目名，如/shop，为root项目时，为空</li>
+<li>war包项目下的绝对路径：request.getServletContext().getRealPath(“/upload”)，Springboot的jar包项目不要使用</li>
+</ul>
+<h4 id="4-session（HttpSession）"><a href="#4-session（HttpSession）" class="headerlink" title="4. session（HttpSession）"></a>4. session（HttpSession）</h4><p>调用request.getSession方法时生成，先通过request.getCookies获取到所有cookie，再查有没有name等于JSESSIONID并且在内存中存在的cookie，有的话，新session引用指向已存在的session（同时也会addCookie）。</p>
+<p>不存在就新建一个session对象，设置name=sessionID，value=sessionID值，保存到到response中，再次访问时，通过sessionID，找到服务器中的session。维持一个状态。Cookie默认关闭浏览器就销毁（即Max-age默认为-1）。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/63061864">cookie，session，token</a></p>
+<p>获取当前request的session里的sessionId：session.getId()</p>
+<p>立即销毁：session.invalidate()</p>
+<p>定时销毁：session.setMaxInactiveInterval(60 * 60 * 3)</p>
+<p>tomcat服务器的session是对session无操作时，默认30分钟。可以通过tomcat的web.xml或者项目的web.xml配置有效期：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>10<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>application（ServletContext）、pageContext（PageContext类）</p>
+<p>服务器可以设置cookie中的Path属性，只有当cookie访问服务器的路径为指定的时，这个cookie才有效</p>
+<h4 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h4><ul>
+<li><p>out对象（JspWriter）</p>
+<p>out对象是的实例，JspWriter关联了PrintWriter对象。print()  和println() 、flush()、clearBuffer()、getBufferSize()</p>
+</li>
+<li><p><strong>config</strong>（Servlet的配置对象）、<strong>exception</strong>（异常对象）和<strong>page</strong>（ 很少使用，就是jsp转化成servlet后的实例，this）</p>
+</li>
+</ul>
+<h4 id="JSP三大指令元素"><a href="#JSP三大指令元素" class="headerlink" title="JSP三大指令元素"></a>JSP三大指令元素</h4><p>在页面最前面写入**&lt;%@ 指令 指令动作 %&gt;**</p>
+<ul>
+<li><p>page：指定页面级别配置，指定pageEncoding和contentType和导包</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span>%&gt;</span><br><span class="line">  等同于response.setEncording();</span><br><span class="line">  &lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.util.Date&quot;</span> %&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Taglib：主要用于导入标签库</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> prefix=<span class="string">&quot;c&quot;</span>%&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>include指令：导入jsp</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//最终只会会转化成1个servlet，和include动作相似（最常用）</span></span><br><span class="line">&lt;%@ include  file=xxx.jsp&gt;</span><br><span class="line"><span class="comment">// JSP包含标签（动作），表示页面要包含的页面，会转化两个servlet，类似thymeleaf的th:include=&quot;&quot;</span></span><br><span class="line">&lt;jsp:include page=<span class="string">&quot;a.jsp&quot;</span>&gt; </span><br><span class="line"><span class="comment">// JSP跳转标签（动作），相当于request.getrequestDispatcher(&quot;a.jsp&quot;).forward(req,resp);</span></span><br><span class="line">&lt;jsp:forward page=<span class="string">&quot;showUser.jsp&quot;</span>&gt;</span><br><span class="line">	&lt;jsp:param value=<span class="string">&quot;admin@test.com&quot;</span> name=<span class="string">&quot;email&quot;</span>/&gt;</span><br><span class="line">	&lt;jsp:param value=<span class="string">&quot;888888&quot;</span> name=<span class="string">&quot;password&quot;</span>/&gt;</span><br><span class="line">&lt;/jsp:forward&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="EL表达式"><a href="#EL表达式" class="headerlink" title="EL表达式"></a>EL表达式</h2><p>EL表达式只能在JSP中使用，不能写在jsp的Java代码中，就是为了替代&lt;%= %&gt;或者&lt;c:out&gt; ，用EL表达式如果没取到值自动处理为空字符串，不会空指针（null）异常。</p>
+<h4 id="1-域对象"><a href="#1-域对象" class="headerlink" title="1. 域对象"></a>1. 域对象</h4><p>有四个域范围对象，对应jsp四个域对象：pageScope、requestScope、sessionScope、applicationScope</p>
+<ol>
+<li><p>${域范围对象.username}</p>
+</li>
+<li><p>省略域范围对象，按顺序从page/request/session/application对应的域对象</p>
+<p>如果获取到的Attribute是map集合：${ 域范围对象.key1[“key2”]}取得map中的元素</p>
+</li>
+</ol>
+<h4 id="2-param"><a href="#2-param" class="headerlink" title="2. param"></a>2. param</h4><p>${param.username}代表执行getParameter(“username”)，很少用</p>
+<h4 id="3-pageContext对象"><a href="#3-pageContext对象" class="headerlink" title="3. pageContext对象"></a>3. pageContext对象</h4><p>属于page作用域名，一般用来在获取request，然后获取到项目路径：**${pageContext.request.contextPath}**或者</p>
+<h4 id="4-EL表达式运算符"><a href="#4-EL表达式运算符" class="headerlink" title="4. EL表达式运算符"></a>4. EL表达式运算符</h4><p>jEL表达式取值以外，还可以使用EL表达式进行算术运算和逻辑运算，逻辑和比较运算符常用于&lt;c:if&gt;中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$&#123;p.age+<span class="number">1</span> &#125;	<span class="comment">//算数运算符</span></span><br><span class="line">$&#123;!(p.age == <span class="number">1</span>) &#125;	<span class="comment">//比较运算符（eq）</span></span><br><span class="line">$&#123;p.age==<span class="number">1</span> &amp;&amp; p.age==<span class="number">20</span> &#125;	<span class="comment">//逻辑运算符（and）</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="JSTL"><a href="#JSTL" class="headerlink" title="JSTL"></a>JSTL</h2><p>在jsp中创建的javabean对象，<strong>默认page</strong>作用域，可以指定保存其他作用域。</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 用原生JSP标签生成并设置JavaBean,很少用 --&gt;</span><br><span class="line">&lt;jsp:useBean id=<span class="string">&quot;person&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;com.lee.Person&quot;</span> scope=<span class="string">&quot;request&quot;</span> typeSpec /&gt;</span><br><span class="line">&lt;jsp:setProperty name=<span class="string">&quot;person&quot;</span> property=<span class="string">&quot;name&quot;</span> value=<span class="string">&quot;jack&quot;</span>/&gt;</span><br><span class="line">&lt;jsp:getProperty name=<span class="string">&quot;demo&quot;</span> property=<span class="string">&quot;name&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 利用JSTL的方式设置javabean的属性--&gt;</span><br><span class="line">&lt;c:set target=<span class="string">&quot;$&#123;person&#125;&quot;</span> property=<span class="string">&quot;name&quot;</span> value=<span class="string">&quot;lee&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 设置name的属性，不是新建 --&gt;</span><br><span class="line">&lt;c:<span class="keyword">catch</span> <span class="keyword">var</span>=<span class="string">&quot;没有name这个参数&quot;</span>&gt;</span><br><span class="line">  &lt;c:set <span class="keyword">var</span>=<span class="string">&quot;name&quot;</span> value=<span class="string">&quot;lee&quot;</span> scope=<span class="string">&quot;request&quot;</span>/&gt;</span><br><span class="line">&lt;/c:catch&gt;</span><br><span class="line">&lt;c:remove <span class="keyword">var</span>=<span class="string">&quot;name&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="forEach（迭代标签）"><a href="#forEach（迭代标签）" class="headerlink" title="forEach（迭代标签）"></a>forEach（迭代标签）</h4><p>迭代标签还有fortokens()，用分割符分割字符串再迭代输出，在forEach的每次循环中，自动先向pageContext的attribute存储本次循环的状态对象，状态对象中包含了index和count属性代表循环的索引和循环次数</p>
+<p>items：要循环的对象，只能是Java集合或者数组、var：每个元素、begin：从哪个索引开始，默认0、end：默认size-1</p>
+<p>step，索引增加次数， 默认是1、varstatus 获取循环索引，count数</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 我们通过循环打印一个表格--&gt;</span><br><span class="line">&lt;% </span><br><span class="line">	List&lt;Employee&gt; empList = (List&lt;Employee&gt;)request.getAttriute(<span class="string">&quot;empList&quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(Employee emp:empList) &#123; </span><br><span class="line">%&gt;</span><br><span class="line">&lt;table&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">    &lt;td&gt;&lt;%= emp.getName()%&gt;&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;&lt;%= emp.getNo() %&gt;&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;    </span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 用EL表达式+JSTL代替--&gt;</span><br><span class="line">&lt;c:forEach <span class="keyword">var</span>=<span class="string">&quot;emp&quot;</span> iterms=<span class="string">&quot;$&#123;requestScope.empList&#125;&quot;</span> &gt;</span><br><span class="line">  &lt;table&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">    &lt;td&gt;$&#123;emp.name&#125;&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;$&#123;emp.no&#125;&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;    </span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;/c:forEach&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="lt-c-if-gt-（条件标签）"><a href="#lt-c-if-gt-（条件标签）" class="headerlink" title="&lt;c:if&gt;（条件标签）"></a>&lt;c:if&gt;（条件标签）</h4><p>标签中使用test属性+EL表达式条件判断</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:<span class="keyword">if</span> test=<span class="string">&quot;$&#123;count==10 &#125;&quot;</span>&gt;</span><br><span class="line">  is ten</span><br><span class="line">&lt;/c:if&gt;</span><br><span class="line">&lt;c:<span class="keyword">if</span> test=<span class="string">&quot;$&#123;count!=10 &#125;&quot;</span>&gt;</span><br><span class="line">  is not ten</span><br><span class="line">&lt;/c:if&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="lt-c-choose-when-otherwise-gt"><a href="#lt-c-choose-when-otherwise-gt" class="headerlink" title="&lt;c:choose-when-otherwise&gt;"></a>&lt;c:choose-when-otherwise&gt;</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:choose&gt;</span><br><span class="line">  &lt;c:when test=<span class="string">&quot;$&#123;count==5 &#125;&quot;</span>&gt;</span><br><span class="line">    is five</span><br><span class="line">  &lt;/c:when&gt;</span><br><span class="line">  &lt;c:when test=<span class="string">&quot;$&#123;count==10 &#125;&quot;</span>&gt;</span><br><span class="line">    is ten</span><br><span class="line">  &lt;/c:when&gt;</span><br><span class="line">  &lt;c:otherwise&gt;</span><br><span class="line">    other</span><br><span class="line">  &lt;/c:otherwise&gt;</span><br><span class="line">&lt;/c:choose&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="格式化标签库"><a href="#格式化标签库" class="headerlink" title="格式化标签库"></a>格式化标签库</h4><p>除了核心标签库，JSTL还提供了格式化标签库、SQL标签库、XML标签库和常用函数标签库等。日期对象格式化成指定对象，</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;fmt:formatDate value=&quot;$&#123;e.hireDate &#125;&quot; pattern=&quot;yyyy-MM-dd&quot;&gt;&lt;/fmt:formatDate&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义标签"><a href="#自定义标签" class="headerlink" title="自定义标签"></a>自定义标签</h4><ol>
+<li>创建处理标签的Java类，让这个类<strong>继承SimpleTagSupport</strong>，重写doTag方法，getJspContext只有继承这个类才能够使用getJspContext之类的方法</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestTag</span> <span class="keyword">extends</span> <span class="title">SimpleTagSupport</span></span>&#123;</span><br><span class="line">  <span class="meta">@Override</span> </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doTag</span><span class="params">()</span> <span class="keyword">throws</span> JspException, IOException </span>&#123;</span><br><span class="line">    JspWriter out = getJspContext().getOut();</span><br><span class="line">    out.println(<span class="string">&quot;Hello Custom Tag!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ol start="2">
+<li>在WEB-INF下创建后缀是.tld的标签库描述文件</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tag</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tag-class</span>&gt;</span>test.Tag<span class="tag">&lt;/<span class="name">tag-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body-content</span>&gt;</span>empty<span class="tag">&lt;/<span class="name">body-content</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tag</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在其taglib中加入tag标签</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">@taglib</span> <span class="attr">prefix</span>=<span class="string">&quot;my&quot;</span> <span class="attr">uri</span>=<span class="string">&quot;test.Tag&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/20/7.%20Spring/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/05/30/5.%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李柱新</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
