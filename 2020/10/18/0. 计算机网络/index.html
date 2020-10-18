@@ -24,18 +24,18 @@
 
   <meta name="description" content="HTTP协议在TCP&#x2F;IP四层网络结构（应用层，传输层TCP&#x2F;UDP，网络层IP，网络接口层）中。OSI七层 发送端在层与层间传输数据时，每经过一层都会被加上网络层的首部信息，接收端每经过一层都会删除一条当前网络层的首部信息。 HTTP1&#x2F;2是基于TCP&#x2F;IP应用层的协议（HTTP3基于UDP），最初只用来传输HTML且只有GET方法，97年的1.1版本用了将近20年，2015年诞生了HTTP 2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lee&#39;s Blog">
-<meta property="og:url" content="http://example.com/2020/09/09/0.%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:title" content="网络">
+<meta property="og:url" content="http://example.com/2020/10/18/0.%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html">
 <meta property="og:site_name" content="Lee&#39;s Blog">
 <meta property="og:description" content="HTTP协议在TCP&#x2F;IP四层网络结构（应用层，传输层TCP&#x2F;UDP，网络层IP，网络接口层）中。OSI七层 发送端在层与层间传输数据时，每经过一层都会被加上网络层的首部信息，接收端每经过一层都会删除一条当前网络层的首部信息。 HTTP1&#x2F;2是基于TCP&#x2F;IP应用层的协议（HTTP3基于UDP），最初只用来传输HTML且只有GET方法，97年的1.1版本用了将近20年，2015年诞生了HTTP 2">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-09-09T09:08:48.000Z">
-<meta property="article:modified_time" content="2020-10-13T02:44:22.483Z">
+<meta property="article:published_time" content="2020-10-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-10-18T03:29:05.734Z">
 <meta property="article:author" content="李柱新">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2020/09/09/0.%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+<link rel="canonical" href="http://example.com/2020/10/18/0.%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
 
 
 <script class="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title> | Lee's Blog</title>
+  <title>网络 | Lee's Blog</title>
   
 
 
@@ -170,7 +170,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E6%8A%A5%E6%96%87%E8%A7%A3%E6%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP报文解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-HTTP-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">1. HTTP 请求报文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-HTTP-%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">2. HTTP 响应报文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-HTTP-Header"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">3. HTTP Header</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E7%BC%93%E5%AD%98"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP缓存</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">服务器优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-DNS"><span class="nav-number">2.1.</span> <span class="nav-text">1. DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">相关工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS%E8%A7%A3%E6%9E%90%E9%A1%BA%E5%BA%8F%E5%8F%8A%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">DNS解析顺序及原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%85%B1DNS"><span class="nav-number">2.1.0.3.</span> <span class="nav-text">公共DNS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS%E8%AE%B0%E5%BD%95"><span class="nav-number">2.1.0.4.</span> <span class="nav-text">DNS记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS%E6%81%B6%E6%84%8F%E8%A7%A3%E6%9E%90"><span class="nav-number">2.1.0.5.</span> <span class="nav-text">DNS恶意解析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">2.2.</span> <span class="nav-text">2. 服务器负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">DNS负载均衡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">负载均衡服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CDN"><span class="nav-number">2.2.0.3.</span> <span class="nav-text">CDN</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%BD%91%E7%BB%9C%E7%BA%BF%E8%B7%AF%E4%BC%98%E5%8C%96"><span class="nav-number">2.3.</span> <span class="nav-text">3. 网络线路优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">代理服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E8%BD%AF%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">代理软件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E4%BB%A3%E7%90%86"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">普通代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%EF%BC%88%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86%EF%BC%89"><span class="nav-number">3.1.0.2.</span> <span class="nav-text">全局代理（透明代理）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8"><span class="nav-number">4.</span> <span class="nav-text">网络安全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%92%8C%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-number">5.</span> <span class="nav-text">路由和交换机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="nav-number">5.1.</span> <span class="nav-text">路由器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="nav-number">5.1.0.1.</span> <span class="nav-text">静态路由与动态路由</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-number">5.2.</span> <span class="nav-text">交换机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAT%E5%9C%B0%E5%9D%80%E8%BD%AC%E5%8C%96"><span class="nav-number">5.3.</span> <span class="nav-text">NAT地址转化</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E6%8A%A5%E6%96%87%E8%A7%A3%E6%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP报文解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-HTTP-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">1. HTTP 请求报文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-HTTP-%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">2. HTTP 响应报文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-HTTP-Header"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">3. HTTP Header</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E7%BC%93%E5%AD%98"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP缓存</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">服务器优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-DNS"><span class="nav-number">2.1.</span> <span class="nav-text">1. DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">相关工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS%E8%A7%A3%E6%9E%90%E9%A1%BA%E5%BA%8F%E5%8F%8A%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">DNS解析顺序及原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%85%B1DNS"><span class="nav-number">2.1.0.3.</span> <span class="nav-text">公共DNS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS%E8%AE%B0%E5%BD%95"><span class="nav-number">2.1.0.4.</span> <span class="nav-text">DNS记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS%E6%81%B6%E6%84%8F%E8%A7%A3%E6%9E%90"><span class="nav-number">2.1.0.5.</span> <span class="nav-text">DNS恶意解析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">2.2.</span> <span class="nav-text">2. 服务器负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">DNS负载均衡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">负载均衡服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CDN"><span class="nav-number">2.2.0.3.</span> <span class="nav-text">CDN</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%BD%91%E7%BB%9C%E7%BA%BF%E8%B7%AF%E4%BC%98%E5%8C%96"><span class="nav-number">2.3.</span> <span class="nav-text">3. 网络线路优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">代理服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E8%BD%AF%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">代理软件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E4%BB%A3%E7%90%86"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">普通代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%EF%BC%88%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86%EF%BC%89"><span class="nav-number">3.1.0.2.</span> <span class="nav-text">全局代理（透明代理）</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -230,7 +230,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/09/0.%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/18/0.%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -243,7 +243,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          网络
         </h1>
 
         <div class="post-meta-container">
@@ -253,16 +253,10 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-09 17:08:48" itemprop="dateCreated datePublished" datetime="2020-09-09T17:08:48+08:00">2020-09-09</time>
+      <time title="创建时间：2020-10-18 00:00:00 / 修改时间：11:29:05" itemprop="dateCreated datePublished" datetime="2020-10-18T00:00:00+08:00">2020-10-18</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-10-13 10:44:22" itemprop="dateModified" datetime="2020-10-13T10:44:22+08:00">2020-10-13</time>
-      </span>
 
   
 </div>
@@ -428,56 +422,6 @@
 <p>Fancyss（路由器翻墙软件）使用的redir，surge的增强模式用的FakeIP，clash使用redir-host和FakeIP两种都有</p>
 <p><a target="_blank" rel="noopener" href="https://blog.skk.moe/post/what-happend-to-dns-in-proxy/">浅谈在代理环境中的 DNS 解析行为</a></p>
 <p><a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/HT210060">apple域名参考</a></p>
-<h1 id="网络安全"><a href="#网络安全" class="headerlink" title="网络安全"></a>网络安全</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/078df7a35671">SQL注入</a></p>
-<h1 id="路由和交换机"><a href="#路由和交换机" class="headerlink" title="路由和交换机"></a>路由和交换机</h1><p>企业级局域网：AP- -Switch–Firewall –Router –Internet。</p>
-<p>路由表判断是否是同一子网</p>
-<p>AP负责认证</p>
-<ul>
-<li><p>IPV4：8位（10进制表示）*4=32位，一共大约42亿个地址</p>
-</li>
-<li><p>IPV6：16位（4个16进制数）*8=128位，超出人类计数范围</p>
-</li>
-<li><p>网卡的MAC地址：物理地址或局域网地址，8位（2个16进制数）*6=48位。</p>
-</li>
-<li><p>DHCP：自动分配IP，掩码、网关，默认DNS</p>
-</li>
-<li><p>二层链路层，以MAC帧通信；三层网络层，以IP数据包通信</p>
-</li>
-</ul>
-<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>传统路由器是三层设备（网络层），在TCP/IP构建的层级上来说就是承担转发功能，两个端口之间不能处于同一个子网，端口之间本身就有直连路由功能。</p>
-<p>⚠️：家庭路由器不是传统路由器，带路由+交换机+AP（无线交换机）的多用途设备</p>
-<ol>
-<li><p>IP+子网掩码<strong>按位与</strong>就 是子网，同一个子网可以通过ARP广播帧互相访问到，当IP不是子网内部时，数据包抛向默认网关（一般是路由器地址）。</p>
-</li>
-<li><p><strong>路由器连接不同的子网，不同子网通信就要用到路由器</strong>，路由器收到IP数据包后，用目的地址和路由表（目的子网+子网掩码+下一跳地址）匹配，决定下一跳地址。</p>
-<p>路由器的直连路由会自动记录在路由表当中，同一个路由器的两个子网之间</p>
-</li>
-</ol>
-<h4 id="静态路由与动态路由"><a href="#静态路由与动态路由" class="headerlink" title="静态路由与动态路由"></a>静态路由与动态路由</h4><p>静态路由协议比较简单，认为主动的在路由表中添加一条路由路径，所以重点讲解一下动态路由</p>
-<ul>
-<li>路由表的生成</li>
-</ul>
-<p><strong>RIP动态路由协议</strong>，使得路由器之间互相发送自己的路由表信息。</p>
-<p>路由器接收到相邻路由器发送来的路由信息，会与自己路由表中的条目进行比较，如果路由表中已经有这条路由信息，路由器会比较新接收到的路由信息是否优先于现有的条目。如果优先于现有的条目，路由器会用新的路由信息替换原有的路由条目。</p>
-<ul>
-<li>协议的度量值与更新时间</li>
-</ul>
-<p>(1）RIP的度量值</p>
-<p>RIP路由协议使用跳数作为唯一的度量值。在RIP中，规定了跳数的最大值为15, 16跳视为不可达。因此，RIP路由协议不适用与大型的广域网。</p>
-<p>(2）RIP的更新时间</p>
-<p>RIP使用UDP协议，端口号是520。路由器启动后，平均每隔30s就从每个启动RIP协议的接口不断的发送出路由更新消息。</p>
-<ul>
-<li>水平分割（Split Horizon）</li>
-</ul>
-<p>网络收敛后，路由器仍然在以30s的时间间隔向外发送整个路由表。</p>
-<p>执行水平分割可以阻止路由环路的发生，水平分割的规则是：从一个接口学习到路由信息，不再从这个接口发送出去。水平分割不仅能够阻止路由环路的产生，同时也能减少路由更新信息占用的链路带宽资源。</p>
-<ul>
-<li>路由中毒，毒性逆转</li>
-</ul>
-<p>路由器将不可达网络度量值置为无穷大（也就是跳数为15以上)，并由该表项来引发一个路由中毒，中毒路由被发给邻居路由器以通知这条路径失效，其他路由器到收到一个路由中毒后发送一个毒性逆转，表示已经收到中毒路由信息。</p>
-<h2 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h2><p>hub和交换机是做拓展接口的，区别在于hub普通交换机是二层设备（链路层），二层设备之间，通过APR广播域进行通信</p>
-<p>，而交换机划分VLAN，也就是划分广播域，即使处于同一子网也无法进行通信。局域网设计就是通过交换机+VLAN划分实现的。三层交换机具有路由功能</p>
-<h2 id="NAT地址转化"><a href="#NAT地址转化" class="headerlink" title="NAT地址转化"></a>NAT地址转化</h2><p>三层交换机、路由器都会进行NAT转化</p>
 
     </div>
 
@@ -491,13 +435,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/09/07/11.%20%E9%9D%A2%E8%AF%95/" rel="prev" title="">
+                <a href="/2020/10/15/%E5%85%B6%E4%BB%96/%E5%B7%A5%E4%BD%9C%E4%BA%8B%E9%A1%B9/" rel="prev" title="">
                   <i class="fa fa-chevron-left"></i> 
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/09/24/%E5%85%B6%E4%BB%96/%E9%93%B6%E8%A1%8C%E4%B8%9A%E5%8A%A1/" rel="next" title="金融和会计">
-                  金融和会计 <i class="fa fa-chevron-right"></i>
+                <a href="/2020/10/18/0.%20%E7%BC%96%E7%A0%81%E5%92%8C%E6%95%B0%E6%8D%AE/" rel="next" title="数据和编码">
+                  数据和编码 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
