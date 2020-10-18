@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="1. 基本数据类型（原生类）Java只存在基本数据类型和引用型数据类型。 1234567891011           默认值				占用大小及在计算机中的表示boolean			false    1字节、boolean数据类型表示一位的信息char        ‘’			 2字节、UTF-16低位字符。可以用字符或者ACSII数值给char赋值---4种整形数据-----">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lee&#39;s Blog">
+<meta property="og:url" content="http://example.com/2020/05/27/3.%20%20Java%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Lee&#39;s Blog">
+<meta property="og:description" content="1. 基本数据类型（原生类）Java只存在基本数据类型和引用型数据类型。 1234567891011           默认值				占用大小及在计算机中的表示boolean			false    1字节、boolean数据类型表示一位的信息char        ‘’			 2字节、UTF-16低位字符。可以用字符或者ACSII数值给char赋值---4种整形数据-----">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-27T08:57:32.000Z">
+<meta property="article:modified_time" content="2020-10-18T02:57:54.082Z">
+<meta property="article:author" content="李柱新">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2020/05/27/3.%20%20Java%E5%9F%BA%E7%A1%80/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | Lee's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Lee's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%88%E5%8E%9F%E7%94%9F%E7%B1%BB%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">1. 基本数据类型（原生类）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%85%E8%A3%85%E5%99%A8"><span class="nav-number">1.0.1.</span> <span class="nav-text">包装器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-String%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">2. String类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#StringBuffer%E5%92%8CStringBuilder"><span class="nav-number">2.0.1.</span> <span class="nav-text">StringBuffer和StringBuilder</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%95%B0%E7%BB%84"><span class="nav-number">3.</span> <span class="nav-text">3. 数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.</span> <span class="nav-text">5. 运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.0.1.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%9A"><span class="nav-number">4.0.2.</span> <span class="nav-text">比较运算符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.0.3.</span> <span class="nav-text">条件运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.0.4.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.0.5.</span> <span class="nav-text">位运算符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="nav-number">5.</span> <span class="nav-text">6. 流程控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%8C%85%E4%B8%8E%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90"><span class="nav-number">6.</span> <span class="nav-text">7. 包与访问权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%8C%85"><span class="nav-number">6.0.1.</span> <span class="nav-text">导包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90"><span class="nav-number">6.0.2.</span> <span class="nav-text">访问权限</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">7.</span> <span class="nav-text">8. 常用关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#this%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">7.0.1.</span> <span class="nav-text">this关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Super%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">7.0.2.</span> <span class="nav-text">Super关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#final%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">7.0.3.</span> <span class="nav-text">final关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#static%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88%E7%B1%BB%E6%96%B9%E6%B3%95%EF%BC%8C%E7%B1%BB%E5%B1%9E%E6%80%A7%EF%BC%89"><span class="nav-number">7.0.4.</span> <span class="nav-text">static关键字（类方法，类属性）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="nav-number">7.0.5.</span> <span class="nav-text">全局变量和局部变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD"><span class="nav-number">8.</span> <span class="nav-text">9. 重写和重载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD-overloadding"><span class="nav-number">8.0.1.</span> <span class="nav-text">重载(overloadding)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%86%99-override"><span class="nav-number">8.0.2.</span> <span class="nav-text">重写(override)</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OOP%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7"><span class="nav-number"></span> <span class="nav-text">OOP三大特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%B0%81%E8%A3%85%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">1. 封装性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%BB%A7%E6%89%BF%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">2. 继承性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E7%B1%BB%EF%BC%9A"><span class="nav-number">2.0.1.</span> <span class="nav-text">内部类：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">2.0.2.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.0.3.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="nav-number">2.0.4.</span> <span class="nav-text">类的继承</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%A4%9A%E6%80%81%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">3. 多态性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IO%E6%B5%81"><span class="nav-number"></span> <span class="nav-text">IO流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E6%B5%81"><span class="nav-number">1.</span> <span class="nav-text">字节流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-FileInputStream-FileOutputStream"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. FileInputStream&#x2F;FileOutputStream</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-BufferedInputStream"><span class="nav-number">1.0.2.</span> <span class="nav-text">3. BufferedInputStream</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-BufferedOutputStream"><span class="nav-number">1.0.3.</span> <span class="nav-text">4. BufferedOutputStream</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%B5%81"><span class="nav-number">1.0.4.</span> <span class="nav-text">对象流</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E6%B5%81"><span class="nav-number">2.</span> <span class="nav-text">字符流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-FileWriter-FileReader"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. FileWriter&#x2F;FileReader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E8%BD%AC%E5%AD%97%E7%AC%A6%E6%B5%81"><span class="nav-number">2.0.2.</span> <span class="nav-text">字节转字符流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-BufferedReader%EF%BC%88%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="nav-number">2.0.3.</span> <span class="nav-text">3. BufferedReader（常用）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-BufferWriter"><span class="nav-number">2.0.4.</span> <span class="nav-text">4. BufferWriter</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">对象的序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java%E5%BC%82%E5%B8%B8"><span class="nav-number">3.0.1.</span> <span class="nav-text">Java异常</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">李柱新</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/05/27/3.%20%20Java%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="李柱新">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lee's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-27 16:57:32" itemprop="dateCreated datePublished" datetime="2020-05-27T16:57:32+08:00">2020-05-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-10-18 10:57:54" itemprop="dateModified" datetime="2020-10-18T10:57:54+08:00">2020-10-18</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-基本数据类型（原生类）"><a href="#1-基本数据类型（原生类）" class="headerlink" title="1. 基本数据类型（原生类）"></a>1. 基本数据类型（原生类）</h2><p>Java只存在基本数据类型和引用型数据类型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">           默认值				占用大小及在计算机中的表示</span><br><span class="line"><span class="keyword">boolean</span>			<span class="keyword">false</span>    <span class="number">1</span>字节、<span class="keyword">boolean</span>数据类型表示一位的信息</span><br><span class="line"><span class="keyword">char</span>        ‘’			 <span class="number">2</span>字节、UTF-<span class="number">16</span>低位字符。可以用字符或者ACSII数值给<span class="keyword">char</span>赋值</span><br><span class="line">---<span class="number">4</span>种整形数据-----          </span><br><span class="line"><span class="keyword">byte</span>        <span class="number">0</span>			   <span class="number">1</span>字节、有符号的，以二进制补码表示的整数(-<span class="number">128</span>-<span class="number">127</span>)</span><br><span class="line"><span class="keyword">short</span>       <span class="number">0</span>			   <span class="number">2</span>字节、有符号的、二进制补码表示的整数</span><br><span class="line"><span class="keyword">int</span>         <span class="number">0</span>			   <span class="number">4</span>字节、有符号的、二进制补码整数</span><br><span class="line"><span class="keyword">long</span>        <span class="number">0L</span>       <span class="number">8</span>字节、有符号的、二进制补码表示的整数</span><br><span class="line">---------</span><br><span class="line"><span class="keyword">float</span>       <span class="number">0.0f</span>     <span class="number">4</span>字节、单精度浮点、符合IEEE <span class="number">754</span>标准的浮点数</span><br><span class="line"><span class="keyword">double</span>			<span class="number">0.0</span>			 <span class="number">8</span>字节、双精度浮点、符合IEEE <span class="number">754</span>标准的浮点数</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>低精度之间计算时，会自动转化成高精度</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 精度关系</span></span><br><span class="line"><span class="keyword">byte</span>,<span class="keyword">short</span>,<span class="keyword">char</span>(同级)-&gt; <span class="keyword">int</span> -&gt; <span class="keyword">long</span> -&gt; <span class="keyword">float</span> -&gt; <span class="keyword">double</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>精度强制转化</li>
+</ul>
+<p>高精度转低精度或者同精度（byte，short和char）之间，需要强制类型转化，强制类型转化可以作用于除boolean之外的基本数据<br>高精度数据t将会被截断，如带小数的float转int时小数会丢失，long型数长度大于int能接受的最大长度时，会截断，用int最大数接收。</p>
+<ul>
+<li>上溢和下溢</li>
+</ul>
+<p>正数原码(补码等于源码)、负数存补码（取反加1），byte，int的取值过大时，会发生怪异的结果</p>
+<p>所以(byte)128=-128.（127，-128）（01111111，10000000）。</p>
+<p>byte的129=1 00000001，（1）11111111=-127</p>
+<p>byte的-129=1 01111111，127</p>
+<h4 id="包装器"><a href="#包装器" class="headerlink" title="包装器"></a>包装器</h4><p>8大基本数据类型对应8大包装器对象，扩大了基本数据类型的操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自动装箱</span></span><br><span class="line">Integer a = <span class="number">10</span>;				Integer a = <span class="keyword">new</span> Integer(<span class="number">10</span>);--调用valueOf(<span class="number">10</span>)方法</span><br><span class="line"><span class="comment">//自动拆箱</span></span><br><span class="line"><span class="keyword">int</span> b = a;						<span class="keyword">int</span> b = a.intValue();--调用intValue()方法</span><br><span class="line"><span class="comment">// 字符串转整形</span></span><br><span class="line">Integer.parseInt(<span class="string">&quot;10&quot;</span>);---Integer.valueOf(<span class="string">&quot;10&quot;</span>)</span><br><span class="line"><span class="comment">// 基本数据类型转String</span></span><br><span class="line">Integer.toString(<span class="number">10</span>);--String.valueOf(<span class="string">&quot;10&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-String类型"><a href="#2-String类型" class="headerlink" title="2. String类型"></a>2. String类型</h2><p>String类型的主要构成还是字符数据，一个空String为64个字节：<br>16字节对象开销+12字节属性(3个int)+<strong>8字节char数组引用+24字节空char数组</strong>+4字节padding</p>
+<ul>
+<li><p>**str.equals( )**判断两个字符串是否真正相等</p>
+</li>
+<li><p>使用String.format(“我是%s”,”小明”)进行字符串格式化</p>
+</li>
+</ul>
+<ul>
+<li><p>replace(oldchar，newchar)、charAt(index)、**substring(index1,index2)**，</p>
+</li>
+<li><p>trim()：删除头尾空白字符、reserve()：将字符串反转、indexOf(str)：第一次出现这个str的索引</p>
+</li>
+<li><p>split(“:”)：用什么分割字符串，返回String[]</p>
+</li>
+<li><p>valueOf()是一个基本数据都有静态方法：Integer.valueOf(“80”)，Float.valueOf(“8.1”)，String.valueOf(18.1)</p>
+<p>返回包装器类型，但是一般可以自动拆装箱</p>
+</li>
+</ul>
+<h4 id="StringBuffer和StringBuilder"><a href="#StringBuffer和StringBuilder" class="headerlink" title="StringBuffer和StringBuilder"></a>StringBuffer和StringBuilder</h4><p>String对象在改变值时，总会在堆内存中创建新的对象，开辟新的内存。但是从JDK 8开始，+拼接默认会转化StringBuilder，但还是推荐用StringBuilder。</p>
+<p>所以当频繁变动字符串的值，比如<strong>对字符串进行拼接操作，我们一般会创建StringBuilder和StringBuffer</strong>，用其append进行操作效率更高。</p>
+<ul>
+<li><p>当字符串是单个线程操作时，StringBuilder字符串的效率更高。</p>
+<p>StringBuilder**直接可以append(StringBuffer对象)**，反之不可以。</p>
+</li>
+<li><p>当字符串被多个线程操作时，用StringBuffer字符串，其append方法是synchronized方法，支持并发，线程是安全的。</p>
+</li>
+</ul>
+<h2 id="3-数组"><a href="#3-数组" class="headerlink" title="3. 数组"></a>3. 数组</h2><p>空数组占用24字节（16字节对象开销+4字节保留+4padding）。数组是对象</p>
+<ul>
+<li><p>遍历：数组可以用普通遍历和for-each：</p>
+</li>
+<li><p>Arrays静态工具类：</p>
+<p>Arrays.sort(数组)—升序排列                Arrays.copy(数组，length of copy)–返回数组</p>
+<p>Arrays.binarySearch(数组，被查找的元素)  </p>
+<p>Arrays.asList(数组)—-转化成List集合。</p>
+<p>arraylist.toArray()—–arrayList转数组</p>
+</li>
+<li><p>System.arraycopy( src, srcpos, dest, destpos, length)</p>
+</li>
+</ul>
+<h2 id="5-运算符"><a href="#5-运算符" class="headerlink" title="5. 运算符"></a>5. 运算符</h2><h4 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h4><ul>
+<li><p>运算符中 ”+”  ，可以用于字符串的拼接，数值数据会转化为字符串拼接</p>
+</li>
+<li><p>i++是后自增，i本身增加，但表达式值不变。++i是前自增，i 本身和表达式的值都增加。</p>
+</li>
+</ul>
+<h4 id="比较运算符："><a href="#比较运算符：" class="headerlink" title="比较运算符："></a>比较运算符：</h4><p>有==， !=， &gt;， &lt;， &gt;=， &lt;=着几种，一般作用在两个数之间，返回布尔值</p>
+<p><strong>==：基本数据类型比较数据的值，引用数据类型比较堆内存地址（非引用地址）</strong></p>
+<h4 id="条件运算符"><a href="#条件运算符" class="headerlink" title="条件运算符"></a>条件运算符</h4><p>条件运算符是唯一的三目运算符，可以代替简单的if-else语句：</p>
+<p><strong>布尔表达式 ? 表达式1(布尔值是true返回) : 表达式2（布尔值是false返回）</strong><br>表达式1和表达式2的结果必须是一个数据</p>
+<h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><p>逻辑运算符放在在两个布尔数据之间</p>
+<ul>
+<li><p>逻辑与 &amp;&amp;：有假即为假，全真才为真（第一个为假后面不执行，位运算符都执行）</p>
+</li>
+<li><p>逻辑或 ||：有真即为真，全假才为假（第一个为真后面不执行）</p>
+</li>
+<li><p>逻辑非 !</p>
+</li>
+</ul>
+<h4 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h4><p>位运算符放在两个数之间进行二进制计算。</p>
+<ul>
+<li><p>按位与 &amp;：有零则为零,全一才是一。按位或 |：全零才是零,有一则为一。按位异或 ^：相同为零,不同为1 </p>
+</li>
+<li><p>按位取反 ~：一变零，零变一</p>
+</li>
+<li><p>左移和右移（对数据二进制操作，数据操作最快）</p>
+<p>数&lt;&lt;n位，n化为二进制后整体左边删除n个，右边加n个0，左移相当于 数*2^n<br>n&gt;&gt;m位，相当于右边删除m个数，左边加零，缩小，右移相当于  数/2^n</p>
+</li>
+</ul>
+<h2 id="6-流程控制"><a href="#6-流程控制" class="headerlink" title="6. 流程控制"></a>6. 流程控制</h2><p>if，switch，for，while，do-while基本语法</p>
+<ul>
+<li><p>break跳出控制语句（switch，for等），continue跳出本次循环（用于for循环），return跳出整个函数</p>
+</li>
+<li><p>在判断语句中，<strong>单纯判断、char、byte、short、int和String（JDK 7 ）的值情况</strong>可以用switch代替if-else</p>
+<p>  switch效率比if-else高，但是灵活度非常低</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">switch</span> (n) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    System.out.println(<span class="string">&quot;this is one.&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    System.out.println(<span class="string">&quot;Others.&quot;</span>);</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="7-包与访问权限"><a href="#7-包与访问权限" class="headerlink" title="7. 包与访问权限"></a>7. 包与访问权限</h2><h4 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h4><p>包是为了管理类而存在，不同包可以存在相同的类名，包的逻辑结构代表class文件的文件夹逻辑结构。当我们需要使用非本包中的类时，用<strong>import关键字</strong>导入包中的类，导包<strong>可以导入包中的具体类或者用通配符导入所有类</strong></p>
+<ul>
+<li><p>普通导入</p>
+<p>import com.zhuxin.*                        导入com.zhuxin包中所有的类<br>import com.zhuxin.Demo                导入com.zhuxin包中的Demo类</p>
+</li>
+<li><p><strong>静态导入</strong>（JDK5），导入后直接可使用静态属性，而不用使用System.out这样调用属性</p>
+<p>import static java.lang.System.out         导入System类中的out属性</p>
+<p>import  static java.lang.Integer.*             导入Integer类中的所有静态属性</p>
+</li>
+</ul>
+<h4 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h4><ul>
+<li><p><strong>类的访问权限</strong>，比较少使用，default权限的类，导包后也无法使用</p>
+<ol>
+<li>不加权限（default）：修饰的类只能在本包中使用</li>
+<li>public：修饰的类在导包后，能在所有包中使用</li>
+</ol>
+</li>
+<li><p><strong>属性与方法的访问权限</strong></p>
+<p>约束成员在其他类中建立对象以后，对象能否调用其方法和属性看其属性和方法的访问权限，方法定义的局部变量是不能被访问权限控制的。</p>
+<ol>
+<li><p>private：除了在本类中，均不能被访问(即使是继承了父类的子类)</p>
+</li>
+<li><p>不加权限（default/friendly）：可以被同包的类访问，又称为包级访问权限</p>
+<p>普通类/抽象类的方法和属性不写时默认都是包级访问权限</p>
+</li>
+<li><p>protected：可以被同包类和不同包子类访问</p>
+</li>
+<li><p>public：可被所有包的类访问</p>
+<p>接口中的所有方法（抽象，default，static）和属性只能是public权限，默认不写</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="8-常用关键字"><a href="#8-常用关键字" class="headerlink" title="8. 常用关键字"></a>8. 常用关键字</h2><h4 id="this关键字"><a href="#this关键字" class="headerlink" title="this关键字"></a>this关键字</h4><p>this关键字是JVM在创建对象后产生的一个指向对象本身的一个指针，根据这个原理，得出this的作用</p>
+<ol>
+<li><p>this.属性/方法：<strong>强调本类的成员属性或成员方法</strong>，内部类中的this强调内部类本身的成员属性和方法</p>
+<p>子类重写父类方法后，父类的this.方法会指向子类重写过的方法（不加this也是）。</p>
+<p>子类覆盖父类属性后，父类的this.属性始终指向父类属性（不加this也是）</p>
+</li>
+<li><p>this()：<strong>在构造方法中调用本类的其他构造方法，注意必须写在构造方法第一行。</strong></p>
+<p>场景举例：写一个包含所有字段的构造函数，然后其他部分字段构造函数去调用这个全字段构造函数</p>
+</li>
+<li><p>this：<strong>代指当前对象</strong>，返回调用this的实例对象</p>
+<p>比如父类方法中存在return this，父类对象调用这个方法返回父类对象，子类对象调用这个方法，返回子类对象</p>
+</li>
+</ol>
+<h4 id="Super关键字"><a href="#Super关键字" class="headerlink" title="Super关键字"></a>Super关键字</h4><ol>
+<li><p>super.属性/方法：当子类和父类中存在<strong>相同的属性或方法</strong>时，<strong>强调当前对象父类中的属性和方法</strong></p>
+</li>
+<li><p>super()：<strong>在子类构造方法中，调用父类构造方法。super方法必须写在构造方法的首行，不能和this()一同使用</strong></p>
+<p>子类构造方法默认在第一行使用了super()调用了父类中的无参构造方法。如果父类不存在无参构造方法将会报错，注意给父类编写带参构造方法后需要注意再编写一个无参构造方法。</p>
+</li>
+</ol>
+<h4 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h4><ol>
+<li><p>被final<strong>修饰的类不能被继承</strong>，一般很少将类设计为final类，除非真的不需要继承或者为了安全考虑。</p>
+</li>
+<li><p>修饰的变量为不可更改的常量（修饰基本数据类型值不能改变，修饰引用类型不能更改指向的对象，引用不是对象，String对象值不能改变说的就是这个理）</p>
+</li>
+<li><p>被final<strong>修饰的方法不能被子类重写</strong>，明确禁止子类重写此方法时才用final修饰方法，类的private方法会隐式地被指定为final方法。</p>
+</li>
+</ol>
+<h4 id="static关键字（类方法，类属性）"><a href="#static关键字（类方法，类属性）" class="headerlink" title="static关键字（类方法，类属性）"></a>static关键字（类方法，类属性）</h4><p>static修饰的属性（不能修饰局部变量）和方法，成为静态属性或静态方法，静态方法和静态属性属于类，不依赖与某个对象，可以直接<strong>通过类名调用静态属性和静态方法</strong>，但遵循访问权限控制。<strong>静态方法只能直接调用静态变量和静态方法</strong>，所以在Main使用方法，要么是静态方法，要么是通过对象调用的普通方法。</p>
+<h4 id="全局变量和局部变量"><a href="#全局变量和局部变量" class="headerlink" title="全局变量和局部变量"></a>全局变量和局部变量</h4><ol>
+<li><p><strong>全局变量：定义在方法外的变量，有默认值</strong>，分为成员变量和静态变量：</p>
+<ul>
+<li><p><strong>成员变量（实例变量）</strong>定义在类的所有方法外。加载在堆内存中，随着对象产生或消亡；</p>
+</li>
+<li><p><strong>静态变量（类变量）</strong>，成员变量基础上加用static关键字修饰属性，类加载（class文件读取到内存中）时产生，存在时间比所在对象本身还要久。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>局部变量：定义在方法中的变量，如main方法中定义的变量就是局部变量，无默认值，使用前必须要初始化。</strong></p>
+</li>
+</ol>
+<p>​        局部变量的创建在栈内存中，随着方法产生和消亡，即随线程产生或消亡</p>
+<h2 id="9-重写和重载"><a href="#9-重写和重载" class="headerlink" title="9. 重写和重载"></a>9. 重写和重载</h2><h4 id="重载-overloadding"><a href="#重载-overloadding" class="headerlink" title="重载(overloadding)"></a>重载(overloadding)</h4><p><strong>返回值和方法名不变，参数变化形成新的方法。</strong></p>
+<p>当没有对构造方法进行重载时，默认带一个无参构造方法，当对构造方法重载了一个有参数构造方法后，无参构造方法小时，</p>
+<p>可变长度参数（如String… args）：0个或多个参数</p>
+<p>使方法的参数列表内可以传入不定长度的参数，只能有一个可变长参数且放于所有参数后面，在要实现不定长度参数的类型后加 **…**。Java的可变参数在编译为字节码后，在方法签名中就是以数组形态出现的（将几个参数打包成数组），所以二者同时不可重载</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(String... args)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="重写-override"><a href="#重写-override" class="headerlink" title="重写(override)"></a>重写(override)</h4><p>重写方法是继承性的重要性质，重写的方法<strong>返回值，方法名和形参都不能改变，子类重写方法访问权限不能比父类方法严格</strong>。</p>
+<p>重写方法后不仅使用方法时会指向子类重写方法，而且子类和父类的方法（加不加this都是）调用都指向子类的重写方法，即使在父类方法中使用this.方法。</p>
+<p>属性不存在重写，一般说覆盖，覆盖后父类方法（加与不加this都是）永远调用的是父类属性，子类方法调用的是子类的属性。</p>
+<h1 id="OOP三大特性"><a href="#OOP三大特性" class="headerlink" title="OOP三大特性"></a>OOP三大特性</h1><p><strong>object-oriented programming</strong>是一种编程模型，围绕数据和对象为单位编程，而不是像面向过程编程语言围绕函数和逻辑编程。</p>
+<h2 id="1-封装性"><a href="#1-封装性" class="headerlink" title="1. 封装性"></a>1. 封装性</h2><p>面向对象的核心思想之一就是封装性（Encapsulation），封装就是将属性和方法这些具像的东西“装”到一个类中，私有化属性，<strong>提高安全性</strong>，<strong>隐藏实现细节</strong>。</p>
+<p>我们使用API或者各种框架时，封装性使得我们忽略实现细节，只要去使用即可。</p>
+<h2 id="2-继承性"><a href="#2-继承性" class="headerlink" title="2. 继承性"></a>2. 继承性</h2><p>子类extents父类，获得父类的属性和方法（除private属性和方法），并<strong>通过重写方法和增加新方法，形成新的类，复用父类的代码</strong>，这就是OOP中的继承性的作用。C++使用多继承，Java支持单继承（Single inheritance）。</p>
+<p>静态方法没有重写，类似于属性写了一个同名属性</p>
+<p>实用证明，继承关系（class-based）确实会带来一些代码量的减少，但是带来了子父类的强耦合，所以更现代的流派更推荐使用组合关系（prototype-based），也就是像Java的接口一样，Go语言已经完全采用prototype-based关系。</p>
+<h4 id="内部类："><a href="#内部类：" class="headerlink" title="内部类："></a>内部类：</h4><p>内部类是一个编译时的概念，<strong>编译完成以后成为两个不同类</strong>。内部类增强了Java多重继承功能。内部类中的this关键字指的内部类成员属性和方法，外部类名.this才是强调外部内的成员属性和方法。<strong>内部类可以直接调用外部类的private属性。</strong></p>
+<p><strong>成员内部类</strong>、局部内部类（写在方法中）、<strong>匿名内部类（创建的时候，只能用外部的final属性）</strong>、</p>
+<p><strong>静态内部类（static关键字，只能访问外部类static属性，可以脱离外部类创建）</strong>。</p>
+<p>当我们想要定义一个回调函数却不想写大量代码的时候我们可以选择使用匿名内部类来实现（）。</p>
+<p>在外部类方法中使用new关键字创建内部类对象。</p>
+<p>外部类.内部类 对象名 = new 外部类( ).new 内部类( )</p>
+<p>内部类 对象名 = 外部类对象.new 内部类( )</p>
+<h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4><p>抽象类是特殊的类，用abstract声明，<strong>至少含一个抽象方法</strong>。由于没有足够的信息来构造一个具体的对象时，所以与普通类的区别是<strong>不能被直接实例化</strong>，<strong>必须被继承才能实例化</strong>，但是可以像普通类一样<strong>单继承类，多继承接口</strong>。</p>
+<p><strong>抽象方法：用abstract修饰方法且无方法体的方法（可以为protect和public）</strong>，抽象类可以没有抽象方法，有抽象方法的抽象类被继承时，子类必须实现抽象方法。</p>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><p>接口也是一种特殊的类，用interface声明接口类，用implement来声明实现接口。</p>
+<p>接口是功能的集合，<strong>接口的设计是主要为了多态性</strong>，应该选择接口来实现多态性，。</p>
+<p><strong>接口的属性只能静态全局常量</strong>（默认不写public static final），接口方法<strong>一般是公有抽象方法</strong>（默认可写public abstract）。</p>
+<p>Java8以后，接口方法可以是<strong>default method和static method</strong>，这使得接口和抽象类很像，default一般用于老接口的拓展。static方法一般通过接口类来调用。一般不推荐再方法中使用这两种方法</p>
+<h4 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h4><p>Java中存在3种类，普通类，抽象类和接口。抽象类在继承方面的特性和普通类一样。</p>
+<ul>
+<li><p>普通类/抽象类只能继承一个普通类/抽象类（单继承），但可以实现多个接口（多继承）</p>
+<p>抽象类实现接口时，<strong>不强制抽象类实现接口中的抽象方法</strong>，留给继承这个抽象类普通类去实现。</p>
+</li>
+<li><p>接口可以多继承接口，<strong>当普通类实现子接口时，强制实现类重写子接口和父接口中的所有抽象方法</strong></p>
+<p>Java接口继承层级越多，功能就越多。</p>
+</li>
+</ul>
+<p>实例化子类时，会先初始化父类（非实例化创建对象，那调用的时什么方法），继承的父类的属性和方法是相对独立存在的</p>
+<h2 id="3-多态性"><a href="#3-多态性" class="headerlink" title="3. 多态性"></a>3. 多态性</h2><p>Java中的多态是一个父类类型对不同子类对象同一方法的不同响应，解耦合</p>
+<ul>
+<li><strong>对象 instanceof 类</strong>：返回布尔值       对象是这个类或者类的子类时，返回true</li>
+<li>各种地方（工厂、IO、Service）多态父类或者父接口接受子类对象，就实现了去耦合。只需要改他的实现</li>
+<li>向下转型（downcast）：父类引用重新强转回子类。当父类对象要调用子类的独有方法时需要向下转型</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/SEU_Calvin/article/details/52191321">多态原理</a></p>
+<h1 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h1><p>通过IO流实现在内存，硬盘或不同平台间文件的传输。</p>
+<p><strong>进行IO流操作后需要关流，否则会一直占用资源</strong>，当其他请求访问时将会发生Runtime异常。另外字符流不close或者不flush，会导致当前写入或者读取失败，因为字符流使用了缓冲区，不关流或flush是无法将数据传送到硬盘或者读取到内存的。</p>
+<p>IO流常用方法：write(数据)、read(接收返回数据)。<br><strong>无参read方法返回一个字节/字符，读到底了，返回-1；</strong><br><strong>有参read方法读取数据到参数并返回的字符/字节长度</strong></p>
+<p>输出流默认构造方法会覆盖原文本文件，加true表示追加到文本文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Writer out = <span class="keyword">new</span> FileWriter(file,<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h2><p>InputStream和OutputStream是字节流父类，是抽象方法，必须通过子类实例化。</p>
+<p>字节流写入字节数据，没有缓冲区，直接保存或读取硬盘字节文件。</p>
+<h4 id="1-FileInputStream-FileOutputStream"><a href="#1-FileInputStream-FileOutputStream" class="headerlink" title="1. FileInputStream/FileOutputStream"></a>1. FileInputStream/FileOutputStream</h4><p>与<strong>硬盘有关</strong>的操作使用<strong>File型输入输出流</strong>。</p>
+<p>写入字符数据时，需要我们手动将内存中的字符编码成字节（str.getBytes(“UTF-8”)），再写入字节数组到硬盘，可以直接write整个字节数组，也可以循环字节数组，一个一个写入。</p>
+<p>可以在构造方法传入要操作的<strong>文件路径字符串</strong>，也可以用<strong>File类对象（推荐）</strong>，两种方法指定的<strong>路径不存在时自动创建文件</strong>。File类：抽象的方式表示一个文件路径，用来操作文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> InputStream in = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 读取方法1，直接读取全部</span></span><br><span class="line">Byte[] bytes = <span class="keyword">new</span> Byte[<span class="number">1024</span>];</span><br><span class="line"> in.read(bytes);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取方法2（最常用！！！！！）</span></span><br><span class="line">Byte[] bytes = <span class="keyword">new</span> Byte[<span class="number">1024</span>];</span><br><span class="line"><span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>((temp=in.read())!= -<span class="number">1</span>)&#123;</span><br><span class="line">   bytes[len] = (<span class="keyword">byte</span>)temp;</span><br><span class="line">   len++;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取方法3用for循环，只适用于已知文件的字节长度（很少使用，不推荐）</span></span><br><span class="line">Byte[] bytes = <span class="keyword">new</span> Byte[(<span class="keyword">int</span>)file.length()];</span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;bytes.length; i++)&#123;</span><br><span class="line">	bytes[i]=(<span class="keyword">byte</span>)in.read();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现文件复制：<strong>将一个文件用输入流read，返回的字节或字节数组， 直接用另一个文件的输入流直接write，而不需要构建一个字节数组去接收</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">in = <span class="keyword">new</span> FileInputStream(<span class="string">&quot;/Users/lee/Desktop/a.png&quot;</span>);</span><br><span class="line">out = <span class="keyword">new</span> FileOutputStream(<span class="string">&quot;/Users/lee/Desktop/b.png&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>((temp = in.read())!= -<span class="number">1</span>)&#123;</span><br><span class="line">  out.write((<span class="keyword">byte</span>)temp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-BufferedInputStream"><a href="#3-BufferedInputStream" class="headerlink" title="3. BufferedInputStream"></a>3. BufferedInputStream</h4><p>比如下载文件，从服务器文件中一次读一块</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bis=<span class="keyword">new</span> BufferedInputStream(fis);</span><br><span class="line">OutputStream os=resp.getOutputStream();</span><br><span class="line"><span class="keyword">int</span> i=bis.read(buffer);</span><br><span class="line"><span class="keyword">while</span>(i!=-<span class="number">1</span>)&#123;</span><br><span class="line">  <span class="comment">// write，读取buffer，从buffer的0到i</span></span><br><span class="line">  os.write(buffer,<span class="number">0</span>,i);</span><br><span class="line">  i=bis.read(buffer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-BufferedOutputStream"><a href="#4-BufferedOutputStream" class="headerlink" title="4. BufferedOutputStream"></a>4. BufferedOutputStream</h4><p>一次写一块，socket中</p>
+<h4 id="对象流"><a href="#对象流" class="headerlink" title="对象流"></a>对象流</h4><p>ObjectInputStream和ObjectOutputStream，接受普通流，方法writeObject和readObject</p>
+<p>对象中定义一个一个静态常量的序列号，比较好还原</p>
+<h2 id="字符流"><a href="#字符流" class="headerlink" title="字符流"></a>字符流</h2><p>Reader和Writer是所有字符流父类，是最普通基础的。</p>
+<p><strong>字符流只能读取和写入字符，使用了缓冲区，并在底层帮我门封装了编码和解码过程。</strong><br>底层写：将内存字符（Unicode形式）进行编码（UTF-8），再通过字节流保存到硬盘<br>底层读：读取字节并解码成字符数组，返回给read(接收的字符数组)。</p>
+<h4 id="1-FileWriter-FileReader"><a href="#1-FileWriter-FileReader" class="headerlink" title="1. FileWriter/FileReader"></a>1. FileWriter/FileReader</h4><p>File类字符输入流和输出流用来对文件进行读写：默认底层用UTF-8解码</p>
+<p>具体的读写方法和字节流一样。</p>
+<h4 id="字节转字符流"><a href="#字节转字符流" class="headerlink" title="字节转字符流"></a>字节转字符流</h4><p>网络编程中字符流一般很少去直接读，默认都按操作系统编码去读。怕编码不一致，一般都是用字节流读，在程序中转化成字符流</p>
+<ol>
+<li><p>InputStreamReader（常用）</p>
+<p>字节输入流按照编码转化成字符输入流，如下面代码，将字节流数据，用GBK编码解码成字符流。一般还会将这个流转化成BufferedReader。</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStreamReader in = <span class="keyword">new</span> InputStreamReader(req.getInputStream,<span class="string">&quot;GBK&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>OutputStreamWriter</p>
+<p>字节输出流，按照编码转化成字符输出流，比较少用，也通常转化成BufferedWriter</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OutputStreamWriter osw = <span class="keyword">new</span> OutputStreamWriter(<span class="keyword">new</span> FileOutputStream(<span class="string">&quot;a.txt&quot;</span>), <span class="string">&quot;UTF-8&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-BufferedReader（常用）"><a href="#3-BufferedReader（常用）" class="headerlink" title="3. BufferedReader（常用）"></a>3. BufferedReader（常用）</h4><p>缓冲字符流，将普通字符流转户成缓冲字符流。返回一个字符串，不需要我们去定义字符串长度</p>
+<p>普通字符流每次read操作都会从底层获取字节转化一次，而BufferedReader则会有缓存区，所以有<strong>多次read操作时，推荐将先创建基础的额FileReader或InputStreamReader再转化成BufferedReader</strong></p>
+<p>核心方法：readline()，一行一行读取，返回String，没有下一行了返回null</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader bfr =<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(<span class="string">&quot;test.conf&quot;</span>))</span><br><span class="line"> StringBuffer strBuffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"> String temp = <span class="string">&quot;&quot;</span>;</span><br><span class="line"> <span class="keyword">while</span>((temp=bfr.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	strBuffer.append(temp);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-BufferWriter"><a href="#4-BufferWriter" class="headerlink" title="4. BufferWriter"></a>4. BufferWriter</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bufferWriter.write(message)：在message中，默认一次写一行</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象的序列化"><a href="#对象的序列化" class="headerlink" title="对象的序列化"></a>对象的序列化</h2><p>和Cloneable接口一样是标记接口，虚拟机是否允许反序列化，不仅取决于类路径和功能代码是否一致（这是JDK序列化策略的缺点，一个项目没问题），最好设置一个序列化ID，就是private static final long serialVersionUID = 1L</p>
+<ul>
+<li><p><strong>实现Serializable接口</strong>（如果存在类依赖，依赖也需要序列化），就可以用ObjectOutputString实现这个序列化。使用<strong>transient</strong>关键字选择不需要序列化的属性，反序列化后，变成初始值，<strong>静态属性不会被序列化</strong>（因为静态属性不属于对象）。</p>
+<p>序列化主要是是为了<strong>保存运行时的属</strong>性。</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">&quot;template&quot;</span>));</span><br><span class="line">oos.writeObject(obj);</span><br><span class="line">(Person)oos.readObject();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>**实现<a target="_blank" rel="noopener" href="https://blog.csdn.net/yaomingyang/article/details/79321939">Externalizable**</a></p>
+<p>必须实现writeExternal、readExternal方法。</p>
+</li>
+</ul>
+<h4 id="Java异常"><a href="#Java异常" class="headerlink" title="Java异常"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Qian123/p/5715402.html">Java异常</a></h4>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/21/6.%20Servlet/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/05/30/5.%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李柱新</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
