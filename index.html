@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -216,393 +216,6 @@
       
 
       
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/18/0.%20%E7%BC%96%E7%A0%81%E5%92%8C%E6%95%B0%E6%8D%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="李柱新">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lee's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/18/0.%20%E7%BC%96%E7%A0%81%E5%92%8C%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">数据和编码</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-10-18 00:00:00 / 修改时间：11:28:49" itemprop="dateCreated datePublished" datetime="2020-10-18T00:00:00+08:00">2020-10-18</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="字符集和字符编码"><a href="#字符集和字符编码" class="headerlink" title="字符集和字符编码"></a>字符集和字符编码</h2><ol>
-<li><p>文本文件：通过字符编码（如UTF-8）保存的文件，如数字64，文本文件会将64解析成’6’和’4’两个字符，再根据字符集编码，再存储到硬盘中</p>
-</li>
-<li><p>二进制文件：保留数据本身二进制的文件，数字64，如Java的int型数字64，直接储存64的二进制到硬盘中</p>
-</li>
-</ol>
-<p>字符集规定了字符在字符表的位置，在文本文件的存储过程中，文本会依靠字符集规则转化成字符，其中最著名的就是ASCII字符集和Unicode字符集。</p>
-<h4 id="ASCII字符集"><a href="#ASCII字符集" class="headerlink" title="ASCII字符集"></a>ASCII字符集</h4><p>ASCII既是世界上第一个字符集（charset），同时又规定了字符编码（encoding）。</p>
-<p>ASCII字符编码用一个字节（7位容器）来表示一个字符，ASCII中一共有127个字符（0-126）。</p>
-<h4 id="Unicode字符集"><a href="#Unicode字符集" class="headerlink" title="Unicode字符集"></a>Unicode字符集</h4><p>地球上字符太多，ASCII字符集的单字节无法表示，所以出现了Unicode字符集。最初时UTF-16编码来实现Unicode字符集，用2个或4个字节来保存。</p>
-<ul>
-<li><p>UTF-16：用两个或者四个字节（<strong>Java char类型用的2字节的UTF-16 LE</strong>），四字节称为UTF-16 BE</p>
-</li>
-<li><p>UTF-32：用四个字节</p>
-</li>
-<li><p>UTF-8：1～4个字节，1个字节时与ASCII编码相同，常见<strong>汉字一般3字节</strong></p>
-</li>
-</ul>
-<h4 id="ISO-8859-1-（Latin-1）"><a href="#ISO-8859-1-（Latin-1）" class="headerlink" title="ISO-8859-1 （Latin 1）"></a>ISO-8859-1 （Latin 1）</h4><p>同样是ASCII码的超集，用一个字节（8位容器）实现255节。在支持ISO-8859-1的系统中传输和存储其他任何编码的字节流都不会被抛弃。mysql默认就采用他</p>
-<h4 id="GBK字符集"><a href="#GBK字符集" class="headerlink" title="GBK字符集"></a>GBK字符集</h4><p>一般汉字2字节。</p>
-<h2 id="乱码问题"><a href="#乱码问题" class="headerlink" title="乱码问题"></a>乱码问题</h2><ul>
-<li>文本文件乱码，主要体现在编辑器打开乱码，使用正确的字符编码解码即可</li>
-<li>浏览器打开HTML乱码，主要问题在于HTML文档中的meta标签，和html文本文件的编码无关</li>
-<li>服务器拿到提交的数据乱码</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/java/j-lo-chinesecoding/index.html">Java中存在的编码问题</a></p>
-<h2 id="前后台编码和解码"><a href="#前后台编码和解码" class="headerlink" title="前后台编码和解码"></a>前后台编码和解码</h2><h4 id="浏览器解码："><a href="#浏览器解码：" class="headerlink" title="浏览器解码："></a>浏览器解码：</h4><ol>
-<li><p>根据服务器返回的Content-Type中指定的编码解码。</p>
-</li>
-<li><p>根据meta标签的charset。</p>
-</li>
-<li><p>根据浏览器设定的编码解码（跟随浏览器设定，一般中文系统为GBK）</p>
-</li>
-</ol>
-<h4 id="浏览器编码和Content-Type："><a href="#浏览器编码和Content-Type：" class="headerlink" title="浏览器编码和Content-Type："></a>浏览器编码和Content-Type：</h4><ul>
-<li><p>POST请求的编码：默认UTF-8，<strong>ajax请求强制数据为UTF-8编码，即使在contentType中设置的编码也不生效</strong>，所以对于发送ajax请求，直接写application/json，然后设置服务器对所有请求数据使用UTF-8解析：request.setCharactorEncoding(“UTF-8”)。</p>
-<ul>
-<li><p>Ajax POST默认contentType: application/x-www-form-urlencoded;charset=UTF-8。</p>
-</li>
-<li><p>form POST默认的contentType: application/x-www-form-urlencoded</p>
-<p><strong>form POST的编码也是UTF-8，但是不会在Content-Type中声明</strong></p>
-</li>
-</ul>
-</li>
-<li><p>GET请求的编码：默认UTF-8（不指定Content-Type，一般传输不了中文）</p>
-</li>
-</ul>
-<h4 id="服务器解码："><a href="#服务器解码：" class="headerlink" title="服务器解码："></a>服务器解码：</h4><ol>
-<li><p>使用requst.setCharactorEncoding( )指定的编码解码。</p>
-</li>
-<li><p>根据客户端发送的Content-Type中的编码解码。</p>
-</li>
-<li><p>使用默认的UTF-8解码</p>
-</li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 设置Content-Type作用与于GET请求</span><br><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">useBodyEncodingForURI</span> = <span class="string">&quot;true&quot;</span> &gt;</span> </span><br><span class="line"> // 设置GET请求使用UTF-8解码, Tomcat 8以后这个默认值已经是UTF-8，</span><br><span class="line"> // 注意：request.setCharactorEncoding对GET请求不生效。</span><br><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">URIEncoding</span> =<span class="string">&quot;UTF-8&quot;</span> &gt;</span> </span><br></pre></td></tr></table></figure>
-
-<h4 id="服务器编码和Content-Type："><a href="#服务器编码和Content-Type：" class="headerlink" title="服务器编码和Content-Type："></a>服务器编码和Content-Type：</h4><ol>
-<li><p>response.setContentType(“application/json; charset=UTF-8”)/respnse.setCharactorEncoding()</p>
-</li>
-<li><p>Servlet response的默认编码是UTF-8</p>
-</li>
-<li><p>JSP会默认Content-Type：</p>
-<p>JSP的编码只受到Page指令的contentType/pageEncoding命令约束，而且这两个命令对于JSP生成的Content-Type决定权最高。</p>
-<p>response.setCharactorEncoding方法：设置返回数据的编码</p>
-<p>response.setContentType方法：设置Servlet返回数据的编码和返回数据的Content-Type。<strong>setContentType方法优先级最高</strong>，在此方法前后出现setCharactorEncoding()，数据会按照Content-Type编码。</p>
-</li>
-</ol>
-<ul>
-<li>注解设置注解设置：@RequestMapping(value = “”, <strong>produces=”application/json;charset=UTF-8”</strong>)</li>
-</ul>
-<h2 id="MIME"><a href="#MIME" class="headerlink" title="MIME"></a>MIME</h2><p>MIME即<strong>Multipurpose Internet Mail Extensions</strong>，相当于文件拓展名字，Content-Type就是设定的MIME</p>
-<p><strong>text/html</strong>：返回HTML或者JS都可以用这个，servlet不带Content-type时，浏览器默认按html解析</p>
-<p><strong>text/plain</strong>：纯文本</p>
-<p>application/json、application/x-www-form-urlencoded、</p>
-<p>multipart/form-data ，只用于form提交复杂数据(包含type=file的input表单)</p>
-<p>前台通过Controller去获取服务器上的视频或者图片时，后台需要返回application/video</p>
-<p><strong>image/jpeg，image/png，image/gif，image/svg+xml</strong>：最安全的Web图片格式</p>
-<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p>JSON（Javascript Object Notation）是一种轻量级的<strong>数据交换格式</strong>，或者说就是<strong>结构化的文本字符串</strong>。源于JavaScript创建对象的格式，<strong>JavaScript对象的key对于双引号可加可不加</strong>，一般选择不加，遇到以数字开头的key这样的不规范的命名时必须要加双引号，且访问时需要用<strong>对象[‘53age’]**，而不是用点，</strong>JSON的key一定要加双引号**，否则就不是JSON。被广泛的运用与不同语言平台之间较复杂数据的交换。</p>
-<ul>
-<li>至少包含JSON Object即花括号{“key”: value }或着JSON Array[ ]组成</li>
-<li><strong>key必须加双引号</strong></li>
-<li><strong>value可以是字符串、数字、boolean、null、数组和对象</strong>（字符串时需要加引号）</li>
-</ul>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">员工对象：</span><br><span class="line">&#123;<span class="attr">&quot;fri&quot;</span>:[&#123;<span class="attr">&quot;name&quot;</span>:<span class="string">&quot;rose&quot;</span>&#125;,&#123;<span class="attr">&quot;name&quot;</span>:<span class="string">&quot;jim&quot;</span>&#125;],<span class="attr">&quot;dept&quot;</span>:&#123;<span class="attr">&quot;no&quot;</span>:<span class="number">101</span>,<span class="attr">&quot;dname&quot;</span>:<span class="string">&quot;财务&quot;</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line">获得复杂员工 的第二个朋友的名字：</span><br><span class="line">员工对象.fri[1].name</span><br><span class="line"><span class="comment">// 服务器比较规范的返回JSON代码：</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;Code&quot;</span>: ,</span><br><span class="line">  <span class="attr">&quot;Msg&quot;</span>: <span class="string">&quot;请求失败&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">     <span class="attr">&quot;message&quot;</span>: <span class="string">&quot;Problems parsing JSON&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Java应用JSON"><a href="#Java应用JSON" class="headerlink" title="Java应用JSON"></a>Java应用JSON</h2><p>Java定义字符串需要要用双引号，会和JSON的Key的双引号冲突，拼写复杂，在Java中JSON字符串生成和解析依赖与JSON库，谷歌的Gson功能最全，阿里的FastJSON性能最好，开源的Jackson社区更新快（SpringMVC依赖），JSON-lib老旧</p>
-<p>用输出流流write(JSON)，注意设定Content-Type：<strong>response.setContentType(“application/json; charset=utf-8”);</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置文档类型和编码类型</span></span><br><span class="line">response.setContentType(<span class="string">&quot;text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="comment">/** 设置响应头允许ajax跨域访问 **/</span></span><br><span class="line">response.setHeader(<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>, <span class="string">&quot;*&quot;</span>);</span><br><span class="line"><span class="comment">/* 星号表示所有的异域请求都可以接受， */</span></span><br><span class="line">response.setHeader(<span class="string">&quot;Access-Control-Allow-Methods&quot;</span>, <span class="string">&quot;GET,POST&quot;</span>); </span><br></pre></td></tr></table></figure>
-
-<p>JSON库的基础功能：</p>
-<ul>
-<li>JavaBean对象/集合转化成JSON串</li>
-<li>JSON解析成JavaBean/集合/Map</li>
-<li>普通字符串变成JSON串（加双引号）</li>
-</ul>
-<h2 id="JS应用JSON"><a href="#JS应用JSON" class="headerlink" title="JS应用JSON"></a>JS应用JSON</h2><p>JS比较简单，因为可以JS中可以用单引号定义字符串，而且自带JSON解析</p>
-<h4 id="创建JSON"><a href="#创建JSON" class="headerlink" title="创建JSON"></a>创建JSON</h4><ul>
-<li><strong>var json = ‘{“name”:”lee”, “age”:20}’</strong></li>
-<li>通过**JSON.stringify(js对象)**，将js对象转化为json字串。</li>
-</ul>
-<p>JS通过通过**JSON.parse(json字符串)**：将json转化成JS对象</p>
-<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>发送给服务器时，JSON对象用**escape( JSON对象.toJSONString() )**转化后放在请求参数的的value中。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/18/0.%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="李柱新">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lee's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/18/0.%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">网络</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-10-18 00:00:00 / 修改时间：11:29:05" itemprop="dateCreated datePublished" datetime="2020-10-18T00:00:00+08:00">2020-10-18</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><p>在<strong>TCP/IP四层网络结构（应用层，传输层TCP/UDP，网络层IP，网络接口层）</strong>中。OSI七层</p>
-<p>发送端在层与层间传输数据时，每经过一层都会被加上网络层的首部信息，接收端每经过一层都会删除一条当前网络层的首部信息。</p>
-<p>HTTP1/2是<strong>基于TCP/IP</strong>应用层的协议（<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/68012355">HTTP3基于UDP</a>），最初只用来传输HTML且只有GET方法，97年的1.1版本用了将近20年，2015年诞生了HTTP 2。</p>
-<ul>
-<li><p><strong>无连接</strong>；<strong>即请求时连接，请求完释放连接</strong>，服务器收到请求，返回响应，服务器收到应答，断开连接。</p>
-<p>无连接设计之初目的是为了不占用网络资源，如果一个网页有包含许多请求（如很多图片），多次连接降低了网络效率，所以在HTTP 1.1时，产生了<strong>Connection: Keep-Alive</strong>，默认开启，使客户端和服务器在keep-alive规定时间内保持连接TCP连接，只有设置Connecttion：false时取消</p>
-</li>
-<li><p><strong>无状态</strong>：<strong>每个HTTP报文是独立的</strong>，服务器对于前面请求处理的信息，后面请求不能直接获取到前面请求中的信息。</p>
-<p>设计之初降低了服务器的压力，但是在动态Web时代，无状态特性阻碍了应用程序的实现。于是产生了记录状态的<strong>Cookie和Session</strong>。</p>
-<p><strong>Cookie</strong>：会话保存在客户端，Cookie只能保存是字符串（4KB），切勿保存重要数据，<strong>默认浏览器关闭时清除session</strong>，除非服务端设置setMaxAge。一个cookie就是一个（String，String），使用request.getCookies()获得一个cookie数组，getName()获得cookie的name，getValue获得cookie的value</p>
-<p><strong>Session</strong>：会话保存在服务器，在调用getSession时创建，判断cookie中有无sessionid，无就生成sessionID，定义一个会话状态，并将sessionid通过Cookie发送给浏览器。</p>
-<p>restful的前后端分离项目中一般会使用 access_token，因为前后端分离项目跨域，使用cookie里的sessionID不方便认证状态，这个token和session_id是一个意思。<a target="_blank" rel="noopener" href="https://juejin.im/entry/5bd921fce51d45686d40b2d6">分离Cookie参考</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hxfghgh/article/details/82840613">关于Cookie</a></p>
-</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/24860273">TCP和UDP</a></p>
-<h2 id="HTTP报文解析"><a href="#HTTP报文解析" class="headerlink" title="HTTP报文解析"></a>HTTP报文解析</h2><p><strong>Start line 起始行 — Header Filed 头部字段 — 空行 — Entity Body 实体主体</strong></p>
-<p>起始行和头部字段构成HTTP报文头部（Headers）</p>
-<h4 id="1-HTTP-请求报文"><a href="#1-HTTP-请求报文" class="headerlink" title="1. HTTP 请求报文"></a>1. HTTP 请求报文</h4><p><strong>请求行–HTTP头字段–空行–请求体</strong></p>
-<p>浏览器只支持POST和GET这两种请求方法，实际上还有HEAD，TRACE，PATCH，PUSH等请求方法。一般纯查询请求可以使用GET，其他请求用POST。由于只能是ASCII编码，所以GET不能传输中文</p>
-<ol>
-<li>**GET请求：放在请求行(URL)**，会暴露在地址栏，有长度限制，会被主动Cache，只有默认编    码。</li>
-<li><strong>POST请求：放在报文体</strong>，无长度限制，可以传输中文。POST请求也可以在请求行中写入数据，这时候类似GET请求，但一般没人会在form action或ajax url中加入这种处理</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/mix/76.html?name=kelvin&amp;password=123456</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: www.fishbay.cn</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span>: 1</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) </span><br><span class="line"><span class="attribute">Conetent-Type</span>: application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Cookie</span>: JASSDHUHFUBSIUFHI=232DWUFHI</span><br><span class="line"><span class="attribute">Accept-Encoding</span>: gzip, deflate, sdch</span><br><span class="line"><span class="attribute">Accept-Language</span>: zh-CN,zh;q=0.8,en;q=0.6</span><br><span class="line"></span><br><span class="line">username=jinqiao&amp;password=1234</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-HTTP-响应报文"><a href="#2-HTTP-响应报文" class="headerlink" title="2. HTTP 响应报文"></a>2. HTTP 响应报文</h4><p><strong>状态行–HTTP头–空行–响应体</strong></p>
-<p>这个http响应的响应正文时纯文本，可以时html等等</p>
-<p>Etag，Vary: User-Agent，Cache-Control等都是常用的响应头设置</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Server</span>: nginx</span><br><span class="line"><span class="attribute">Date</span>: Mon, 20 Feb 2017 09:13:59 GMT</span><br><span class="line"><span class="attribute">Content-Type</span>: text/plain;charset=UTF-8</span><br><span class="line"><span class="attribute">Vary</span>: Accept-Encoding</span><br><span class="line"><span class="attribute">Cache-Control</span>: no-store</span><br><span class="line"><span class="attribute">Pragrma</span>: no-cache</span><br><span class="line"><span class="attribute">Expires</span>: Thu, 01 Jan 1970 00:00:00 GMT</span><br><span class="line"><span class="attribute">Cache-Control</span>: no-cache</span><br><span class="line"><span class="attribute">Content-Encoding</span>: gzip</span><br><span class="line"><span class="attribute">Transfer-Encoding</span>: chunked</span><br><span class="line"><span class="attribute">Proxy-Connection</span>: Keep-alive</span><br><span class="line"></span><br><span class="line">&#123;&quot;code&quot;:200,&quot;notice&quot;:0,&quot;follow&quot;:0,&quot;forward&quot;:0,&quot;msg&quot;:0,&quot;comment&quot;:0&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-HTTP-Header"><a href="#3-HTTP-Header" class="headerlink" title="3. HTTP Header"></a>3. HTTP Header</h4><p>HTTP Header中有四种Header Filed：</p>
-<p><strong>通用头：</strong>请求头和响应头都可使用字段</p>
-<p><strong>Cache-Control</strong>、Pragma、Date、Via</p>
-<p>Connection：keep-alive/close</p>
-<p><strong>实体头：</strong>用于定义Entity Body（数据）的一些信息的头字段</p>
-<p>Location（重定向跳转就设置了这个）、</p>
-<p><strong>Content-Type</strong>、Conetent-Encoding（响应内容的压缩）、</p>
-<p>Expire、Allow、Etag（资源标识符）、Last-Modify</p>
-<p><strong>请求头：</strong></p>
-<p>User-Agent、Host、Referer、<strong>Accept</strong>（希望接收的类型）</p>
-<p><strong>响应头：</strong></p>
-<p>Age（在代理服务器中缓存秒数）、Server（提供服务器信息）、Vary</p>
-<h2 id="HTTP缓存"><a href="#HTTP缓存" class="headerlink" title="HTTP缓存"></a>HTTP缓存</h2><p>HTTP缓存也称为Web缓存，主要就是客户端本身的<strong>浏览器本地缓存</strong>和代理服务器缓存（正向代理和反向代理）。<strong>只能缓存GET请求</strong>的内容，缓存css、js、HTML等静态资源</p>
-<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5c417993f265da61285a6075">缓存Cache-Control参考</a></p>
-<p>在HTTP1.0时代，pragma和Expires两个头字段可以设置缓存策略。</p>
-<p>到了HTTP1.1以后，又有<strong>Cache-Control</strong>设置缓存策略，HTML meta、动态网页中可以设置。</p>
-<p>​    public：允许客户端和代理服务器缓存</p>
-<p>​    private（GET请求默认）：允许客户端缓存</p>
-<p>​    <strong>no-cache</strong>：允许客户端缓存，但每次快取需要由服务器请求缓存是否过期，未过期返回304。协商缓存</p>
-<p>​    <strong>no-store：不允许缓存。</strong></p>
-<p>​    <strong>max-age=60</strong>：允许缓存保留60秒（自带no-cache），没有这个属性就会去查找expire。强缓存</p>
-<p>​    must-revalidate</p>
-<p>这些设置缓存的头字段时通用头字段，当request和response都设置时，Apache或nginx等服务器可以设置听哪个request还是response的。</p>
-<h1 id="服务器优化"><a href="#服务器优化" class="headerlink" title="服务器优化"></a>服务器优化</h1><p>⚠️：关于域名备案：网站备案+域名备案，全称为icp备案。</p>
-<p>可在工信部备案，阿里云等服务器提供商也支持快速备案，提供域名+服务器的IP地址。备案<strong>要求服务器是国内服务器，域名是国内注册商注册</strong>，如果是在国外域名注册商注册.com/.net等域名，可将域名迁入阿里云等国内域名注册商再备案。</p>
-<h2 id="1-DNS"><a href="#1-DNS" class="headerlink" title="1. DNS"></a>1. DNS</h2><h4 id="相关工具"><a href="#相关工具" class="headerlink" title="相关工具"></a>相关工具</h4><ul>
-<li><p><strong>whois</strong>：返回域名的注册信息</p>
-</li>
-<li><p><strong>ping 域名</strong>：返回当前域名用默认DNS解析的IP，并显示时延迟</p>
-</li>
-<li><p>**nslookup 域名 [ DNS服务器 ] ** ：返回域名被默认或指定的DNS服务器解析成的所有IP地址（无优先级）</p>
-</li>
-<li><p><strong>dig 域名 [ DNS服务器 ] **：返回域名被默认或指定的DNS服务器解析成到的IP地址</strong>和DNS递归过程**。</p>
-<p>dig ns .        返回<strong>根域名—根DNS</strong>这一条DNS记录<br>dig ns com.<br>dig ns baidu.com     查询baidu.com这域名层级NS记录（baidu.com的—权威域名服务器）</p>
-<p>dig a baidu.com    查询baidu.com这域名层级的A记录，基本等同于nslookup</p>
-</li>
-</ul>
-<p>测试DNS性能，一般不单独用ping或者dig命令，而是用tae</p>
-<h4 id="DNS解析顺序及原理"><a href="#DNS解析顺序及原理" class="headerlink" title="DNS解析顺序及原理"></a>DNS解析顺序及原理</h4><p>DNS即domain name system，就是将域名解析到IP的服务器，一共有13台IPV4根域名服务器。缓存到LDNS（递归服务器）的过程是迭代（没找到就下一级找，将上一级输出作为条件），LDNS到最终查询结果是<strong>递归查询</strong>（逐级查询到再逐级返回），从整个系统层级来说DNS是一种递归系统</p>
-<ol>
-<li><p><strong>浏览器的DNS缓存</strong>：chrome缓存60是，Safari缓存10S，chrome://net-internals/#dns可以查看设置和清楚</p>
-</li>
-<li><p><strong>操作系统DNS缓存</strong>：</p>
-<p>windows默认固定保留一天（MaxCacheTTL=86400秒），ipconfig/displaydns查看。ipconfig/flushdns清除</p>
-<p>macOS中保留时间遵守由DNS服务器设置的TTL值，Time To Live，一般不会超过一周。</p>
-<p>macOS清除DNS缓存，sudo killall -HUP mDNSResponder</p>
-<p>Linux通过nscd实现DNS缓存，重启该服务将会刷新缓存</p>
-</li>
-<li><p><strong>hosts文件</strong></p>
-</li>
-<li><p>向系统设定的<strong>LDNS（ISP DNS或公共DNS）</strong>，先zone文件后dns服务器缓存（同样受TTL限制）</p>
-<p>⚠️：操作系统不设定DNS时，实际会上抛给路由器，检查路由器有无DNS缓存，无缓存就会抛给ISP DNS</p>
-</li>
-<li><p>LDNS<strong>向根域名服务器发送递归请求</strong>，选取最快的根域名服务器，在里面根据**.com—–NS记录<strong>，找到最快的负责解析.com的</strong>顶级域名服务器**，</p>
-</li>
-<li><p>然后在顶级域名服务器里根据<strong>qq.com—-NS记录</strong>，查找到负责解析这个qq.com次级域名的服务商，次级域名的域名解析一般就是<strong>权威服务器</strong>，如DNSPOD</p>
-</li>
-</ol>
-<h4 id="公共DNS"><a href="#公共DNS" class="headerlink" title="公共DNS"></a>公共DNS</h4><p>为了防止DNS污染和运营商劫持一般会使用公共DNS，公共DNS也会被污染和劫持？</p>
-<p>但是一般的公共DNS影响CDN效率，权威DNS根据<strong>公共DNS出口</strong>的请求IP来判断用户本身的位置和运营商来分配CDN，而公共DNS节点不多的，位置很有可能有偏差，甚至导致给你分配一个国外IP的CDN。而运营商分配的CDN是最准确的。</p>
-<p><strong>ECS协议</strong>（Edns-Client-Subnet，<strong>允许递归服务器发送用户的IP给权威服务器</strong>）能解决公共DNS的CDN分配不准确问题，但是需要递归服务器和权威服务器同时支持，目前并不是特别广泛</p>
-<h4 id="DNS记录"><a href="#DNS记录" class="headerlink" title="DNS记录"></a>DNS记录</h4><ul>
-<li>A记录：最终主机地址</li>
-<li><strong>NS记录</strong>：<strong>域名—-NS（域名的解析服务器）</strong>，NS只能是域名，如e.gtld-servers.net.这是一个.com域名的DNS</li>
-<li>SOA：起始授权服务器，标记众多NS记录中的主服务器</li>
-<li>CNAME（别名）：CNAME记录主要用于域名的内部跳转</li>
-<li>MX（邮件交换器）</li>
-</ul>
-<h4 id="DNS恶意解析"><a href="#DNS恶意解析" class="headerlink" title="DNS恶意解析"></a>DNS恶意解析</h4><p>在DNS服务商上可以设置，用域名解析到任意IP，所以存在恶意解析：</p>
-<p>​        用未备案或者污点的域名解析到我们的服务器上，轻则降低我们网站的权重（流量被别人的域名抢走），重则服务器被工信部封杀。解决方法，在服务器上设置配置文件或者反向代理，拒绝直接IP的访问，指定只能域名访问。</p>
-<p>把非绑定的域名用301到自己的服务器。</p>
-<ul>
-<li>DNS污染</li>
-<li>DNS劫持</li>
-</ul>
-<h2 id="2-服务器负载均衡"><a href="#2-服务器负载均衡" class="headerlink" title="2. 服务器负载均衡"></a>2. 服务器负载均衡</h2><p>负载均衡（Load Balance）是一个概念，就是将负载（也就是任务）分摊到多个处理单元，<strong>降低处理压力</strong>。大型网站服务器集群负载均衡（SLB），一般通过DNS服务器解析承担第一级负载均衡，解析到负载均衡服务器进行第二轮负载均衡</p>
-<h4 id="DNS负载均衡"><a href="#DNS负载均衡" class="headerlink" title="DNS负载均衡"></a>DNS负载均衡</h4><p>通过DNS解析到不同IP，达到访问集群服务器。智能DNS解析，可以解析成最近的服务器（CDN），不仅起到降低服务器压力，还能加快访问速度。</p>
-<p>优点是简单和成本低，只需要在DNS服务商</p>
-<p>缺点是，DNS负载均衡使用简单的轮询算法，不能根据服务器的运行状态和处理能力来完成负载均衡。</p>
-<h4 id="负载均衡服务器"><a href="#负载均衡服务器" class="headerlink" title="负载均衡服务器"></a>负载均衡服务器</h4><p>通过负载均衡服务器在服务器集群中的选择服务器，负载均衡服务器接受普通TCP/UDP请求，与TCP三次握手也就是解析到报文的第4层后就发送到RS（Real server），接收http/ftp等请求，需要TCP握手三次之后，解析到第7层，才与RS建立连接。负载均衡服务器有三种传输模式：</p>
-<ul>
-<li><p><strong>反向代理模式（proxy_pass）</strong>：代理服务器访问，服务器无法知道客户端的真实IP，只知道代理服务器的IP；反向代理，客户端无法知道服务器的真实IP，只知道反向代理服务器的IP（virtual IP）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">	listen 80;</span><br><span class="line"><span class="meta">	#</span><span class="bash">将本机接收到的test.test的请求全部转发到web_server</span></span><br><span class="line">  server_name test.test;</span><br><span class="line">  location / &#123;</span><br><span class="line"><span class="meta">		#</span><span class="bash">反向代理</span></span><br><span class="line">   	proxy_pass http://web_server;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash">配置负载均衡服务器组</span></span><br><span class="line">upstream web_server &#123;</span><br><span class="line">	server 192.168.78.128;</span><br><span class="line">	server 192.168.78.129;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>透传模式</p>
-</li>
-<li><p>三角模式（IP欺骗）</p>
-</li>
-</ul>
-<h4 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h4><p>CDN的全称是Content Delivery Network，即<strong>内容分发网络</strong>。将网站的静态内容发布到最接近用户的网络边缘，提高用户访问网站的响应速度。CDN有别于镜像，因为它比镜像更智能。CDN同样依靠智能DNS解析，通过CDN服务商的<strong>智能DNS</strong>将域名解析到最近的缓存服务器上，对于静态网站加速效果好，交互性网络不明显。</p>
-<p>​    当用到国外DNS服务商时，有可能会造成一定的国内网站，使用了 CDN 加速的国内网站的 DNS 会无法判断你的来源</p>
-<h2 id="3-网络线路优化"><a href="#3-网络线路优化" class="headerlink" title="3. 网络线路优化"></a>3. 网络线路优化</h2><p>线路优化主要是让用户以最快的速度访问到服务器，服务器线路如何搭建很重要，单线就是用户访问服务器只会是固定的联通或者电信，双线就是根据用户的IP走不同的运营商路由。</p>
-<ul>
-<li>单IP单线，一个服务器对应一个IP，这是最常见的最普通的网络方式</li>
-<li>双IP双线，一个服务器多IP（联通/电信/移动），用两个域名解析到这两个IP，或者配合<strong>智能DNS解析</strong>，DNS权威服务器根据递归DNS的出口IP代表用户IP线路，返回对应运营商的服务器IP，一般泛解析默认指向电信IP。</li>
-<li>普通单IP返程双线：在服务器的出口路由器配置路由表，达到返回数据时选择运营商线路，但用户发起请求达不到双线</li>
-<li>BGP单IP双线：机房与电信联通达成合作协议，通过BGP协议选择多个运营商之间的最佳骨干路由器</li>
-<li>CDN加速：通过CDN服务商的<strong>智能DNS</strong>将域名解析到最近的缓存服务器上，对于静态网站加速效果好，交互性网络不明显</li>
-</ul>
-<h1 id="代理服务器"><a href="#代理服务器" class="headerlink" title="代理服务器"></a>代理服务器</h1><h2 id="代理软件"><a href="#代理软件" class="headerlink" title="代理软件"></a>代理软件</h2><p>基本国外的网站都走国外</p>
-<p>域名代理规则—–直接发送（防止在本地解析DNS）。配置尽量多的国外地址，防止落到IP判断，解析浪费时间</p>
-<p>域名直连规则—解析</p>
-<p>未知域名—一次解析—中国IP走直连，外国IP走代理。外国速度变慢</p>
-<h4 id="普通代理"><a href="#普通代理" class="headerlink" title="普通代理"></a>普通代理</h4><p>代理客户端会接管系统代理，浏览器等软件会检测到系统代理来使用，<strong>此时浏览器等软件直接将HTTPS请求封装到sock5流量，不会使用DNS缓存</strong></p>
-<p>socks5流量到达代理客户端后</p>
-<ul>
-<li><p><strong>先匹配域名规则</strong>，走直连规则就由代理客户端DNS解析到IP，将socks5流量还原成TCP请求；域名走代理规则就本地不解析，用某种协议重组socks5流量发送其中的域名和其他数据到代理服务器。</p>
-</li>
-<li><p>如果<strong>没有匹配到域名规则的域名</strong>，代理客户端解析到IP匹配IP规则，匹配到直连规则直接还原TCP连接；匹配到代理规则将域名通过某种协议重组socks5流量发送域名+其他数据给代理服务器，远程服务器用域名再次解析并发起链接。</p>
-</li>
-</ul>
-<h4 id="全局代理（透明代理）"><a href="#全局代理（透明代理）" class="headerlink" title="全局代理（透明代理）"></a>全局代理（透明代理）</h4><p>通过redir/tun2socks客户端截获系统所有DNS请求和TCP连接。然后经由redir客户端封装成socks5流量发送给代理客户端（或者redir自身建立TCP），代理客户端拿到socks5以后，同普通代理，按照域名规则和IP规则分流。有两种形式的截获。</p>
-<p><strong>全局模式模式下就算是浏览器也必须要DNS解析拿到IP，才能发起TCP连接（HTTPS请求）</strong>。</p>
-<ul>
-<li><p>普通redir/tun2socks（真DNS解析），代理客户端截获操作系统的DNS请求，返回解析IP结果，软件发起TCP连接，代理客户端截获TCP连接，根据TCP请求中的IP反查出域名。</p>
-</li>
-<li><p>FakeIP形式的redir（假DNS解析）：代理客户端截获DNS请求不会解析，而是返回一个FakeIP，截获TCP连接时按照FakeIP反查出域名。相对于普通的redir，FakeIP会省去一次DNS解析，变成和直接设置代理差不多。</p>
-</li>
-</ul>
-<p>DNS缓存的影响：可能通过浏览器或系统缓存获取IP而不会发起操作系统解析，DNS不会被截获，此时普通redir的域名规则代理失效，而Fake IP池会缓存之前的IP与域名的映射关系，不受DNS缓存的影响。</p>
-<p>Fancyss（路由器翻墙软件）使用的redir，surge的增强模式用的FakeIP，clash使用redir-host和FakeIP两种都有</p>
-<p><a target="_blank" rel="noopener" href="https://blog.skk.moe/post/what-happend-to-dns-in-proxy/">浅谈在代理环境中的 DNS 解析行为</a></p>
-<p><a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/HT210060">apple域名参考</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
     
 
 
@@ -715,7 +328,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-10-18 11:07:59" itemprop="dateModified" datetime="2020-10-18T11:07:59+08:00">2020-10-18</time>
+        <time title="修改时间：2020-10-19 16:32:25" itemprop="dateModified" datetime="2020-10-19T16:32:25+08:00">2020-10-19</time>
       </span>
 
   
@@ -729,6 +342,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>BFF和网关。接口和通讯协议。接口联调，熟悉接口，熟悉系统。</p>
+<p>同步编程和异步编程实战。</p>
+<p>Springboot、springcloud对webflux异步编程（代替SpringMVC）的支持、服务注册与发现、熔断。</p>
+<p>报表工具流行用js前端，而不是jasper report等报表工具</p>
 
       
     </div>
@@ -755,7 +371,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/13/0.%20%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/13/0.%20HTTP%E5%8D%8F%E8%AE%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -769,7 +385,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/10/13/0.%20%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">正则表达式</a>
+            <a href="/2020/10/13/0.%20HTTP%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">HTTP协议</a>
         </h2>
 
         <div class="post-meta-container">
@@ -787,7 +403,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-10-14 16:54:26" itemprop="dateModified" datetime="2020-10-14T16:54:26+08:00">2020-10-14</time>
+        <time title="修改时间：2020-10-19 10:01:29" itemprop="dateModified" datetime="2020-10-19T10:01:29+08:00">2020-10-19</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -795,7 +411,142 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
+          <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h2><p>在<strong>TCP/IP四层网络结构（应用层，传输层TCP/UDP，网络层IP，网络接口层）</strong>中。OSI七层</p>
+<p>发送端在层与层间传输数据时，每经过一层都会被加上网络层的首部信息，接收端每经过一层都会删除一条当前网络层的首部信息。</p>
+<p>HTTP1/2是<strong>基于TCP/IP</strong>应用层的协议（<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/68012355">HTTP3基于UDP</a>），最初只用来传输HTML且只有GET方法，97年的1.1版本用了将近20年，2015年诞生了HTTP 2。</p>
+<ul>
+<li><p><strong>无连接</strong>；<strong>即请求时连接，请求完释放连接</strong>，服务器收到请求，返回响应，服务器收到应答，断开连接。</p>
+<p>无连接设计之初目的是为了不占用网络资源，如果一个网页有包含许多请求（如很多图片），多次连接降低了网络效率，所以在HTTP 1.1时，产生了<strong>Connection: Keep-Alive</strong>，默认开启，使客户端和服务器在keep-alive规定时间内保持连接TCP连接，只有设置Connecttion：false时取消</p>
+</li>
+<li><p><strong>无状态</strong>：<strong>每个HTTP报文是独立的</strong>，服务器对于前面请求处理的信息，后面请求不能直接获取到前面请求中的信息。</p>
+<p>设计之初降低了服务器的压力，但是在动态Web时代，无状态特性阻碍了应用程序的实现。于是产生了记录状态的<strong>Cookie和Session</strong>。</p>
+<p><strong>Cookie</strong>：会话保存在客户端，Cookie只能保存是字符串（4KB），切勿保存重要数据，<strong>默认浏览器关闭时清除session</strong>，除非服务端设置setMaxAge。一个cookie就是一个（String，String），使用request.getCookies()获得一个cookie数组，getName()获得cookie的name，getValue获得cookie的value</p>
+<p><strong>Session</strong>：会话保存在服务器，在调用getSession时创建，判断cookie中有无sessionid，无就生成sessionID，定义一个会话状态，并将sessionid通过Cookie发送给浏览器。</p>
+<p>restful的前后端分离项目中一般会使用 access_token，因为前后端分离项目跨域，使用cookie里的sessionID不方便认证状态，这个token和session_id是一个意思。<a target="_blank" rel="noopener" href="https://juejin.im/entry/5bd921fce51d45686d40b2d6">分离Cookie参考</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hxfghgh/article/details/82840613">关于Cookie</a></p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/24860273">TCP和UDP</a></p>
+<h2 id="HTTP报文解析"><a href="#HTTP报文解析" class="headerlink" title="HTTP报文解析"></a>HTTP报文解析</h2><p><strong>Start line 起始行 — Header Filed 头部字段 — 空行 — Entity Body 实体主体</strong></p>
+<p>起始行和头部字段构成HTTP报文头部（Headers）</p>
+<h4 id="1-HTTP-请求报文"><a href="#1-HTTP-请求报文" class="headerlink" title="1. HTTP 请求报文"></a>1. HTTP 请求报文</h4><p><strong>请求行–HTTP头字段–空行–请求体</strong></p>
+<p>浏览器只支持POST和GET这两种请求方法，实际上还有HEAD，TRACE，PATCH，PUSH等请求方法。一般纯查询请求可以使用GET，其他请求用POST。由于只能是ASCII编码，所以GET不能传输中文</p>
+<ol>
+<li>**GET请求：放在请求行(URL)**，会暴露在地址栏，有长度限制，会被主动Cache，只有默认编    码。</li>
+<li><strong>POST请求：放在报文体</strong>，无长度限制，可以传输中文。POST请求也可以在请求行中写入数据，这时候类似GET请求，但一般没人会在form action或ajax url中加入这种处理</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/mix/76.html?name=kelvin&amp;password=123456</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: www.fishbay.cn</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span>: 1</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) </span><br><span class="line"><span class="attribute">Conetent-Type</span>: application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Cookie</span>: JASSDHUHFUBSIUFHI=232DWUFHI</span><br><span class="line"><span class="attribute">Accept-Encoding</span>: gzip, deflate, sdch</span><br><span class="line"><span class="attribute">Accept-Language</span>: zh-CN,zh;q=0.8,en;q=0.6</span><br><span class="line"></span><br><span class="line">username=jinqiao&amp;password=1234</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-HTTP-响应报文"><a href="#2-HTTP-响应报文" class="headerlink" title="2. HTTP 响应报文"></a>2. HTTP 响应报文</h4><p><strong>状态行–HTTP头–空行–响应体</strong></p>
+<p>这个http响应的响应正文时纯文本，可以时html等等</p>
+<p>Etag，Vary: User-Agent，Cache-Control等都是常用的响应头设置</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Server</span>: nginx</span><br><span class="line"><span class="attribute">Date</span>: Mon, 20 Feb 2017 09:13:59 GMT</span><br><span class="line"><span class="attribute">Content-Type</span>: text/plain;charset=UTF-8</span><br><span class="line"><span class="attribute">Vary</span>: Accept-Encoding</span><br><span class="line"><span class="attribute">Cache-Control</span>: no-store</span><br><span class="line"><span class="attribute">Pragrma</span>: no-cache</span><br><span class="line"><span class="attribute">Expires</span>: Thu, 01 Jan 1970 00:00:00 GMT</span><br><span class="line"><span class="attribute">Cache-Control</span>: no-cache</span><br><span class="line"><span class="attribute">Content-Encoding</span>: gzip</span><br><span class="line"><span class="attribute">Transfer-Encoding</span>: chunked</span><br><span class="line"><span class="attribute">Proxy-Connection</span>: Keep-alive</span><br><span class="line"></span><br><span class="line">&#123;&quot;code&quot;:200,&quot;notice&quot;:0,&quot;follow&quot;:0,&quot;forward&quot;:0,&quot;msg&quot;:0,&quot;comment&quot;:0&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-HTTP-Header"><a href="#3-HTTP-Header" class="headerlink" title="3. HTTP Header"></a>3. HTTP Header</h4><p>HTTP Header中有四种Header Filed：</p>
+<p><strong>通用头：</strong>请求头和响应头都可使用字段</p>
+<p><strong>Cache-Control</strong>、Pragma、Date、Via</p>
+<p>Connection：keep-alive/close</p>
+<p><strong>实体头：</strong>用于定义Entity Body（数据）的一些信息的头字段</p>
+<p>Location（重定向跳转就设置了这个）、</p>
+<p><strong>Content-Type</strong>、Conetent-Encoding（响应内容的压缩）、</p>
+<p>Expire、Allow、Etag（资源标识符）、Last-Modify</p>
+<p><strong>请求头：</strong></p>
+<p>User-Agent、Host、Referer、<strong>Accept</strong>（希望接收的类型）</p>
+<p><strong>响应头：</strong></p>
+<p>Age（在代理服务器中缓存秒数）、Server（提供服务器信息）、Vary</p>
+<h2 id="HTTP缓存"><a href="#HTTP缓存" class="headerlink" title="HTTP缓存"></a>HTTP缓存</h2><p>HTTP缓存也称为Web缓存，主要就是客户端本身的<strong>浏览器本地缓存</strong>和代理服务器缓存（正向代理和反向代理）。<strong>只能缓存GET请求</strong>的内容，缓存css、js、HTML等静态资源</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5c417993f265da61285a6075">缓存Cache-Control参考</a></p>
+<p>在HTTP1.0时代，pragma和Expires两个头字段可以设置缓存策略。</p>
+<p>到了HTTP1.1以后，又有<strong>Cache-Control</strong>设置缓存策略，HTML meta、动态网页中可以设置。</p>
+<p>​    public：允许客户端和代理服务器缓存</p>
+<p>​    private（GET请求默认）：允许客户端缓存</p>
+<p>​    <strong>no-cache</strong>：允许客户端缓存，但每次快取需要由服务器请求缓存是否过期，未过期返回304。协商缓存</p>
+<p>​    <strong>no-store：不允许缓存。</strong></p>
+<p>​    <strong>max-age=60</strong>：允许缓存保留60秒（自带no-cache），没有这个属性就会去查找expire。强缓存</p>
+<p>​    must-revalidate</p>
+<p>这些设置缓存的头字段时通用头字段，当request和response都设置时，Apache或nginx等服务器可以设置听哪个request还是response的。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.skk.moe/post/what-happend-to-dns-in-proxy/">浅谈在代理环境中的 DNS 解析行为</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/12/0.%20%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="李柱新">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lee's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/12/0.%20%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">正则表达式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-12 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-12T00:00:00+08:00">2020-10-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-10-19 10:01:30" itemprop="dateModified" datetime="2020-10-19T10:01:30+08:00">2020-10-19</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
         </span>
     </span>
 
@@ -870,6 +621,155 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/11/0.%20%E7%BC%96%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="李柱新">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lee's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/11/0.%20%E7%BC%96%E7%A0%81/" class="post-title-link" itemprop="url">数据和编码</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-11 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-11T00:00:00+08:00">2020-10-11</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-10-19 10:01:32" itemprop="dateModified" datetime="2020-10-19T10:01:32+08:00">2020-10-19</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="字符集和字符编码"><a href="#字符集和字符编码" class="headerlink" title="字符集和字符编码"></a>字符集和字符编码</h2><ol>
+<li><p>文本文件：通过字符编码（如UTF-8）保存的文件，如数字64，文本文件会将64解析成’6’和’4’两个字符，再根据字符集编码，再存储到硬盘中</p>
+</li>
+<li><p>二进制文件：保留数据本身二进制的文件，数字64，如Java的int型数字64，直接储存64的二进制到硬盘中</p>
+</li>
+</ol>
+<p>字符集规定了字符在字符表的位置，在文本文件的存储过程中，文本会依靠字符集规则转化成字符，其中最著名的就是ASCII字符集和Unicode字符集。</p>
+<h4 id="ASCII字符集"><a href="#ASCII字符集" class="headerlink" title="ASCII字符集"></a>ASCII字符集</h4><p>ASCII既是世界上第一个字符集（charset），同时又规定了字符编码（encoding）。</p>
+<p>ASCII字符编码用一个字节（7位容器）来表示一个字符，ASCII中一共有127个字符（0-126）。</p>
+<h4 id="Unicode字符集"><a href="#Unicode字符集" class="headerlink" title="Unicode字符集"></a>Unicode字符集</h4><p>地球上字符太多，ASCII字符集的单字节无法表示，所以出现了Unicode字符集。最初时UTF-16编码来实现Unicode字符集，用2个或4个字节来保存。</p>
+<ul>
+<li><p>UTF-16：用两个或者四个字节（<strong>Java char类型用的2字节的UTF-16 LE</strong>），四字节称为UTF-16 BE</p>
+</li>
+<li><p>UTF-32：用四个字节</p>
+</li>
+<li><p>UTF-8：1～4个字节，1个字节时与ASCII编码相同，常见<strong>汉字一般3字节</strong></p>
+</li>
+</ul>
+<h4 id="ISO-8859-1-（Latin-1）"><a href="#ISO-8859-1-（Latin-1）" class="headerlink" title="ISO-8859-1 （Latin 1）"></a>ISO-8859-1 （Latin 1）</h4><p>同样是ASCII码的超集，用一个字节（8位容器）实现255节。在支持ISO-8859-1的系统中传输和存储其他任何编码的字节流都不会被抛弃。mysql默认就采用他</p>
+<h4 id="GBK字符集"><a href="#GBK字符集" class="headerlink" title="GBK字符集"></a>GBK字符集</h4><p>一般汉字2字节。</p>
+<p><a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/java/j-lo-chinesecoding/index.html">Java中存在的编码问题</a></p>
+<h2 id="Content-Type与前后编解码"><a href="#Content-Type与前后编解码" class="headerlink" title="Content-Type与前后编解码"></a>Content-Type与前后编解码</h2><h4 id="浏览器解码："><a href="#浏览器解码：" class="headerlink" title="浏览器解码："></a>浏览器解码：</h4><ol>
+<li><p>根据服务器返回的Content-Type中指定的编码解码。</p>
+</li>
+<li><p>根据meta标签的charset。</p>
+</li>
+<li><p>根据浏览器设定的编码解码（跟随浏览器设定，一般中文系统为GBK）</p>
+</li>
+</ol>
+<h4 id="浏览器编码和Content-Type："><a href="#浏览器编码和Content-Type：" class="headerlink" title="浏览器编码和Content-Type："></a>浏览器编码和Content-Type：</h4><ul>
+<li><p>POST请求的编码：默认UTF-8，<strong>ajax请求强制数据为UTF-8编码，即使在contentType中设置的编码也不生效</strong>，所以对于发送ajax请求，直接写application/json，然后设置服务器对所有请求数据使用UTF-8解析：request.setCharactorEncoding(“UTF-8”)。</p>
+<ul>
+<li><p>Ajax POST默认contentType: application/x-www-form-urlencoded;charset=UTF-8。</p>
+</li>
+<li><p>form POST默认的contentType: application/x-www-form-urlencoded</p>
+<p><strong>form POST的编码也是UTF-8，但是不会在Content-Type中声明</strong></p>
+</li>
+</ul>
+</li>
+<li><p>GET请求的编码：默认UTF-8（不指定Content-Type，一般传输不了中文）</p>
+</li>
+</ul>
+<h4 id="服务器解码："><a href="#服务器解码：" class="headerlink" title="服务器解码："></a>服务器解码：</h4><ol>
+<li><p>使用requst.setCharactorEncoding( )指定的编码解码。</p>
+</li>
+<li><p>根据客户端发送的Content-Type中的编码解码。</p>
+</li>
+<li><p>使用默认的UTF-8解码</p>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 设置Content-Type作用与于GET请求</span><br><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">useBodyEncodingForURI</span> = <span class="string">&quot;true&quot;</span> &gt;</span> </span><br><span class="line"> // 设置GET请求使用UTF-8解码, Tomcat 8以后这个默认值已经是UTF-8，</span><br><span class="line"> // 注意：request.setCharactorEncoding对GET请求不生效。</span><br><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">URIEncoding</span> =<span class="string">&quot;UTF-8&quot;</span> &gt;</span> </span><br></pre></td></tr></table></figure>
+
+<h4 id="服务器编码和Content-Type："><a href="#服务器编码和Content-Type：" class="headerlink" title="服务器编码和Content-Type："></a>服务器编码和Content-Type：</h4><ol>
+<li><p>response.setContentType(“application/json; charset=UTF-8”)，respnse.setCharactorEncoding()</p>
+</li>
+<li><p>Servlet response的默认编码是UTF-8</p>
+</li>
+<li><p>JSP会默认Content-Type：</p>
+<p>JSP的编码只受到Page指令的contentType/pageEncoding命令约束，而且这两个命令对于JSP生成的Content-Type决定权最高。</p>
+<p>response.setCharactorEncoding方法：设置返回数据的编码</p>
+<p>response.setContentType方法：设置Servlet返回数据的编码和返回数据的Content-Type。<strong>setContentType方法优先级最高</strong>，在此方法前后出现setCharactorEncoding()，数据会按照Content-Type编码。</p>
+</li>
+</ol>
+<ul>
+<li>注解设置注解设置：@RequestMapping(value = “”, <strong>produces=”application/json;charset=UTF-8”</strong>)</li>
+</ul>
+<h2 id="Content-Type指定MIME"><a href="#Content-Type指定MIME" class="headerlink" title="Content-Type指定MIME"></a>Content-Type指定MIME</h2><p>MIME即<strong>Multipurpose Internet Mail Extensions</strong>，相当于文件拓展名字。常见</p>
+<p>text/html（ 浏览器默认解析形式）、text/plain、application/json、application/x-www-form-urlencoded、multipart/form-data ，只用于form提交复杂数据(包含type=file的input表单)</p>
+<p>前台通过Controller去获取服务器上的视频或者图片时，后台需要返回application/video、<strong>image/jpeg，image/png，image/gif，image/svg+xml</strong>：最安全的Web图片格式</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/24/%E5%85%B6%E4%BB%96/%E9%93%B6%E8%A1%8C%E4%B8%9A%E5%8A%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -902,7 +802,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-10-18 11:30:51" itemprop="dateModified" datetime="2020-10-18T11:30:51+08:00">2020-10-18</time>
+        <time title="修改时间：2020-10-19 14:44:03" itemprop="dateModified" datetime="2020-10-19T14:44:03+08:00">2020-10-19</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1108,7 +1008,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/07/4.%20SE%E8%BF%9B%E9%98%B6/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/07/1.%20SE%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1122,7 +1022,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/07/4.%20SE%E8%BF%9B%E9%98%B6/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2020/09/07/1.%20SE%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1135,6 +1035,13 @@
 
       <time title="创建时间：2020-09-07 14:55:29" itemprop="dateCreated datePublished" datetime="2020-09-07T14:55:29+08:00">2020-09-07</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-10-19 16:33:39" itemprop="dateModified" datetime="2020-10-19T16:33:39+08:00">2020-10-19</time>
+      </span>
 
   
 </div>
@@ -1146,21 +1053,67 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="JVM问题"><a href="#JVM问题" class="headerlink" title="JVM问题"></a>JVM问题</h2><ul>
-<li><p>代码执行顺序</p>
+          <h1 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h1><p>通过IO流实现在内存，硬盘或不同平台间文件的传输。</p>
+<p><strong>进行IO流操作后需要关流，否则会一直占用资源</strong>，当其他请求访问时将会发生Runtime异常。另外字符流不close或者不flush，会导致当前写入或者读取失败，因为字符流使用了缓冲区，不关流或flush是无法将数据传送到硬盘或者读取到内存的。</p>
+<p>IO流常用方法：write(数据)、read(接收返回数据)。<br><strong>无参read方法返回一个字节/字符，读到底了，返回-1；</strong><br><strong>有参read方法读取数据到参数并返回的字符/字节长度</strong></p>
+<p>输出流默认构造方法会覆盖原文本文件，加true表示追加到文本文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Writer out = <span class="keyword">new</span> FileWriter(file,<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h2><p>InputStream和OutputStream是字节流父类，是抽象方法，必须通过子类实例化。</p>
+<p>字节流写入字节数据，没有缓冲区，直接保存或读取硬盘字节文件。</p>
+<h4 id="1-FileInputStream-FileOutputStream"><a href="#1-FileInputStream-FileOutputStream" class="headerlink" title="1. FileInputStream/FileOutputStream"></a>1. FileInputStream/FileOutputStream</h4><p>与<strong>硬盘有关</strong>的操作使用<strong>File型输入输出流</strong>。</p>
+<p>写入字符数据时，需要我们手动将内存中的字符编码成字节（str.getBytes(“UTF-8”)），再写入字节数组到硬盘，可以直接write整个字节数组，也可以循环字节数组，一个一个写入。</p>
+<p>可以在构造方法传入要操作的<strong>文件路径字符串</strong>，也可以用<strong>File类对象（推荐）</strong>，两种方法指定的<strong>路径不存在时自动创建文件</strong>。File类：抽象的方式表示一个文件路径，用来操作文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> InputStream in = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 读取方法1，直接读取全部</span></span><br><span class="line">Byte[] bytes = <span class="keyword">new</span> Byte[<span class="number">1024</span>];</span><br><span class="line"> in.read(bytes);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取方法2（最常用！！！！！）</span></span><br><span class="line">Byte[] bytes = <span class="keyword">new</span> Byte[<span class="number">1024</span>];</span><br><span class="line"><span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>((temp=in.read())!= -<span class="number">1</span>)&#123;</span><br><span class="line">   bytes[len] = (<span class="keyword">byte</span>)temp;</span><br><span class="line">   len++;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取方法3用for循环，只适用于已知文件的字节长度（很少使用，不推荐）</span></span><br><span class="line">Byte[] bytes = <span class="keyword">new</span> Byte[(<span class="keyword">int</span>)file.length()];</span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;bytes.length; i++)&#123;</span><br><span class="line">	bytes[i]=(<span class="keyword">byte</span>)in.read();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现文件复制：<strong>将一个文件用输入流read，返回的字节或字节数组， 直接用另一个文件的输入流直接write，而不需要构建一个字节数组去接收</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">in = <span class="keyword">new</span> FileInputStream(<span class="string">&quot;/Users/lee/Desktop/a.png&quot;</span>);</span><br><span class="line">out = <span class="keyword">new</span> FileOutputStream(<span class="string">&quot;/Users/lee/Desktop/b.png&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>((temp = in.read())!= -<span class="number">1</span>)&#123;</span><br><span class="line">  out.write((<span class="keyword">byte</span>)temp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-BufferedInputStream"><a href="#3-BufferedInputStream" class="headerlink" title="3. BufferedInputStream"></a>3. BufferedInputStream</h4><p>比如下载文件，从服务器文件中一次读一块</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bis=<span class="keyword">new</span> BufferedInputStream(fis);</span><br><span class="line">OutputStream os=resp.getOutputStream();</span><br><span class="line"><span class="keyword">int</span> i=bis.read(buffer);</span><br><span class="line"><span class="keyword">while</span>(i!=-<span class="number">1</span>)&#123;</span><br><span class="line">  <span class="comment">// write，读取buffer，从buffer的0到i</span></span><br><span class="line">  os.write(buffer,<span class="number">0</span>,i);</span><br><span class="line">  i=bis.read(buffer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-BufferedOutputStream"><a href="#4-BufferedOutputStream" class="headerlink" title="4. BufferedOutputStream"></a>4. BufferedOutputStream</h4><p>一次写一块，socket中</p>
+<h4 id="对象流"><a href="#对象流" class="headerlink" title="对象流"></a>对象流</h4><p>ObjectInputStream和ObjectOutputStream，接受普通流，方法writeObject和readObject</p>
+<p>对象中定义一个一个静态常量的序列号，比较好还原</p>
+<h2 id="字符流"><a href="#字符流" class="headerlink" title="字符流"></a>字符流</h2><p>Reader和Writer是所有字符流父类，是最普通基础的。</p>
+<p><strong>字符流只能读取和写入字符，使用了缓冲区，并在底层帮我门封装了编码和解码过程。</strong><br>底层写：将内存字符（Unicode形式）进行编码（UTF-8），再通过字节流保存到硬盘<br>底层读：读取字节并解码成字符数组，返回给read(接收的字符数组)。</p>
+<h4 id="1-FileWriter-FileReader"><a href="#1-FileWriter-FileReader" class="headerlink" title="1. FileWriter/FileReader"></a>1. FileWriter/FileReader</h4><p>File类字符输入流和输出流用来对文件进行读写：默认底层用UTF-8解码</p>
+<p>具体的读写方法和字节流一样。</p>
+<h4 id="字节转字符流"><a href="#字节转字符流" class="headerlink" title="字节转字符流"></a>字节转字符流</h4><p>网络编程中字符流一般很少去直接读，默认都按操作系统编码去读。怕编码不一致，一般都是用字节流读，在程序中转化成字符流</p>
+<ol>
+<li><p>InputStreamReader（常用）</p>
+<p>字节输入流按照编码转化成字符输入流，如下面代码，将字节流数据，用GBK编码解码成字符流。一般还会将这个流转化成BufferedReader。</p>
 </li>
-<li><p>JVM构成</p>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStreamReader in = <span class="keyword">new</span> InputStreamReader(req.getInputStream,<span class="string">&quot;GBK&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>OutputStreamWriter</p>
+<p>字节输出流，按照编码转化成字符输出流，比较少用，也通常转化成BufferedWriter</p>
 </li>
-<li><p>Java内存模型：线程私有的工作内存+线程共享的主存区。<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yanlingyin/archive/2011/12/07/2278961.html">C++中的引用传递、值传递、引用传递</a></p>
-</li>
-<li><p>垃圾搜索算法</p>
-</li>
-<li><p>垃圾回收算法：标记 -清除算法、标记-压缩算法、复制算法、分代收集</p>
-</li>
-<li><p>常见垃圾回收器</p>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OutputStreamWriter osw = <span class="keyword">new</span> OutputStreamWriter(<span class="keyword">new</span> FileOutputStream(<span class="string">&quot;a.txt&quot;</span>), <span class="string">&quot;UTF-8&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-BufferedReader（常用）"><a href="#3-BufferedReader（常用）" class="headerlink" title="3. BufferedReader（常用）"></a>3. BufferedReader（常用）</h4><p>缓冲字符流，将普通字符流转户成缓冲字符流。返回一个字符串，不需要我们去定义字符串长度</p>
+<p>普通字符流每次read操作都会从底层获取字节转化一次，而BufferedReader则会有缓存区，所以有<strong>多次read操作时，推荐将先创建基础的额FileReader或InputStreamReader再转化成BufferedReader</strong></p>
+<p>核心方法：readline()，一行一行读取，返回String，没有下一行了返回null</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader bfr =<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(<span class="string">&quot;test.conf&quot;</span>))</span><br><span class="line"> StringBuffer strBuffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"> String temp = <span class="string">&quot;&quot;</span>;</span><br><span class="line"> <span class="keyword">while</span>((temp=bfr.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	strBuffer.append(temp);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-BufferWriter"><a href="#4-BufferWriter" class="headerlink" title="4. BufferWriter"></a>4. BufferWriter</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bufferWriter.write(message)：在message中，默认一次写一行</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象的序列化"><a href="#对象的序列化" class="headerlink" title="对象的序列化"></a>对象的序列化</h2><p>和Cloneable接口一样是标记接口，虚拟机是否允许反序列化，不仅取决于类路径和功能代码是否一致（这是JDK序列化策略的缺点，一个项目没问题），最好设置一个序列化ID，就是private static final long serialVersionUID = 1L</p>
+<ul>
+<li><p><strong>实现Serializable接口</strong>（如果存在类依赖，依赖也需要序列化），就可以用ObjectOutputString实现这个序列化。使用<strong>transient</strong>关键字选择不需要序列化的属性，反序列化后，变成初始值，<strong>静态属性不会被序列化</strong>（因为静态属性不属于对象）。</p>
+<p>序列化主要是是为了<strong>保存运行时的属</strong>性。</p>
 </li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://crowhawk.github.io/2017/08/15/jvm_3/">垃圾收集器</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">&quot;template&quot;</span>));</span><br><span class="line">oos.writeObject(obj);</span><br><span class="line">(Person)oos.readObject();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>**实现<a target="_blank" rel="noopener" href="https://blog.csdn.net/yaomingyang/article/details/79321939">Externalizable**</a></p>
+<p>必须实现writeExternal、readExternal方法。</p>
+</li>
+</ul>
 <h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><p>​    泛型出现的原因就是为了<strong>创建容器类</strong>，JavaSE5之前，容器类只能接受Object对象，Object对象是所有类型的父类，所以可以直接接受所有类型的数据，但是还原使用时需要强制类型转化，灵活性不够。所以出现了泛型。</p>
 <h4 id="1-泛型类和泛型接口"><a href="#1-泛型类和泛型接口" class="headerlink" title="1. 泛型类和泛型接口"></a>1. 泛型类和泛型接口</h4><p><strong>在类或接口的头部声明，使之成为泛型类或泛型接口</strong>，表示在当前类或接口中的某些方法或属性将使用不确定的类型。<strong>泛型不支持基本数据类型，要用他的包装器对象</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span>&lt;<span class="title">T</span>&gt;</span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Demo</span>&lt;<span class="title">T</span>&gt;</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
@@ -1472,7 +1425,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-10-15 10:16:26" itemprop="dateModified" datetime="2020-10-15T10:16:26+08:00">2020-10-15</time>
+        <time title="修改时间：2020-10-19 14:21:57" itemprop="dateModified" datetime="2020-10-19T14:21:57+08:00">2020-10-19</time>
       </span>
 
   
@@ -1520,7 +1473,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/05/30/5.%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/05/21/6.%20Servlet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1534,7 +1487,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/30/5.%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2020/05/21/6.%20Servlet/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1545,8 +1498,15 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-05-30 14:24:24" itemprop="dateCreated datePublished" datetime="2020-05-30T14:24:24+08:00">2020-05-30</time>
+      <time title="创建时间：2020-05-21 10:43:42" itemprop="dateCreated datePublished" datetime="2020-05-21T10:43:42+08:00">2020-05-21</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-10-19 17:04:27" itemprop="dateModified" datetime="2020-10-19T17:04:27+08:00">2020-10-19</time>
+      </span>
 
   
 </div>
@@ -1558,97 +1518,197 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><p>单例、代理、<a target="_blank" rel="noopener" href="https://juejin.im/entry/58f5e080b123db2fa2b3c4c6">工厂</a>（<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24843188">作用</a>）</p>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/41988550">装饰器</a>、<a target="_blank" rel="noopener" href="https://blog.csdn.net/carson_ho/article/details/54910430">适配器</a>（<a target="_blank" rel="noopener" href="https://blog.csdn.net/uniquewonderq/article/details/79873251">和装饰器对比</a>）、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/58093669">建造者</a>、<a target="_blank" rel="noopener" href="https://blog.csdn.net/ljd2038/article/details/51262518">观察者</a>（<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56017188">其他</a>）、<a target="_blank" rel="noopener" href="https://juejin.im/post/5a126b146fb9a0450c490201#comment">责任链</a>、<a target="_blank" rel="noopener" href="https://juejin.im/post/5a126b146fb9a0450c490201#comment">模板</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengzhb/article/details/7278174">设计模式六大原则</a></p>
-<h4 id="单例设计模式（Singleton类）"><a href="#单例设计模式（Singleton类）" class="headerlink" title="单例设计模式（Singleton类）"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/cselmu9/article/details/51366946">单例设计模式</a>（Singleton类）</h4><p>单例设计模式的最基本点在于整个系统中，只有一个类的实例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 懒汉式（懒的预先创建）</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="comment">//static让对象在获取方法之初就生成，private让外界无法获取，volatile禁止指令重排</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton singleton = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">//私有化构造方法</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="comment">//外界通过这个静态方法来调用实例</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingle</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(singleton=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">          <span class="keyword">if</span>(singleton = <span class="keyword">null</span>)&#123;</span><br><span class="line">            singleton = <span class="keyword">new</span> Singleton();</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h2 id="tomcat的结构"><a href="#tomcat的结构" class="headerlink" title="tomcat的结构"></a>tomcat的结构</h2><p><img src="https://www.ibm.com/developerworks/cn/java/j-lo-tomcat1/image001.gif" alt="图 1.Tomcat 的总体结构"></p>
+<p>tomcat里有<strong>一个server</strong>，在Tomcat的server.xml中配置server标签的信息来配置server。</p>
+<p>server有<strong>一个至多个service</strong>（默认一个），service的核心组件是connector和container</p>
+<ul>
+<li><p><strong>connector</strong>：解析请求，并封装request和response两个对象。（底层创建socket接收请求）</p>
+<p>默认service自带两个connector，一个解析HTTP请求，一个解析AJP请求，与Apache服务器集成时，会采用AJP解析。</p>
+<p>tomcat不设置编码时，默认编码是iso8859-1，即tomcat默认以iso8859-1编码接收get参数。在connector中可以设置tomcat服务器的编码，这样请求</p>
+</li>
+<li><p><strong>container</strong>：servlet容器，有四种父子关系的container。connector过来的request根据容器pipiline-valve模式下到达请求service方法。</p>
+<p><strong>—engine</strong></p>
+<p><strong>—host</strong>：存放所有web项目的文件夹，appBase属性指定哪个文件夹为host容器，默认webapps：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">&quot;&quot;</span> <span class="attr">docBase</span>=<span class="string">&quot;webapps/web&quot;</span> <span class="attr">reloadable</span>=<span class="string">&quot;true&quot;</span>/&gt;</span> </span><br></pre></td></tr></table></figure>
 
-<h4 id="代理设计模式"><a href="#代理设计模式" class="headerlink" title="代理设计模式"></a>代理设计模式</h4><p>我们<strong>通过代理对象操作真实对象</strong>。</p>
-<p>代理模式需要三个角色： <strong>真实角色、代理角色、抽象角色（接口）</strong>。</p>
+<p><strong>—contex</strong>t：一个web应用，初始化后就会初始化</p>
+<p><strong>—wrapper</strong>：对应一个servlet类，开启FilterChain对request和response对象过滤处理</p>
+</li>
+</ul>
+<h4 id="tomcat的请求过程"><a href="#tomcat的请求过程" class="headerlink" title="tomcat的请求过程"></a>tomcat的请求过程</h4><ul>
+<li><p>服务器启动后会依次初始化各容器，Context容器会读取项目中web.xml的映射来初始化wrapper。servlet的wrapper会封装一个InvokerServlet，jsp会封装JspServlet，静态资源封装一个DefaultServlet对象</p>
+</li>
+<li><p>收到请求后，connector根据请求信息创建request和response对象</p>
+</li>
+</ul>
+<ul>
+<li><p>请求在container层层根据请求的信息定位到wrapper，并通过里面的Filter</p>
+</li>
+<li><p>访问到service方法 / 取到静态页面</p>
+<p>当service方法中有输出流时，则会用response封装返回，connector发送到客户端</p>
+</li>
+</ul>
+<h2 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h2><p>创建类并继承HttpServlet类我们就创建了一个Servlet。</p>
+<p>映射原则：多个URL可以映射到一个Servlet上，但一个URL只能映射一个servlet，映射路径必须是绝对路径</p>
+<ul>
+<li><p>@WebServlet ( name=”testServlet”,vaule=”/test” loadonstart=1 , </p>
+<p>​                         initparam=@WebInitParam(name=”name”, value=”小明”) )</p>
+</li>
+<li><p>web.xml</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>name<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>jackson<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>TestServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.oracle.servlet.TestServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">init-param</span>&gt;</span> </span><br><span class="line">   		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>remoteAddress<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>202.97.233.50<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span> </span><br><span class="line">  	<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span> </span><br><span class="line">		<span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>TestServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  	<span class="comment">&lt;!-- 自定义的URL  建议带/servlet/ --&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/servlet/test<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>获取初始化参数，先获取<strong>ServletConfig</strong>对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String servletParam = <span class="keyword">this</span>.getServletConfig.getInitParameter(<span class="string">&quot;servletParam&quot;</span>)</span><br><span class="line">String contextParam = request.getServletContext().getInitParameter(<span class="string">&quot;contextParam&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>获取session对象：HttpSession session = request.getSession()</p>
+<p>获取servletContext对象：SerlvletContext application = request.getServletContext()</p>
+<p>​                                          request.getSession.getServletContext()</p>
+<p>​                                          this.getServletConfig.getServletContext()</p>
+<p>请求转发跳转：</p>
+<ul>
+<li>request.getRequestDispatcher(url).forward(request,response)，对应JSP动作中&lt;jsp:forward page=””/&gt;</li>
+<li>request.getRequestDispatcher(url).include(request,response)，对应JSP动作&lt;jsp:include page=””/&gt;</li>
+</ul>
+<p>重定向跳转（返回301）：response.sendRedirect(request.getContextPath+”/b.jsp”) </p>
+<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p>实现Filter接口就成为了过滤器，重写doFilter，拦截jsp和servlet请求，包括重定向请求，请求转发跳转请求</p>
+<ul>
+<li><p>使用web.xml配置，类似servlet</p>
+</li>
+<li><p>使用注解配置（实际开发）</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebFilter(&#123;&quot;*.jsp&quot;,&quot;/controller/*&quot;&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重写doFilter方法，filterchain.doFilter(request, response)写在最后放行，不放行，进行重定向跳转或者请求转发跳转就可以了</li>
+</ul>
+<h2 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a>Listener</h2><p>用一个类实现这些Listener接口就生成了对应的监听器</p>
+<ul>
+<li>HttpSessionListener接口</li>
+</ul>
+<p>当服务器创建了一个Session对象，执行实现类的createSession方法。通常用来坚挺在线人数</p>
+<p>最常见用处：<strong>统计当前在线人数</strong>，</p>
+<p>简易统计在线人数（不太行，一般用redis计数可以）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sessionCreated</span><span class="params">(HttpSessionEvent httpSessionEvent)</span> </span>&#123;</span><br><span class="line">   count++;</span><br><span class="line">   <span class="comment">//用这个监听器提供的event获取到session，再获取到application对象存入</span></span><br><span class="line">	httpSessonEvent.getSession().getServletContext().setAttribute(<span class="string">&quot;count&quot;</span>, count);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sessionDestroy</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ServletContextListener</li>
+</ul>
+<p>监听application对象的创建和销毁（服务器启动和销毁），服务器启动时想要启动一些多线程，放置数据，可以配置这个对象</p>
+<ul>
+<li>ServletContextAttributeListener</li>
+</ul>
+<p>监听application对象的属性操作，如新建，删除，修改一个Attribute属性触发</p>
+<h2 id="Jsp基本语法"><a href="#Jsp基本语法" class="headerlink" title="Jsp基本语法"></a>Jsp基本语法</h2><ol>
+<li><p><strong>&lt;%  java  %&gt; 自动放在生成servlet的service方法中</strong></p>
+</li>
+<li><p><strong>&lt;%!  java   %&gt;自动放在生成servlet中</strong> ，很少使用，因为很少定义全局变量，比如要写新的方法给service调用就写这里面，但是没必要把方法封装在jsp中，单独写一个类就行</p>
+</li>
+<li><p>**&lt;%= 有返回值Java代码 %&gt;**，等于 &lt;%  out.print( 返回值代码);  %&gt;，将值打印到HTML中</p>
+</li>
+<li><p>JSP支持注释：jsp注释：&lt;%–  –%&gt;、html注释（会生成到html代码中）：<!-- -->   </p>
+<p>​                        Java注释（会生成在servlet中）：//，/*  */</p>
+</li>
+</ol>
+<h2 id="JSP九大内置对象"><a href="#JSP九大内置对象" class="headerlink" title="JSP九大内置对象"></a>JSP九大内置对象</h2><p><strong>内置对象</strong>：jsp生成的servlet中的service方法中，生成了已经赋完值的一些对象，这些变量引用的对象叫内置对象，可以在jsp的Java代码中使用，很少使用</p>
+<p>容器对象：attribute是一个Map（String，Object）：setAttribute()、getAttribute(key)、<strong>removeAttribute(key)</strong></p>
+<h4 id="1-response对象"><a href="#1-response对象" class="headerlink" title="1. response对象"></a>1. response对象</h4><p>是HttpServletResponse接口的实例，封装了传给客户端的响应信息</p>
+<p>getWriter()、getOutputStream()、setContentType()</p>
+<p>setHeader(“Cache-Control”,”no-cache”)。SSM代替：&lt;mvc:cache-control max-age=”3600” cache-public=”true”/&gt;</p>
+<p><strong>addCoodie( Cookie对象 )</strong></p>
+<p>response.setStatus(302)：向response对象中设置HTTP状态码</p>
+<p>response.sendError(404)：并且会向web.xml中设置的错误页面跳转</p>
+<h4 id="2-request对象（HttpServletRequest）"><a href="#2-request对象（HttpServletRequest）" class="headerlink" title="2. request对象（HttpServletRequest）"></a>2. request对象（HttpServletRequest）</h4><p>生命周期：HTTP请求到达Servlet，就创建一个request对象，当servlet返回response时，request生命周期结束</p>
+<p>getParameter(key) 、getParameterValues(key)、getParemeterNames()  、getParemeterMap() </p>
+<p> <strong>request.getCookies();</strong></p>
+<p>获取请求方式：getmethod()、获取IP：getRemoteAddr()、获取客户端主机名：getRemoteHost()</p>
+<ul>
+<li>URL全路径（包含域名）：getRequestURL()</li>
+<li>URI资源路径（不包含域名）：getRequestURI()，相比ServeletPath()带项目名，一般使用这个来获取</li>
+<li>当前这个controller的路径：getServletPath()。如/test，war包和jar包项目都一样，不带项目名字</li>
+<li>获取ServletContext对象：getServletContext</li>
+</ul>
+<h4 id="3-ServletContext"><a href="#3-ServletContext" class="headerlink" title="3. ServletContext"></a>3. ServletContext</h4><ul>
+<li>上下文路径：request.getServletjContext().get<strong>ContextPath</strong>() ，一般来说就是项目名，如/shop，为root项目时，为空</li>
+<li>war包项目下的绝对路径：request.getServletContext().getRealPath(“/upload”)，Springboot的jar包项目不要使用</li>
+</ul>
+<h4 id="4-session（HttpSession）"><a href="#4-session（HttpSession）" class="headerlink" title="4. session（HttpSession）"></a>4. session（HttpSession）</h4><p>调用request.getSession方法时生成，先通过request.getCookies获取到所有cookie，再查有没有name等于JSESSIONID并且在内存中存在的cookie，有的话，新session引用指向已存在的session（同时也会addCookie）。</p>
+<p>不存在就新建一个session对象，设置name=sessionID，value=sessionID值，保存到到response中，再次访问时，通过sessionID，找到服务器中的session。维持一个状态。Cookie默认关闭浏览器就销毁（即Max-age默认为-1）。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/63061864">cookie，session，token</a></p>
+<p>获取当前request的session里的sessionId：session.getId()</p>
+<p>立即销毁：session.invalidate()</p>
+<p>定时销毁：session.setMaxInactiveInterval(60 * 60 * 3)</p>
+<p>tomcat服务器的session是对session无操作时，默认30分钟。可以通过tomcat的web.xml或者项目的web.xml配置有效期：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>10<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>application（ServletContext）、pageContext（PageContext类）</p>
+<p>服务器可以设置cookie中的Path属性，只有当cookie访问服务器的路径为指定的时，这个cookie才有效</p>
+<h4 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h4><ul>
+<li><p>out对象（JspWriter）</p>
+<p>out对象是的实例，JspWriter关联了PrintWriter对象。print()  和println() 、flush()、clearBuffer()、getBufferSize()</p>
+</li>
+<li><p><strong>config</strong>（Servlet的配置对象）、<strong>exception</strong>（异常对象）和<strong>page</strong>（ 很少使用，就是jsp转化成servlet后的实例，this）</p>
+</li>
+</ul>
+<h4 id="JSP三大指令元素"><a href="#JSP三大指令元素" class="headerlink" title="JSP三大指令元素"></a>JSP三大指令元素</h4><p>在页面最前面写入**&lt;%@ 指令 指令动作 %&gt;**</p>
+<ul>
+<li><p>page：指定页面级别配置，指定pageEncoding和contentType和导包</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span>%&gt;</span><br><span class="line">  等同于response.setEncording();</span><br><span class="line">  &lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.util.Date&quot;</span> %&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Taglib：主要用于导入标签库</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> prefix=<span class="string">&quot;c&quot;</span>%&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>include指令：导入jsp</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//最终只会会转化成1个servlet，和include动作相似（最常用）</span></span><br><span class="line">&lt;%@ include  file=xxx.jsp&gt;</span><br><span class="line"><span class="comment">// JSP包含标签（动作），表示页面要包含的页面，会转化两个servlet，类似thymeleaf的th:include=&quot;&quot;</span></span><br><span class="line">&lt;jsp:include page=<span class="string">&quot;a.jsp&quot;</span>&gt; </span><br><span class="line"><span class="comment">// JSP跳转标签（动作），相当于request.getrequestDispatcher(&quot;a.jsp&quot;).forward(req,resp);</span></span><br><span class="line">&lt;jsp:forward page=<span class="string">&quot;showUser.jsp&quot;</span>&gt;</span><br><span class="line">	&lt;jsp:param value=<span class="string">&quot;admin@test.com&quot;</span> name=<span class="string">&quot;email&quot;</span>/&gt;</span><br><span class="line">	&lt;jsp:param value=<span class="string">&quot;888888&quot;</span> name=<span class="string">&quot;password&quot;</span>/&gt;</span><br><span class="line">&lt;/jsp:forward&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="EL表达式"><a href="#EL表达式" class="headerlink" title="EL表达式"></a>EL表达式</h2><p>EL表达式只能在JSP中使用，不能写在jsp的Java代码中，就是为了替代&lt;%= %&gt;或者&lt;c:out&gt; ，用EL表达式如果没取到值自动处理为空字符串，不会空指针（null）异常。</p>
+<h4 id="1-域对象"><a href="#1-域对象" class="headerlink" title="1. 域对象"></a>1. 域对象</h4><p>有四个域范围对象，对应jsp四个域对象：pageScope、requestScope、sessionScope、applicationScope</p>
 <ol>
-<li>静态代理</li>
+<li><p>${域范围对象.username}</p>
+</li>
+<li><p>省略域范围对象，按顺序从page/request/session/application对应的域对象</p>
+<p>如果获取到的Attribute是map集合：${ 域范围对象.key1[“key2”]}取得map中的元素</p>
+</li>
 </ol>
-<p>要同时具有三种角色，为每个真实角色创建一个代理类，代理类会很多。</p>
-<p>真实角色和代理角色必须要继承同一个接口（抽象角色），才能通过代理角色创建了真实角色。</p>
-<p>用处：<strong>不修改真实对象的前提下，增强了真实对象功能</strong>。</p>
+<h4 id="2-param"><a href="#2-param" class="headerlink" title="2. param"></a>2. param</h4><p>${param.username}代表执行getParameter(“username”)，很少用</p>
+<h4 id="3-pageContext对象"><a href="#3-pageContext对象" class="headerlink" title="3. pageContext对象"></a>3. pageContext对象</h4><p>属于page作用域名，一般用来在获取request，然后获取到项目路径：**${pageContext.request.contextPath}**或者</p>
+<h4 id="4-EL表达式运算符"><a href="#4-EL表达式运算符" class="headerlink" title="4. EL表达式运算符"></a>4. EL表达式运算符</h4><p>jEL表达式取值以外，还可以使用EL表达式进行算术运算和逻辑运算，逻辑和比较运算符常用于&lt;c:if&gt;中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$&#123;p.age+<span class="number">1</span> &#125;	<span class="comment">//算数运算符</span></span><br><span class="line">$&#123;!(p.age == <span class="number">1</span>) &#125;	<span class="comment">//比较运算符（eq）</span></span><br><span class="line">$&#123;p.age==<span class="number">1</span> &amp;&amp; p.age==<span class="number">20</span> &#125;	<span class="comment">//逻辑运算符（and）</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="JSTL"><a href="#JSTL" class="headerlink" title="JSTL"></a>JSTL</h2><p>在jsp中创建的javabean对象，<strong>默认page</strong>作用域，可以指定保存其他作用域。</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 用原生JSP标签生成并设置JavaBean,很少用 --&gt;</span><br><span class="line">&lt;jsp:useBean id=<span class="string">&quot;person&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;com.lee.Person&quot;</span> scope=<span class="string">&quot;request&quot;</span> typeSpec /&gt;</span><br><span class="line">&lt;jsp:setProperty name=<span class="string">&quot;person&quot;</span> property=<span class="string">&quot;name&quot;</span> value=<span class="string">&quot;jack&quot;</span>/&gt;</span><br><span class="line">&lt;jsp:getProperty name=<span class="string">&quot;demo&quot;</span> property=<span class="string">&quot;name&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 利用JSTL的方式设置javabean的属性--&gt;</span><br><span class="line">&lt;c:set target=<span class="string">&quot;$&#123;person&#125;&quot;</span> property=<span class="string">&quot;name&quot;</span> value=<span class="string">&quot;lee&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 设置name的属性，不是新建 --&gt;</span><br><span class="line">&lt;c:<span class="keyword">catch</span> <span class="keyword">var</span>=<span class="string">&quot;没有name这个参数&quot;</span>&gt;</span><br><span class="line">  &lt;c:set <span class="keyword">var</span>=<span class="string">&quot;name&quot;</span> value=<span class="string">&quot;lee&quot;</span> scope=<span class="string">&quot;request&quot;</span>/&gt;</span><br><span class="line">&lt;/c:catch&gt;</span><br><span class="line">&lt;c:remove <span class="keyword">var</span>=<span class="string">&quot;name&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="forEach（迭代标签）"><a href="#forEach（迭代标签）" class="headerlink" title="forEach（迭代标签）"></a>forEach（迭代标签）</h4><p>迭代标签还有fortokens()，用分割符分割字符串再迭代输出，在forEach的每次循环中，自动先向pageContext的attribute存储本次循环的状态对象，状态对象中包含了index和count属性代表循环的索引和循环次数</p>
+<p>items：要循环的对象，只能是Java集合或者数组、var：每个元素、begin：从哪个索引开始，默认0、end：默认size-1</p>
+<p>step，索引增加次数， 默认是1、varstatus 获取循环索引，count数</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 我们通过循环打印一个表格--&gt;</span><br><span class="line">&lt;% </span><br><span class="line">	List&lt;Employee&gt; empList = (List&lt;Employee&gt;)request.getAttriute(<span class="string">&quot;empList&quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(Employee emp:empList) &#123; </span><br><span class="line">%&gt;</span><br><span class="line">&lt;table&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">    &lt;td&gt;&lt;%= emp.getName()%&gt;&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;&lt;%= emp.getNo() %&gt;&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;    </span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 用EL表达式+JSTL代替--&gt;</span><br><span class="line">&lt;c:forEach <span class="keyword">var</span>=<span class="string">&quot;emp&quot;</span> iterms=<span class="string">&quot;$&#123;requestScope.empList&#125;&quot;</span> &gt;</span><br><span class="line">  &lt;table&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">    &lt;td&gt;$&#123;emp.name&#125;&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;$&#123;emp.no&#125;&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;    </span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;/c:forEach&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="lt-c-if-gt-（条件标签）"><a href="#lt-c-if-gt-（条件标签）" class="headerlink" title="&lt;c:if&gt;（条件标签）"></a>&lt;c:if&gt;（条件标签）</h4><p>标签中使用test属性+EL表达式条件判断</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:<span class="keyword">if</span> test=<span class="string">&quot;$&#123;count==10 &#125;&quot;</span>&gt;</span><br><span class="line">  is ten</span><br><span class="line">&lt;/c:if&gt;</span><br><span class="line">&lt;c:<span class="keyword">if</span> test=<span class="string">&quot;$&#123;count!=10 &#125;&quot;</span>&gt;</span><br><span class="line">  is not ten</span><br><span class="line">&lt;/c:if&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="lt-c-choose-when-otherwise-gt"><a href="#lt-c-choose-when-otherwise-gt" class="headerlink" title="&lt;c:choose-when-otherwise&gt;"></a>&lt;c:choose-when-otherwise&gt;</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:choose&gt;</span><br><span class="line">  &lt;c:when test=<span class="string">&quot;$&#123;count==5 &#125;&quot;</span>&gt;</span><br><span class="line">    is five</span><br><span class="line">  &lt;/c:when&gt;</span><br><span class="line">  &lt;c:when test=<span class="string">&quot;$&#123;count==10 &#125;&quot;</span>&gt;</span><br><span class="line">    is ten</span><br><span class="line">  &lt;/c:when&gt;</span><br><span class="line">  &lt;c:otherwise&gt;</span><br><span class="line">    other</span><br><span class="line">  &lt;/c:otherwise&gt;</span><br><span class="line">&lt;/c:choose&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="格式化标签库"><a href="#格式化标签库" class="headerlink" title="格式化标签库"></a>格式化标签库</h4><p>除了核心标签库，JSTL还提供了格式化标签库、SQL标签库、XML标签库和常用函数标签库等。日期对象格式化成指定对象，</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;fmt:formatDate value=&quot;$&#123;e.hireDate &#125;&quot; pattern=&quot;yyyy-MM-dd&quot;&gt;&lt;/fmt:formatDate&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义标签"><a href="#自定义标签" class="headerlink" title="自定义标签"></a>自定义标签</h4><ol>
+<li>创建处理标签的Java类，让这个类<strong>继承SimpleTagSupport</strong>，重写doTag方法，getJspContext只有继承这个类才能够使用getJspContext之类的方法</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestTag</span> <span class="keyword">extends</span> <span class="title">SimpleTagSupport</span></span>&#123;</span><br><span class="line">  <span class="meta">@Override</span> </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doTag</span><span class="params">()</span> <span class="keyword">throws</span> JspException, IOException </span>&#123;</span><br><span class="line">    JspWriter out = getJspContext().getOut();</span><br><span class="line">    out.println(<span class="string">&quot;Hello Custom Tag!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 <ol start="2">
-<li>动态代理（Proxy实现）</li>
+<li>在WEB-INF下创建后缀是.tld的标签库描述文件</li>
 </ol>
-<p>调用反射包中的Proxy类里的newProxyInstance()，<strong>不再需要代理类，但还是要有抽象角色（接口）</strong></p>
-<p>Mybatis中的代理：IEmpDao empDao = sqlSession.getmapper(IEmpMapper.class)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 真实对象类加载器（等于抽象角色类加载器是一个对象)</span></span><br><span class="line"><span class="comment">// 抽象的class对象（IDao.class），可以是多个</span></span><br><span class="line"><span class="comment">// 加入的代码Handler,将真实对下行传入Handler</span></span><br><span class="line">IBuyer buyer = (IBuyer)Proxy.newProxyInstance(IBuyer.class.getClassLoader(),<span class="keyword">new</span> IBuyer.class,<span class="keyword">new</span> MyHandler(<span class="keyword">new</span> Buyer()) );</span><br><span class="line"></span><br><span class="line">实现InvocationHandler接口，重写invoke方法，这是动态代理的核心</span><br><span class="line"><span class="comment">//    构造方法传入Object obj </span></span><br><span class="line">invoke(Method method, Object obj, String[] args)&#123;</span><br><span class="line">  <span class="comment">// 前置通知</span></span><br><span class="line">		method.invoke(obj,args)</span><br><span class="line">	<span class="comment">// 后置通知      </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tag</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tag-class</span>&gt;</span>test.Tag<span class="tag">&lt;/<span class="name">tag-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body-content</span>&gt;</span>empty<span class="tag">&lt;/<span class="name">body-content</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tag</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ol start="3">
-<li>CGlib代理</li>
+<li>在其taglib中加入tag标签</li>
 </ol>
-<p>每个实体类创建代理对象。代理对象是真实对象的子类</p>
-<p><strong>特点：自动生成真实类子类代理对象</strong></p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DaoProxy</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span></span>&#123;</span><br><span class="line">		<span class="keyword">private</span> Object targetob;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">DaoProxy</span><span class="params">(Object targetobj)</span></span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.targetobj = targetobj;</span><br><span class="line">		&#125;</span><br><span class="line">  <span class="comment">// 自己在里面写一个获取最想的方法，我写成getProxy</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span>  Object <span class="title">getProxy</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="comment">//1.工具类，enhancer生成代理对象</span></span><br><span class="line">			Enhancer enhancer = <span class="keyword">new</span> Enhancer();</span><br><span class="line">			<span class="comment">//2.设置父类</span></span><br><span class="line">			enhancer.setSuperclass(targetobj.getClass());</span><br><span class="line">			<span class="comment">//3.设置回调函数 当调用代理对象的方法时，则会调用this的intercepter方法</span></span><br><span class="line">			enhancer.setCallback(<span class="keyword">this</span>);</span><br><span class="line">			<span class="keyword">return</span> enhancer.create();</span><br><span class="line">		&#125;</span><br><span class="line">  </span><br><span class="line">		<span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object obj, Method method, Object[] objs, MethodProxy methodProxy)</span> 		<span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;开始事务。。。。&quot;</span>);</span><br><span class="line">			Object returnValue = method.invoke(target, objs);</span><br><span class="line">			System.out.println(<span class="string">&quot;提交事务。。。。&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span> returnValue;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="日期操作类："><a href="#日期操作类：" class="headerlink" title="日期操作类："></a>日期操作类：</h2><h4 id="承载时间：util-Date"><a href="#承载时间：util-Date" class="headerlink" title="承载时间：util.Date"></a>承载时间：util.Date</h4><p>普通Java程序都必须使用util.Date这个对象</p>
-<ul>
-<li><p>无参构造函数以当前时间实例化对象；</p>
-</li>
-<li><p>有参构造器传入一个long数值（System.crrenTimeMilles），数值代表距离时间原点（1970年1月1日）的毫秒偏移量。</p>
-</li>
-<li><p>实例化特定时间：用simpleDateFormat的parse方法</p>
-</li>
-</ul>
-<h4 id="数据库时间：sql-Date"><a href="#数据库时间：sql-Date" class="headerlink" title="数据库时间：sql.Date"></a>数据库时间：sql.Date</h4><p>数据库的时间数据是：sql.Date（只有日期）/sql.Time（只有时间）/sql.Timestamp，这三个类是util.Date的子类，所以util.Date可以直接接受接受sql.Date.</p>
-<p>一般数据库会设置成timeStamp，PO类设置成Date</p>
-<p>util.Date转sql.Date。</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhaopengcheng/p/8797972.html">https://www.cnblogs.com/zhaopengcheng/p/8797972.html</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.sql.Date date1 = <span class="keyword">new</span> java.sql.Date(java.util.Date().getTime());  <span class="comment">//丢失掉时分秒</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Calendar："><a href="#Calendar：" class="headerlink" title="Calendar："></a>Calendar：</h4><p>单例类，用日历对象像日历一样来操作时间，如翻到下一个月。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象类单例设计模式</span></span><br><span class="line">Calendar calendar = Calendar.getInstance();</span><br><span class="line"><span class="comment">// 接收一个Date类型对象，开始操作</span></span><br><span class="line">calendar.setTime(date);</span><br><span class="line"><span class="comment">// add或者set日期对象  YEAR/MONTH/DATE/HOUR/MINUTE/SECOND代表年月日</span></span><br><span class="line">calendar.add(Calendar.MONTH, <span class="number">1</span>);</span><br><span class="line">calendar.set(Calendar.MONTH, <span class="number">1</span>);</span><br><span class="line"><span class="comment">// 返回Calendar的Date对象</span></span><br><span class="line">Date date1 = calendar.getTime();</span><br><span class="line"><span class="comment">// 返回Calendar对象的部分时间信息</span></span><br><span class="line"><span class="keyword">int</span> month = calendar.get(Calendar.MONTH);</span><br></pre></td></tr></table></figure>
-
-<h4 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h4><p>用SimpleDateFormat是构造一个格式，然后用其方法</p>
-<ul>
-<li>用SimpleDateFormat.format ( date ) 将时间对象返回成具体字符串</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Date date = <span class="keyword">new</span> Date();</span><br><span class="line"><span class="comment">// 字符串里的转义：y，M，d，H（24小时制小时），h（12小时制小时），m，s，E</span></span><br><span class="line">SimpleDateFormat  sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd, 时间：HH:mm:ss&quot;</span>);    </span><br><span class="line">String str = sdf.format(date);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>用SimpleDateFormat.parse返回一个具体时间的date对象</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SimpleDateFormat  sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd&quot;</span>);</span><br><span class="line">Date date = sdf.parse(<span class="string">&quot;1999-03-11&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h4 id="DateFormat："><a href="#DateFormat：" class="headerlink" title="DateFormat："></a>DateFormat：</h4><p>单例类，真正日期格式化很少用，而是用他的子类SimpleDateFormat</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象类单例设计模式</span></span><br><span class="line">DateFormat df1 = DateFormat.getDateInstance(DateFormat.YEAR_FIELD, <span class="keyword">new</span> Locale(<span class="string">&quot;zh&quot;</span>,<span class="string">&quot;CN&quot;</span>);</span><br><span class="line"><span class="comment">// 无参默认为YYYY-MM-DD形式</span></span><br><span class="line">DateFormat df2 = DateFormat.getDateTimeInstance();                               </span><br><span class="line">String str1 = df1.format(<span class="keyword">new</span> Date());</span><br><span class="line">String str2 = df2.format(<span class="keyword">new</span> Date());</span><br></pre></td></tr></table></figure>
-
-<h2 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h2><p>实现国际化，归根结底就是根据语言类型去定义好字符串模板的资源文文件</p>
-<h4 id="属性文件"><a href="#属性文件" class="headerlink" title="属性文件"></a>属性文件</h4><p>按照baseName_language_country.properties命名，里面是key-value对。然后再用类去根据key去读取value。属性文件不能有中文，只能存在ACSII码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过（资源文件包路径+base_name，Locale）定位到资源文件</span></span><br><span class="line">Locale enLocale = <span class="keyword">new</span> Locale(<span class="string">&quot;zh&quot;</span>,<span class="string">&quot;CN&quot;</span>);</span><br><span class="line">ResourceBundle resourceBundle = ResourceBundle.getBundle(<span class="string">&quot;com.lee.cmp.common.name&quot;</span>,enLocale);</span><br><span class="line"><span class="comment">// 获取国际化后字符串</span></span><br><span class="line">resourceBundle.getString(<span class="string">&quot;jackson&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h4 id="MessageFormat类"><a href="#MessageFormat类" class="headerlink" title="MessageFormat类"></a>MessageFormat类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String pattern1 = <span class="string">&quot;&#123;0&#125;，你好！你于  &#123;1&#125; 消费  &#123;2&#125; 元。&quot;</span>;</span><br><span class="line">String pattern2 = <span class="string">&quot;At &#123;1,time,short&#125; On &#123;1,date,long&#125;，&#123;0&#125; paid &#123;2,number, currency&#125;.&quot;</span>;</span><br><span class="line">Object[] params = &#123; <span class="string">&quot;Jack&quot;</span>, <span class="keyword">new</span> GregorianCalendar().getTime(), <span class="number">8888</span> &#125;;</span><br><span class="line">String msg1 = MessageFormat.format(pattern1, params);</span><br><span class="line">MessageFormat mf = <span class="keyword">new</span> MessageFormat(pattern2, Locale.US);</span><br><span class="line">String msg2 = mf.format(params);</span><br><span class="line">System.out.println(msg1);</span><br><span class="line">System.out.println(msg2);</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-Object类"><a href="#1-Object类" class="headerlink" title="1. Object类"></a>1. Object类</h2><p>每个Java类都会继承Object类，所以每一个所编写的Java类，都自带Object中的13个方法，下面四个方法是我们经常需要重写的四个Object方法</p>
-<h4 id="a-toString"><a href="#a-toString" class="headerlink" title="a. toString"></a>a. toString</h4><p>默认<strong>包名.类名@hashcode的十六进制</strong>。我们System.out.println(对象)是，调用这个对象toString方法。</p>
-<p>String、List等都重写了这个方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源码：</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> getClass().getName() + <span class="string">&quot;@&quot;</span> + Integer.toHexString(hashCode());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="b-equals"><a href="#b-equals" class="headerlink" title="b. equals"></a>b. equals</h4><p>equals方法的Object底层源码使用 == 直接比较两个对象内存地址是否相等，String重写了equals方法，用equals比较两个String值是否相等</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Object的equls源码：</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">this</span> == obj);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// String equals源码：</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;<span class="comment">//先判断地址是否相等，地址相等直接返回</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;<span class="comment">//判断是否是String类，为了向下转型的安全</span></span><br><span class="line">    String anotherString = (String)anObject;</span><br><span class="line">    <span class="keyword">int</span> n = value.length;<span class="comment">//value就是本String转化成的字符数组</span></span><br><span class="line">    <span class="keyword">if</span> (n == anotherString.value.length) &#123;<span class="comment">//比较两者的字符数组是否相等</span></span><br><span class="line">      <span class="keyword">char</span> v1[] = value;</span><br><span class="line">      <span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line">      <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;<span class="comment">//从前往后一个字符一个字符比较</span></span><br><span class="line">        <span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        i++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="c-hashCode"><a href="#c-hashCode" class="headerlink" title="c. hashCode"></a>c. hashCode</h4><p>hashcode方法是一个native方法，<strong>默认返回对象虚拟的内存地址的int值</strong>，不是在Java中直接实现，而是通过JNI接口调用C/C++实现对底层的访问。</p>
-<h4 id="d-clone"><a href="#d-clone" class="headerlink" title="d. clone"></a>d. clone</h4><p>clone方法常用于实现对象的浅拷贝和深拷贝，不过类要<strong>先实现Cloneable接口，再重写clone方法。</strong>，才能实现深浅拷贝</p>
-<p><strong>引用拷贝</strong>：用 = 实现。将对象的的堆内存地址赋值给新的引用，实质上是还是操作同一个对象</p>
-<p><strong>浅拷贝</strong>：对象里的 基本数据和String 完全拷贝，对象里的引用类型数据还是操作同一个</p>
-<p><strong>深拷贝</strong>：基本数据和引用数据完全的拷贝。</p>
-<blockquote>
-<p>出了重写clone实现深拷贝，还可以使用序列化来完成深拷贝（实现见序列化）</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用浅拷贝</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            <span class="keyword">return</span> (类名)<span class="keyword">super</span>.clone();  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">// 深拷贝，直接在里面创建新的对象并直接赋值</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Student <span class="title">clone</span><span class="params">()</span> </span>&#123; </span><br><span class="line">      Student s = <span class="keyword">new</span> Student(<span class="keyword">this</span>.name); </span><br><span class="line">      <span class="keyword">return</span> s; </span><br><span class="line">   &#125; </span><br></pre></td></tr></table></figure>
-
-<h4 id="f-其他方法"><a href="#f-其他方法" class="headerlink" title="f. 其他方法"></a>f. 其他方法</h4><ul>
-<li><strong>notify，notifyAll，wait</strong>：native且final方法，线程类方法</li>
-<li><strong>getClass</strong>：native且final，返回对象的类对象</li>
-<li><strong>finalize</strong>：Runtime.getRuntime().gc()，System.gc( )， exec(运行程序)</li>
-</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">@taglib</span> <span class="attr">prefix</span>=<span class="string">&quot;my&quot;</span> <span class="attr">uri</span>=<span class="string">&quot;test.Tag&quot;</span></span></span><br></pre></td></tr></table></figure>
 
       
     </div>
