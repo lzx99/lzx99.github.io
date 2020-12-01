@@ -22,29 +22,33 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Lee&#39;s Blog">
-<meta property="og:url" content="http://example.com/page/2/index.html">
+  <meta name="description" content="文件上传 表单上传：type为file类型的input标签和enctype&#x3D;multipart&#x2F;form-data上传数据，不做处理，是同步上传。  ajax上传： 12345$(&quot;#myinput&quot;).ajax(&amp;#123;  &#x2F;&#x2F; 这两个必写  data: new FormData($(&amp;#x27;#uploadForm&amp;#x27;)[0]),	processData: f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编码">
+<meta property="og:url" content="http://example.com/2020/10/11/0.%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD/index.html">
 <meta property="og:site_name" content="Lee&#39;s Blog">
+<meta property="og:description" content="文件上传 表单上传：type为file类型的input标签和enctype&#x3D;multipart&#x2F;form-data上传数据，不做处理，是同步上传。  ajax上传： 12345$(&quot;#myinput&quot;).ajax(&amp;#123;  &#x2F;&#x2F; 这两个必写  data: new FormData($(&amp;#x27;#uploadForm&amp;#x27;)[0]),	processData: f">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-01T01:05:20.596Z">
 <meta property="article:author" content="李柱新">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/page/2/">
+<link rel="canonical" href="http://example.com/2020/10/11/0.%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD/">
 
 
 <script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Lee's Blog</title>
+  <title>编码 | Lee's Blog</title>
   
 
 
@@ -154,7 +158,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -166,6 +170,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">1.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Servlet%E7%BA%AF%E6%B5%81%E6%96%B9%E5%BC%8F-SmartUpload%E6%88%96Apache-FileUpload"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. Servlet纯流方式&#x2F;. SmartUpload或Apache FileUpload</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-SpringMVC%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. SpringMVC文件上传</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">文件下载：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Servlet%E7%BA%AF%E6%B5%81%E6%96%B9%E5%BC%8F"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. Servlet纯流方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-SpringMVC%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.0.2.</span> <span class="nav-text">2. SpringMVC文件下载</span></a></li></ol></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -178,7 +183,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -212,11 +217,12 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
       
 
       
-    
+
+  
 
 
 <div class="post-block">
@@ -224,7 +230,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/07/0.%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/11/0.%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -236,10 +242,9 @@
       <meta itemprop="name" content="Lee's Blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/07/0.%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          编码
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -249,15 +254,24 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-09-07 16:03:07" itemprop="dateCreated datePublished" datetime="2020-09-07T16:03:07+08:00">2020-09-07</time>
+      <time title="创建时间：2020-10-11 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-11T00:00:00+08:00">2020-10-11</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-10-28 00:06:50" itemprop="dateModified" datetime="2020-10-28T00:06:50+08:00">2020-10-28</time>
+        <time title="修改时间：2020-12-01 09:05:20" itemprop="dateModified" datetime="2020-12-01T09:05:20+08:00">2020-12-01</time>
       </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -269,7 +283,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><ul>
+        <h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><ul>
 <li><p>表单上传：type为file类型的input标签<strong>和enctype=multipart/form-data</strong>上传数据，不做处理，是同步上传。</p>
 </li>
 <li><p>ajax上传：</p>
@@ -298,7 +312,6 @@
 <h4 id="2-SpringMVC文件下载"><a href="#2-SpringMVC文件下载" class="headerlink" title="2. SpringMVC文件下载"></a>2. SpringMVC文件下载</h4><p> 使用spirng 自带的<strong>ResponseEntity</strong>实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/download&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ResponseEntity&lt;<span class="keyword">byte</span>[]&gt; download(HttpServletRequest request) <span class="keyword">throws</span> IOException&#123;</span><br><span class="line">  <span class="comment">//	获取你文件的文件夹，一般从数据库读区，这里模拟service已经取到路径</span></span><br><span class="line">  String path = request.getSession().getServletContext().getRealPath(<span class="string">&quot;/upload&quot;</span>);</span><br><span class="line">  String filename = <span class="string">&quot;/1168701023208865792.jpg&quot;</span>; </span><br><span class="line">  <span class="comment">// 1. 获取文件路径</span></span><br><span class="line">  File file = <span class="keyword">new</span> File(path,filename); </span><br><span class="line">  <span class="comment">//设置header里的ContentDisposition字段，以attachment(下载框方式)打开图</span></span><br><span class="line">  HttpHeaders headers = <span class="keyword">new</span> HttpHeaders(); </span><br><span class="line">  headers.setContentDispositionFormData(<span class="string">&quot;attachment&quot;</span>, downloadFielName);</span><br><span class="line">  <span class="comment">// 2. ResponseEntity返回，返回application/octet-stream : 二进制流数据(最常见的文件下载)。</span></span><br><span class="line">  headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;<span class="keyword">byte</span>[]&gt;(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
@@ -306,20 +319,27 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/10/11/0.%20%E7%BC%96%E7%A0%81/" rel="prev" title="编码">
+                  <i class="fa fa-chevron-left"></i> 编码
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/10/12/0.%20%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="next" title="正则表达式">
+                  正则表达式 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
 
 
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
 
 
 
