@@ -22,16 +22,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta property="og:type" content="website">
+  <meta name="description" content="异常和日志规范Java的异常规范，如何去更好的完善和编写异常机制。 返回returnCode和returnMsg GIT问题git完全合。 git每一次切换分支文件都是全局切换，所有不同分支的不同文件不会untracked（未暂存文件）。 新建文件在每一个分支都是untracked，注意git merge后，会将被merge分支的没有被merge的文件在merge的分支变成未暂存文件。 git的核">
+<meta property="og:type" content="website">
 <meta property="og:title" content="新新&#39;s Blog">
-<meta property="og:url" content="http://example.com/archives/2020/10/index.html">
+<meta property="og:url" content="http://example.com/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98.html">
 <meta property="og:site_name" content="新新&#39;s Blog">
+<meta property="og:description" content="异常和日志规范Java的异常规范，如何去更好的完善和编写异常机制。 返回returnCode和returnMsg GIT问题git完全合。 git每一次切换分支文件都是全局切换，所有不同分支的不同文件不会untracked（未暂存文件）。 新建文件在每一个分支都是untracked，注意git merge后，会将被merge分支的没有被merge的文件在merge的分支变成未暂存文件。 git的核">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-18T07:24:09.983Z">
+<meta property="article:modified_time" content="2020-12-18T07:24:09.974Z">
 <meta property="article:author" content="新新">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/archives/2020/10/">
+<link rel="canonical" href="http://example.com/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">
 
 
 <script class="page-configurations">
@@ -44,7 +48,8 @@
   };
 </script>
 
-  <title>归档 | 新新's Blog</title>
+  <title> | 新新's Blog
+</title>
   
 
 
@@ -154,7 +159,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -166,6 +171,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%92%8C%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83"><span class="nav-number">1.</span> <span class="nav-text">异常和日志规范</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GIT%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">GIT问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#IDEA%E6%8A%A5%E9%94%99"><span class="nav-number">3.</span> <span class="nav-text">IDEA报错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#taskctl%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">taskctl的配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97"><span class="nav-number">5.</span> <span class="nav-text">查看日志</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E7%AE%97%E8%81%94%E8%B0%83"><span class="nav-number">6.</span> <span class="nav-text">核算联调</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -212,214 +218,60 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner page posts-expand">
       
+  
+  
 
       
 
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+</h1>
+
+<div class="post-meta-container">
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 9 篇日志。 继续努力。</span>
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h5 id="异常和日志规范"><a href="#异常和日志规范" class="headerlink" title="异常和日志规范"></a>异常和日志规范</h5><p>Java的异常规范，如何去更好的完善和编写异常机制。</p>
+<p>返回returnCode和returnMsg</p>
+<h5 id="GIT问题"><a href="#GIT问题" class="headerlink" title="GIT问题"></a>GIT问题</h5><p>git完全合。</p>
+<p>git每一次切换分支文件都是全局切换，所有不同分支的不同文件不会untracked（未暂存文件）。</p>
+<p>新建文件在每一个分支都是untracked，注意git merge后，会将被merge分支的没有被merge的文件在merge的分支变成未暂存文件。</p>
+<p>git的核心是在小分支上新增和修改，往大分支上合。</p>
+<p>文件修改就变成modified（暂存文件），存在暂存文件需要切换分支时，要提交或者git stash后保存暂存区状态，才能checkout。idea提供smart checkout（保留暂存区切换到另一个分支）和force checkout，看情况使用。</p>
+<p>git merge如果有冲突文件，idea/source tree都能选择保留哪个分支的更改。</p>
+<p>merge后。commit</p>
+<p>ignore机制？？？git版本好像不是根据文件来的吧？？</p>
+<h5 id="IDEA报错"><a href="#IDEA报错" class="headerlink" title="IDEA报错"></a>IDEA报错</h5><p>重置maven项目，修改setting，删除idea文件，maven选项下 reload project。</p>
+<p>如果出现JDK报错，clean and restart cache</p>
+<h5 id="taskctl的配置"><a href="#taskctl的配置" class="headerlink" title="taskctl的配置"></a>taskctl的配置</h5><p>启动定时器：重置+重栽+启动</p>
+<h5 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h5><p>tail -f、tail -n 100</p>
+<p>grep - B/A/C 100 “/sync”</p>
+<h5 id="核算联调"><a href="#核算联调" class="headerlink" title="核算联调"></a>核算联调</h5><p>报文数据异常。</p>
+
       </div>
-
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+      
+      
     </div>
+    
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-13T00:00:00+08:00"
-              content="2020-10-13">
-          10-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/10/13/0.%20Git/" itemprop="url">
-            <span itemprop="name">GIT</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-13T00:00:00+08:00"
-              content="2020-10-13">
-          10-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/10/13/0.%20HTTP%E5%8D%8F%E8%AE%AE/" itemprop="url">
-            <span itemprop="name">HTTP协议</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-13T00:00:00+08:00"
-              content="2020-10-13">
-          10-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/10/13/2.%20Servlet/" itemprop="url">
-            <span itemprop="name">servlet</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-13T00:00:00+08:00"
-              content="2020-10-13">
-          10-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/10/13/1.%20SE%E5%9F%BA%E7%A1%80/" itemprop="url">
-            <span itemprop="name">SE基础</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-13T00:00:00+08:00"
-              content="2020-10-13">
-          10-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/10/13/4.%20MySQL/" itemprop="url">
-            <span itemprop="name">数据库</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-13T00:00:00+08:00"
-              content="2020-10-13">
-          10-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/10/13/3.%20Spring/" itemprop="url">
-            <span itemprop="name">Spring</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-12T00:00:00+08:00"
-              content="2020-10-12">
-          10-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/10/12/0.%20%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" itemprop="url">
-            <span itemprop="name">正则表达式</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-11T00:00:00+08:00"
-              content="2020-10-11">
-          10-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/10/11/0.%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD/" itemprop="url">
-            <span itemprop="name">编码</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-10-11T00:00:00+08:00"
-              content="2020-10-11">
-          10-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/10/11/0.%20%E7%BC%96%E7%A0%81/" itemprop="url">
-            <span itemprop="name">编码</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-
-    </div>
-  </div>
-  
-  
-  
-
-  
-
+    
+    
+    
 
 
       
