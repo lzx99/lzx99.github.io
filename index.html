@@ -178,14 +178,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -216,136 +216,6 @@
       
 
       
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/13/0.%20Git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="新新">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="新新's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/13/0.%20Git/" class="post-title-link" itemprop="url">GIT</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-10-13 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-13T00:00:00+08:00">2020-10-13</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-01 09:05:09" itemprop="dateModified" datetime="2020-12-01T09:05:09+08:00">2020-12-01</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="Git还原"><a href="#Git还原" class="headerlink" title="Git还原"></a>Git还原</h4><p>场景1：从暂存区还原：<code>git checkout -- a.txt</code></p>
-<p>场景2：<code>git reset HEAD &lt;file&gt;</code>（将最新分支恢复到暂存区）</p>
-<p>场景3：历史版本直接回退到工作区和暂存区</p>
-<p><code>git reset --hard commit_id</code> 回退版本，HEAD指向的版本为当前版本，所以用<code>HEAD^</code></p>
-<h4 id="Git删除"><a href="#Git删除" class="headerlink" title="Git删除"></a>Git删除</h4><p>需要用命令<code>git rm</code>用于删除一个文件，操作保存在暂存区，<code>git commit -m</code>提交版本</p>
-<h4 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h4><p>不指定分支clone时，默认下载远程项目（master分支）， 会关联并追踪所有分支，默认名为origin</p>
-<p>分支：可以<code>git checkout -b dev origin/dev</code>在本地创建。</p>
-<h4 id="remote"><a href="#remote" class="headerlink" title="remote"></a>remote</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin [git@github.com](&lt;mailto:git@github.com&gt;):zhu-xin&#x2F;demo.git</span><br></pre></td></tr></table></figure>
-
-<p>创建本地库后，本地库与自己的远程库<strong>关联并设定主机名</strong>（默认远程库为origin），一般用于本地库上传到GitHub的空库（remote以后push一个master分支）</p>
-<ul>
-<li>查看本地关联的远程库信 息：<code>git remote -v</code></li>
-</ul>
-<h4 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h4><p>推送本地分支到远程，<code>没有则创建</code>，如果分支在远程分支的后面，解决冲突才能推送，-f参数强制覆盖远程的，一般用不到，一般只需要同步master分支和dev分支，feature分支取决于你是否需要修复，bug分支般只由你一个人修复，不需要同步。</p>
-<ul>
-<li><p>推送本地master分支到远程master分支：git push origin 本地master:远程master（gp）</p>
-<p>省略:远程分支名时，代表推送到远程同名：<code>git push origin master</code></p>
-<p>推送同时，将远程master和本地关联：git push -u origin master（第一次）</p>
-</li>
-<li><p>将当前推送到有origin上他的追踪关系的分支，可以省略分支名字：<code>git push origin</code></p>
-</li>
-<li><p>当只有一个主机的追踪分支时可以省略主机名：git push</p>
-</li>
-<li><p>推送所有分支到远程：git push –all origin</p>
-</li>
-<li><p>删除远程分支：<code>git push origin --delete dev</code>或者<code>git push origin :dev</code></p>
-</li>
-</ul>
-<h4 id="Pull-Fetch-Merge"><a href="#Pull-Fetch-Merge" class="headerlink" title="Pull = Fetch+Merge"></a>Pull = Fetch+Merge</h4><p>取回并合并：git pull origin 远程master:本地master，本地没有则会创建，也可以使用</p>
-<p>省略:本地分支时，代表取回并合并到本地当前所在分支：<code>git pull origin master</code></p>
-<p>当前分支与origin上他的追踪分支取回并合并：<code>git pull origin</code></p>
-<p>当前分支与唯一主机上的追踪分支取回并合并：git pull</p>
-<p>设置本地dev和远程dev分支关联：<code>git branch --set-upstream-to=origin/dev dev</code>（或者第一次push的时候加如-u）</p>
-<h4 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h4><p>用于抓取远程分支到本地，成为origin/master分支，不会合并到本地master</p>
-<p>所以remote后，需要用<code>git fetch origin</code>取回所有分支信息，才能查看远程分支信息：<code>git branch -r</code></p>
-<h4 id="分支查看："><a href="#分支查看：" class="headerlink" title="分支查看："></a>分支查看：</h4><ul>
-<li>查看本地分支：<code>git branch</code>(gb)，当前分支会显示<code>*</code></li>
-<li>查看远程分支：<code>git branch -r</code>(gbr)</li>
-<li>查看本地分支和远程git的分支：<code>git branch -a</code>(gba)</li>
-<li>创建分支：<code>git branch dev</code></li>
-<li>创建并切换分支：<code>git checkout -b dev</code></li>
-<li>普通删除：<code>git branch -d &lt;name&gt;</code>（gbd）</li>
-<li>删除没有被合并过的分支，<code>git branch -D &lt;name&gt;</code>（gbD）</li>
-<li>本地-远程的追踪分支关系：<code>git branch -vv</code></li>
-</ul>
-<p>切换分支时：<code>git checkout/switch dev</code>(gco dev)，切换就是HEAD指针的变化。</p>
-<ul>
-<li><strong>快速合并</strong>dev分支到当前分支：<code>git merge dev</code>(gm)，快速合并有时会产生冲突，比如当dev提交后，master又有新的提交。此时修改冲突文件，再次add+commit，此时冲突解决，两个分支合成新的分支。</li>
-<li>禁用快速合并在（普通模式）：<code>git merge —-no-ff lee -m &quot;Do Job&quot;</code>，能看出来谁曾经做过合并。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
     
 
 
@@ -463,6 +333,136 @@
 <p>​    must-revalidate</p>
 <p>这些设置缓存的头字段时通用头字段，当request和response都设置时，Apache或nginx等服务器可以设置听哪个request还是response的。</p>
 <p><a target="_blank" rel="noopener" href="https://blog.skk.moe/post/what-happend-to-dns-in-proxy/">浅谈在代理环境中的 DNS 解析行为</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/13/0.%20Git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="新新">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="新新's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/13/0.%20Git/" class="post-title-link" itemprop="url">GIT</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-13 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-13T00:00:00+08:00">2020-10-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-18 17:24:18" itemprop="dateModified" datetime="2020-12-18T17:24:18+08:00">2020-12-18</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="Git还原"><a href="#Git还原" class="headerlink" title="Git还原"></a>Git还原</h4><p>场景1：从暂存区还原：<code>git checkout -- a.txt</code>。</p>
+<p>场景2：<code>git reset HEAD &lt;file&gt;</code>（将最新分支恢复到暂存区）</p>
+<p>场景3：历史版本直接回退到工作区和暂存区</p>
+<p><code>git reset --hard commit_id</code> 以hard模式回退版本，HEAD指向的版本为当前版本，所以用<code>HEAD^。</code></p>
+<h4 id="Git删除"><a href="#Git删除" class="headerlink" title="Git删除"></a>Git删除</h4><p>需要用命令<code>git rm</code>用于删除一个文件，操作保存在暂存区，<code>git commit -m</code>提交版本</p>
+<h4 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h4><p>不指定分支clone时，默认下载远程项目（master分支）， 会关联并追踪所有分支，默认名为origin</p>
+<p>分支：可以<code>git checkout -b dev origin/dev</code>在本地创建。</p>
+<h4 id="remote"><a href="#remote" class="headerlink" title="remote"></a>remote</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin [git@github.com](&lt;mailto:git@github.com&gt;):zhu-xin&#x2F;demo.git</span><br></pre></td></tr></table></figure>
+
+<p>创建本地库后，本地库与自己的远程库<strong>关联并设定主机名</strong>（默认远程库为origin），一般用于本地库上传到GitHub的空库（remote以后push一个master分支）</p>
+<ul>
+<li>查看本地关联的远程库信 息：<code>git remote -v</code></li>
+</ul>
+<h4 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h4><p>推送本地分支到远程，<code>没有则创建</code>，如果分支在远程分支的后面，解决冲突才能推送，-f参数强制覆盖远程的，一般用不到，一般只需要同步master分支和dev分支，feature分支取决于你是否需要修复，bug分支般只由你一个人修复，不需要同步。</p>
+<ul>
+<li><p>推送本地master分支到远程master分支：git push origin 本地master:远程master（gp）</p>
+<p>省略:远程分支名时，代表推送到远程同名：<code>git push origin master</code></p>
+<p>推送同时，将远程master和本地关联：git push -u origin master（第一次）</p>
+</li>
+<li><p>将当前推送到有origin上他的追踪关系的分支，可以省略分支名字：<code>git push origin</code></p>
+</li>
+<li><p>当只有一个主机的追踪分支时可以省略主机名：git push</p>
+</li>
+<li><p>推送所有分支到远程：git push –all origin</p>
+</li>
+<li><p>删除远程分支：<code>git push origin --delete dev</code>或者<code>git push origin :dev</code></p>
+</li>
+</ul>
+<h4 id="Pull-Fetch-Merge"><a href="#Pull-Fetch-Merge" class="headerlink" title="Pull = Fetch+Merge"></a>Pull = Fetch+Merge</h4><p>取回并合并：git pull origin 远程master:本地master，本地没有则会创建，也可以使用</p>
+<p>省略:本地分支时，代表取回并合并到本地当前所在分支：<code>git pull origin master</code></p>
+<p>当前分支与origin上他的追踪分支取回并合并：<code>git pull origin</code></p>
+<p>当前分支与唯一主机上的追踪分支取回并合并：git pull</p>
+<p>设置本地dev和远程dev分支关联：<code>git branch --set-upstream-to=origin/dev dev</code>（或者第一次push的时候加如-u）</p>
+<h4 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h4><p>用于抓取远程分支到本地，成为origin/master分支，不会合并到本地master</p>
+<p>所以remote后，需要用<code>git fetch origin</code>取回所有分支信息，才能查看远程分支信息：<code>git branch -r</code></p>
+<h4 id="分支查看："><a href="#分支查看：" class="headerlink" title="分支查看："></a>分支查看：</h4><ul>
+<li>查看本地分支：<code>git branch</code>(gb)，当前分支会显示<code>*</code></li>
+<li>查看远程分支：<code>git branch -r</code>(gbr)</li>
+<li>查看本地分支和远程git的分支：<code>git branch -a</code>(gba)</li>
+<li>创建分支：<code>git branch dev</code></li>
+<li>创建并切换分支：<code>git checkout -b dev</code></li>
+<li>普通删除：<code>git branch -d &lt;name&gt;</code>（gbd）</li>
+<li>删除没有被合并过的分支，<code>git branch -D &lt;name&gt;</code>（gbD）</li>
+<li>本地-远程的追踪分支关系：<code>git branch -vv</code></li>
+</ul>
+<p>切换分支时：<code>git checkout/switch dev</code>(gco dev)，切换就是HEAD指针的变化。</p>
+<ul>
+<li><strong>快速合并</strong>dev分支到当前分支：<code>git merge dev</code>(gm)，快速合并有时会产生冲突，比如当dev提交后，master又有新的提交。此时修改冲突文件，再次add+commit，此时冲突解决，两个分支合成新的分支。</li>
+<li>禁用快速合并在（普通模式）：<code>git merge —-no-ff lee -m &quot;Do Job&quot;</code>，能看出来谁曾经做过合并。</li>
+</ul>
 
       
     </div>
@@ -758,6 +758,86 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/13/%E6%A0%B8%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="新新">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="新新's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/13/%E6%A0%B8%E7%AE%97/" class="post-title-link" itemprop="url">数据库</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-13 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-13T00:00:00+08:00">2020-10-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-18 16:45:43" itemprop="dateModified" datetime="2020-12-18T16:45:43+08:00">2020-12-18</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%B4%B7%E6%AC%BE%E6%A0%B8%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">贷款核算</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/13/1.%20SE%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -790,7 +870,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-11-29 21:36:14" itemprop="dateModified" datetime="2020-11-29T21:36:14+08:00">2020-11-29</time>
+        <time title="修改时间：2020-11-04 15:39:34" itemprop="dateModified" datetime="2020-11-04T15:39:34+08:00">2020-11-04</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1496,7 +1576,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-01 09:17:29" itemprop="dateModified" datetime="2020-12-01T09:17:29+08:00">2020-12-01</time>
+        <time title="修改时间：2020-11-04 15:39:41" itemprop="dateModified" datetime="2020-11-04T15:39:41+08:00">2020-11-04</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2087,7 +2167,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-18 15:24:27" itemprop="dateModified" datetime="2020-12-18T15:24:27+08:00">2020-12-18</time>
+        <time title="修改时间：2020-10-20 00:07:47" itemprop="dateModified" datetime="2020-10-20T00:07:47+08:00">2020-10-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
