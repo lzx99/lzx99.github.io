@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -183,14 +183,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -256,13 +256,6 @@
 
       <time title="创建时间：2020-10-13 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-13T00:00:00+08:00">2020-10-13</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-10-19 10:01:29" itemprop="dateModified" datetime="2020-10-19T10:01:29+08:00">2020-10-19</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -307,13 +300,11 @@
 <li>**GET请求：放在请求行(URL)**，会暴露在地址栏，有长度限制，会被主动Cache，只有默认编    码。</li>
 <li><strong>POST请求：放在报文体</strong>，无长度限制，可以传输中文。POST请求也可以在请求行中写入数据，这时候类似GET请求，但一般没人会在form action或ajax url中加入这种处理</li>
 </ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/mix/76.html?name=kelvin&amp;password=123456</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: www.fishbay.cn</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span>: 1</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) </span><br><span class="line"><span class="attribute">Conetent-Type</span>: application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Cookie</span>: JASSDHUHFUBSIUFHI=232DWUFHI</span><br><span class="line"><span class="attribute">Accept-Encoding</span>: gzip, deflate, sdch</span><br><span class="line"><span class="attribute">Accept-Language</span>: zh-CN,zh;q=0.8,en;q=0.6</span><br><span class="line"></span><br><span class="line">username=jinqiao&amp;password=1234</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/mix/76.html?name=kelvin&amp;password=123456</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>www.fishbay.cn</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) </span><br><span class="line"><span class="attribute">Conetent-Type</span><span class="punctuation">: </span>application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>JASSDHUHFUBSIUFHI=232DWUFHI</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate, sdch</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,zh;q=0.8,en;q=0.6</span><br><span class="line"></span><br><span class="line">username=jinqiao&amp;password=1234</span><br></pre></td></tr></table></figure>
 <h4 id="2-HTTP-响应报文"><a href="#2-HTTP-响应报文" class="headerlink" title="2. HTTP 响应报文"></a>2. HTTP 响应报文</h4><p><strong>状态行–HTTP头–空行–响应体</strong></p>
 <p>这个http响应的响应正文时纯文本，可以时html等等</p>
 <p>Etag，Vary: User-Agent，Cache-Control等都是常用的响应头设置</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Server</span>: nginx</span><br><span class="line"><span class="attribute">Date</span>: Mon, 20 Feb 2017 09:13:59 GMT</span><br><span class="line"><span class="attribute">Content-Type</span>: text/plain;charset=UTF-8</span><br><span class="line"><span class="attribute">Vary</span>: Accept-Encoding</span><br><span class="line"><span class="attribute">Cache-Control</span>: no-store</span><br><span class="line"><span class="attribute">Pragrma</span>: no-cache</span><br><span class="line"><span class="attribute">Expires</span>: Thu, 01 Jan 1970 00:00:00 GMT</span><br><span class="line"><span class="attribute">Cache-Control</span>: no-cache</span><br><span class="line"><span class="attribute">Content-Encoding</span>: gzip</span><br><span class="line"><span class="attribute">Transfer-Encoding</span>: chunked</span><br><span class="line"><span class="attribute">Proxy-Connection</span>: Keep-alive</span><br><span class="line"></span><br><span class="line">&#123;&quot;code&quot;:200,&quot;notice&quot;:0,&quot;follow&quot;:0,&quot;forward&quot;:0,&quot;msg&quot;:0,&quot;comment&quot;:0&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">HTTP/1.1</span> <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Server</span><span class="punctuation">: </span>nginx</span><br><span class="line"><span class="attribute">Date</span><span class="punctuation">: </span>Mon, 20 Feb 2017 09:13:59 GMT</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/plain;charset=UTF-8</span><br><span class="line"><span class="attribute">Vary</span><span class="punctuation">: </span>Accept-Encoding</span><br><span class="line"><span class="attribute">Cache-Control</span><span class="punctuation">: </span>no-store</span><br><span class="line"><span class="attribute">Pragrma</span><span class="punctuation">: </span>no-cache</span><br><span class="line"><span class="attribute">Expires</span><span class="punctuation">: </span>Thu, 01 Jan 1970 00:00:00 GMT</span><br><span class="line"><span class="attribute">Cache-Control</span><span class="punctuation">: </span>no-cache</span><br><span class="line"><span class="attribute">Content-Encoding</span><span class="punctuation">: </span>gzip</span><br><span class="line"><span class="attribute">Transfer-Encoding</span><span class="punctuation">: </span>chunked</span><br><span class="line"><span class="attribute">Proxy-Connection</span><span class="punctuation">: </span>Keep-alive</span><br><span class="line"></span><br><span class="line">&#123;&quot;code&quot;:200,&quot;notice&quot;:0,&quot;follow&quot;:0,&quot;forward&quot;:0,&quot;msg&quot;:0,&quot;comment&quot;:0&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="3-HTTP-Header"><a href="#3-HTTP-Header" class="headerlink" title="3. HTTP Header"></a>3. HTTP Header</h4><p>HTTP Header中有四种Header Filed：</p>
 <p><strong>通用头：</strong>请求头和响应头都可使用字段</p>
 <p><strong>Cache-Control</strong>、Pragma、Date、Via</p>
@@ -351,11 +342,14 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/10/13/0.%20Git/" rel="prev" title="GIT">
-                  <i class="fa fa-chevron-left"></i> GIT
+                <a href="/2020/10/13/2.%20Servlet/" rel="prev" title="servlet">
+                  <i class="fa fa-chevron-left"></i> servlet
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2020/10/13/0.%20Git/" rel="next" title="GIT">
+                  GIT <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -403,7 +397,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
