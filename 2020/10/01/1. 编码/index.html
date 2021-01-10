@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="新新">
   <meta name="keywords" content="">
-  <title>GIT - 新新&#39;s Blog</title>
+  <title>文本编码 - 新新&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="GIT">
+            <span class="h2" id="subtitle" title="文本编码">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-10-13 00:00" pubdate>
-        2020年10月13日 凌晨
+      <time datetime="2020-10-01 00:00" pubdate>
+        2020年10月1日 凌晨
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      960 字
+      972 字
     </span>
   
 
@@ -224,60 +224,76 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">GIT</h1>
+            <h1 style="display: none">文本编码</h1>
             
             <div class="markdown-body">
-              <h4 id="Git还原"><a href="#Git还原" class="headerlink" title="Git还原"></a>Git还原</h4><p>场景1：从暂存区还原：<code>git checkout -- a.txt</code>。</p>
-<p>场景2：<code>git reset HEAD &lt;file&gt;</code>（将最新分支恢复到暂存区）</p>
-<p>场景3：历史版本直接回退到工作区和暂存区</p>
-<p><code>git reset --hard commit_id</code> 以hard模式回退版本，HEAD指向的版本为当前版本，所以用<code>HEAD^。</code></p>
-<h4 id="Git删除"><a href="#Git删除" class="headerlink" title="Git删除"></a>Git删除</h4><p>需要用命令<code>git rm</code>用于删除一个文件，操作保存在暂存区，<code>git commit -m</code>提交版本</p>
-<h4 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h4><p>不指定分支clone时，默认下载远程项目（master分支）， 会关联并追踪所有分支，默认名为origin</p>
-<p>分支：可以<code>git checkout -b dev origin/dev</code>在本地创建。</p>
-<h4 id="remote"><a href="#remote" class="headerlink" title="remote"></a>remote</h4><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-tag">git</span> <span class="hljs-selector-tag">remote</span> <span class="hljs-selector-tag">add</span> <span class="hljs-selector-tag">origin</span> <span class="hljs-selector-attr">[git@github.com]</span>(&lt;<span class="hljs-attribute">mailto</span>:git<span class="hljs-variable">@github</span>.com&gt;)<span class="hljs-selector-pseudo">:zhu-xin</span>/<span class="hljs-selector-tag">demo</span><span class="hljs-selector-class">.git</span><br></code></pre></td></tr></table></figure>
-<p>创建本地库后，本地库与自己的远程库<strong>关联并设定主机名</strong>（默认远程库为origin），一般用于本地库上传到GitHub的空库（remote以后push一个master分支）</p>
+              <p>通常所说的乱码问题，是指文本文件乱码（非二进制文件），文本乱码的本质是解析的字符编码与文本本身字符编码不匹配导致的。</p>
+<h2 id="字符集和字符编码"><a href="#字符集和字符编码" class="headerlink" title="字符集和字符编码"></a>字符集和字符编码</h2><ol>
+<li><p>文本文件：通过字符编码（如UTF-8）保存的文件，如数字64，文本文件会将64解析成’6’和’4’两个字符，再根据字符集编码，再存储到硬盘中</p>
+</li>
+<li><p>二进制文件（狭义上的非文本文件）：保留数据本身二进制的文件，数字64，如Java的int型数字64，直接储存64的二进制到硬盘中</p>
+</li>
+</ol>
+<p>字符集规定了字符在字符表的位置，在文本文件的存储过程中，文本会依靠字符集规则转化成字符，其中最著名的就是ASCII字符集和Unicode字符集。</p>
+<h4 id="ASCII字符集"><a href="#ASCII字符集" class="headerlink" title="ASCII字符集"></a>ASCII字符集</h4><p>ASCII既是世界上第一个字符集（charset），同时又规定了字符编码（encoding）。</p>
+<p>ASCII字符编码用一个字节（7位容器）来表示一个字符，ASCII中一共有127个字符（0-126）。</p>
+<h4 id="Unicode字符集"><a href="#Unicode字符集" class="headerlink" title="Unicode字符集"></a>Unicode字符集</h4><p>地球上字符太多，ASCII字符集的单字节无法表示，所以出现了Unicode字符集。最初时UTF-16编码来实现Unicode字符集，用2个或4个字节来保存。</p>
 <ul>
-<li>查看本地关联的远程库信 息：<code>git remote -v</code></li>
+<li><p>UTF-16：用两个或者四个字节（<strong>Java char类型用的2字节的UTF-16 LE</strong>），四字节称为UTF-16 BE</p>
+</li>
+<li><p>UTF-32：用四个字节</p>
+</li>
+<li><p>UTF-8：1～4个字节，1个字节时与ASCII编码相同，常见<strong>汉字一般3字节</strong></p>
+</li>
 </ul>
-<h4 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h4><p>推送本地分支到远程，<code>没有则创建</code>，如果分支在远程分支的后面，解决冲突才能推送，-f参数强制覆盖远程的，一般用不到，一般只需要同步master分支和dev分支，feature分支取决于你是否需要修复，bug分支般只由你一个人修复，不需要同步。</p>
+<h4 id="ISO-8859-1-（Latin-1）"><a href="#ISO-8859-1-（Latin-1）" class="headerlink" title="ISO-8859-1 （Latin 1）"></a>ISO-8859-1 （Latin 1）</h4><p>同样是ASCII码的超集，用一个字节（8位容器）实现255节。在支持ISO-8859-1的系统中传输和存储其他任何编码的字节流都不会被抛弃。mysql默认就采用他</p>
+<h4 id="GBK字符集"><a href="#GBK字符集" class="headerlink" title="GBK字符集"></a>GBK字符集</h4><p>一般汉字2字节。</p>
+<p><a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/java/j-lo-chinesecoding/index.html">Java中存在的编码问题</a></p>
+<h2 id="Content-Type与前后编解码"><a href="#Content-Type与前后编解码" class="headerlink" title="Content-Type与前后编解码"></a>Content-Type与前后编解码</h2><p>开发过程中，设定HTTP请求和返回报文中的Content-Type是保证文本不乱码正常解析的最重要保障。</p>
+<h4 id="浏览器解码顺序："><a href="#浏览器解码顺序：" class="headerlink" title="浏览器解码顺序："></a>浏览器解码顺序：</h4><ol>
+<li><p>根据服务器返回的Content-Type中指定的编码解码。</p>
+</li>
+<li><p>根据meta标签的charset。</p>
+</li>
+<li><p>根据浏览器设定的编码解码（跟随浏览器设定，一般中文系统为GBK）</p>
+</li>
+</ol>
+<h4 id="浏览器编码顺序和Content-Type："><a href="#浏览器编码顺序和Content-Type：" class="headerlink" title="浏览器编码顺序和Content-Type："></a>浏览器编码顺序和Content-Type：</h4><ul>
+<li><p>POST请求的编码：默认UTF-8，<strong>ajax请求强制数据为UTF-8编码，即使在contentType中设置的编码也不生效</strong>，所以对于发送ajax请求，直接写application/json，然后设置服务器对所有请求数据使用UTF-8解析：request.setCharactorEncoding(“UTF-8”)。</p>
 <ul>
-<li><p>推送本地master分支到远程master分支：git push origin 本地master:远程master（gp）</p>
-<p>省略:远程分支名时，代表推送到远程同名：<code>git push origin master</code></p>
-<p>推送同时，将远程master和本地关联：git push -u origin master（第一次）</p>
+<li><p>Ajax POST默认contentType: application/x-www-form-urlencoded;charset=UTF-8。</p>
 </li>
-<li><p>将当前推送到有origin上他的追踪关系的分支，可以省略分支名字：<code>git push origin</code></p>
-</li>
-<li><p>当只有一个主机的追踪分支时可以省略主机名：git push</p>
-</li>
-<li><p>推送所有分支到远程：git push –all origin</p>
-</li>
-<li><p>删除远程分支：<code>git push origin --delete dev</code>或者<code>git push origin :dev</code></p>
+<li><p>form POST默认的contentType: application/x-www-form-urlencoded</p>
+<p><strong>form POST的编码也是UTF-8，但是不会在Content-Type中声明</strong></p>
 </li>
 </ul>
-<h4 id="Pull-Fetch-Merge"><a href="#Pull-Fetch-Merge" class="headerlink" title="Pull = Fetch+Merge"></a>Pull = Fetch+Merge</h4><p>取回并合并：git pull origin 远程master:本地master，本地没有则会创建，也可以使用</p>
-<p>省略:本地分支时，代表取回并合并到本地当前所在分支：<code>git pull origin master</code></p>
-<p>当前分支与origin上他的追踪分支取回并合并：<code>git pull origin</code></p>
-<p>当前分支与唯一主机上的追踪分支取回并合并：git pull</p>
-<p>设置本地dev和远程dev分支关联：<code>git branch --set-upstream-to=origin/dev dev</code>（或者第一次push的时候加如-u）</p>
-<h4 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h4><p>用于抓取远程分支到本地，成为origin/master分支，不会合并到本地master</p>
-<p>所以remote后，需要用<code>git fetch origin</code>取回所有分支信息，才能查看远程分支信息：<code>git branch -r</code></p>
-<h4 id="分支查看："><a href="#分支查看：" class="headerlink" title="分支查看："></a>分支查看：</h4><ul>
-<li>查看本地分支：<code>git branch</code>(gb)，当前分支会显示<code>*</code></li>
-<li>查看远程分支：<code>git branch -r</code>(gbr)</li>
-<li>查看本地分支和远程git的分支：<code>git branch -a</code>(gba)</li>
-<li>创建分支：<code>git branch dev</code></li>
-<li>创建并切换分支：<code>git checkout -b dev</code></li>
-<li>普通删除：<code>git branch -d &lt;name&gt;</code>（gbd）</li>
-<li>删除没有被合并过的分支，<code>git branch -D &lt;name&gt;</code>（gbD）</li>
-<li>本地-远程的追踪分支关系：<code>git branch -vv</code></li>
+</li>
+<li><p>GET请求的编码：默认UTF-8（不指定Content-Type，一般传输不了中文）</p>
+</li>
 </ul>
-<p>切换分支时：<code>git checkout/switch dev</code>(gco dev)，切换就是HEAD指针的变化。</p>
+<h4 id="服务器解码顺序："><a href="#服务器解码顺序：" class="headerlink" title="服务器解码顺序："></a>服务器解码顺序：</h4><ol>
+<li><p>使用requst.setCharactorEncoding( )指定的编码解码。</p>
+</li>
+<li><p>根据客户端发送的Content-Type中的编码解码。</p>
+</li>
+<li><p>使用默认的UTF-8解码</p>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml">// 设置Content-Type作用与于GET请求<br><span class="hljs-tag">&lt;<span class="hljs-name">Connector</span> <span class="hljs-attr">useBodyEncodingForURI</span> = <span class="hljs-string">&quot;true&quot;</span> &gt;</span> <br> // 设置GET请求使用UTF-8解码, Tomcat 8以后这个默认值已经是UTF-8，<br> // 注意：request.setCharactorEncoding对GET请求不生效。<br><span class="hljs-tag">&lt;<span class="hljs-name">Connector</span> <span class="hljs-attr">URIEncoding</span> =<span class="hljs-string">&quot;UTF-8&quot;</span> &gt;</span> <br></code></pre></td></tr></table></figure>
+<h4 id="服务器编码顺序和Content-Type："><a href="#服务器编码顺序和Content-Type：" class="headerlink" title="服务器编码顺序和Content-Type："></a>服务器编码顺序和Content-Type：</h4><ol>
+<li><p>response.setContentType(“application/json; charset=UTF-8”)，respnse.setCharactorEncoding()</p>
+</li>
+<li><p>Servlet response的默认编码是UTF-8</p>
+</li>
+<li><p>JSP会默认Content-Type：</p>
+<p>JSP的编码只受到Page指令的contentType/pageEncoding命令约束，而且这两个命令对于JSP生成的Content-Type决定权最高。</p>
+<p>response.setCharactorEncoding方法：设置返回数据的编码</p>
+<p>response.setContentType方法：设置Servlet返回数据的编码和返回数据的Content-Type。<strong>setContentType方法优先级最高</strong>，在此方法前后出现setCharactorEncoding()，数据会按照Content-Type编码。</p>
+</li>
+</ol>
 <ul>
-<li><strong>快速合并</strong>dev分支到当前分支：<code>git merge dev</code>(gm)，快速合并有时会产生冲突，比如当dev提交后，master又有新的提交。此时修改冲突文件，再次add+commit，此时冲突解决，两个分支合成新的分支。</li>
-<li>禁用快速合并在（普通模式）：<code>git merge —-no-ff lee -m &quot;Do Job&quot;</code>，能看出来谁曾经做过合并。</li>
+<li>注解设置注解设置：@RequestMapping(value = “”, <strong>produces=”application/json;charset=UTF-8”</strong>)</li>
 </ul>
-<p>冲突：别人修改过同一行，修改的是同类不是同一行时不会冲突。GIT GUI工具会显示加减</p>
-<p>同源分支来的，可以从远程merge到本地，提交前都需要pull再push吗。</p>
 
             </div>
             <hr>
@@ -301,15 +317,15 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2020/10/02/2.%20%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">正则表达式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/2020/10/13/4.%20MySQL/">
-                        <span class="hidden-mobile">数据库</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>
