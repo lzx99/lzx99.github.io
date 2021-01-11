@@ -53,7 +53,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -185,20 +185,10 @@
                 
 
 <div class="page-content">
-  <h5 id="异常和日志规范"><a href="#异常和日志规范" class="headerlink" title="异常和日志规范"></a>异常和日志规范</h5><p>Java的异常规范，如何去更好的完善和编写异常机制。</p>
-<p>返回returnCode和returnMsg。</p>
-<h5 id="GIT问题"><a href="#GIT问题" class="headerlink" title="GIT问题"></a>GIT问题</h5><p>git可以从远程checkout，不小心把重要分支合乱以后。</p>
-<p>git每一次切换分支文件都是全局切换，所有不同分支的不同文件不会untracked（未暂存文件）。</p>
-<p>新建文件在每一个分支都是untracked，注意git merge后，会将被merge分支的没有被merge的文件在merge的分支变成未暂存文件（会检查小分支上有哪些文件新建和修改，新文件直接merge进分支，如果是修改的会提示解决冲突），merge后通常需要配合commit。</p>
-<p>git reset 可以将整个版本退步。</p>
-<p>git的核心是在小分支上新增和修改，往大分支上合。</p>
-<p>文件修改就变成modified（暂存文件），存在暂存文件需要切换分支时，要提交或者git stash后保存暂存区状态，才能checkout。idea提供smart checkout（保留暂存区切换到另一个分支）和force checkout，看情况使用。</p>
-<p>git merge如果有冲突文件，idea/source tree都能选择保留哪个分支的更改。</p>
-<h5 id="taskctl的配置"><a href="#taskctl的配置" class="headerlink" title="taskctl的配置"></a>taskctl的配置</h5><p>启动定时器：重置+重栽+启动。</p>
+  <h5 id="taskctl的配置"><a href="#taskctl的配置" class="headerlink" title="taskctl的配置"></a>taskctl的配置</h5><p>启动定时器：重置+重栽+启动。</p>
 <h5 id="核算联调"><a href="#核算联调" class="headerlink" title="核算联调"></a>核算联调</h5><p>逾期+当前期金额 = 拖欠金额</p>
 <p>还款日当天没还=拖欠金额。</p>
 <p>结算：入账。计提、还款。</p>
-<p>我希望内涵</p>
 
 </div>
 
