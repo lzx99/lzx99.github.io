@@ -79,5 +79,30 @@
   
   
   
+  <entry>
+    <title>文本编码</title>
+    <link href="/2020/10/01/1.%20%E7%BC%96%E7%A0%81/"/>
+    <url>/2020/10/01/1.%20%E7%BC%96%E7%A0%81/</url>
+    
+    <content type="html"><![CDATA[<p>通常所说的乱码问题，是指文本文件乱码（非二进制文件），文本乱码的本质是解析的字符编码与文本本身字符编码不匹配导致的。</p><h2 id="1-字符集和字符编码"><a href="#1-字符集和字符编码" class="headerlink" title="1. 字符集和字符编码"></a>1. 字符集和字符编码</h2><ol><li><p>文本文件：通过字符编码（如UTF-8）保存的文件，如数字64，文本文件会将64解析成’6’和’4’两个字符，再根据字符集编码，再存储到硬盘中</p></li><li><p>二进制文件（狭义上的非文本文件）：保留数据本身二进制的文件，数字64，如Java的int型数字64，直接储存64的二进制到硬盘中</p></li></ol><p>字符集规定了字符在字符表的位置，在文本文件的存储过程中，文本会依靠字符集规则转化成字符，其中最著名的就是ASCII字符集和Unicode字符集。</p><h3 id="ASCII字符集"><a href="#ASCII字符集" class="headerlink" title="ASCII字符集"></a>ASCII字符集</h3><p>ASCII既是世界上第一个字符集（charset），同时又规定了字符编码（encoding）。</p><p>ASCII字符编码用一个字节（7位容器）来表示一个字符，ASCII中一共有127个字符（0-126）。</p><h3 id="Unicode字符集"><a href="#Unicode字符集" class="headerlink" title="Unicode字符集"></a>Unicode字符集</h3><p>地球上字符太多，ASCII字符集的单字节无法表示，所以出现了Unicode字符集。最初时UTF-16编码来实现Unicode字符集，用2个或4个字节来保存。</p><ul><li><p>UTF-16：用两个或者四个字节（<strong>Java char类型用的2字节的UTF-16 LE</strong>），四字节称为UTF-16 BE</p></li><li><p>UTF-32：用四个字节</p></li><li><p>UTF-8：1～4个字节，1个字节时与ASCII编码相同，常见<strong>汉字一般3字节</strong></p></li></ul><h3 id="ISO-8859-1-（Latin-1）"><a href="#ISO-8859-1-（Latin-1）" class="headerlink" title="ISO-8859-1 （Latin 1）"></a>ISO-8859-1 （Latin 1）</h3><p>同样是ASCII码的超集，用一个字节（8位容器）实现255节。在支持ISO-8859-1的系统中传输和存储其他任何编码的字节流都不会被抛弃。mysql默认就采用他</p><h3 id="GBK字符集"><a href="#GBK字符集" class="headerlink" title="GBK字符集"></a>GBK字符集</h3><p>一般汉字2字节。</p><p><a href="https://www.ibm.com/developerworks/cn/java/j-lo-chinesecoding/index.html">Java中存在的编码问题</a></p><h2 id="2-Content-Type与前后编解码"><a href="#2-Content-Type与前后编解码" class="headerlink" title="2. Content-Type与前后编解码"></a>2. Content-Type与前后编解码</h2><p>开发过程中，设定HTTP请求和返回报文中的Content-Type是保证文本不乱码正常解析的最重要保障。</p><h3 id="浏览器解码顺序："><a href="#浏览器解码顺序：" class="headerlink" title="浏览器解码顺序："></a>浏览器解码顺序：</h3><ol><li><p>根据服务器返回的Content-Type中指定的编码解码。</p></li><li><p>根据meta标签的charset。</p></li><li><p>根据浏览器设定的编码解码（跟随浏览器设定，一般中文系统为GBK）</p></li></ol><h3 id="浏览器编码顺序和Content-Type："><a href="#浏览器编码顺序和Content-Type：" class="headerlink" title="浏览器编码顺序和Content-Type："></a>浏览器编码顺序和Content-Type：</h3><ul><li><p>POST请求的编码：默认UTF-8，<strong>ajax请求强制数据为UTF-8编码，即使在contentType中设置的编码也不生效</strong>，所以对于发送ajax请求，直接写application/json，然后设置服务器对所有请求数据使用UTF-8解析：request.setCharactorEncoding(“UTF-8”)。</p><ul><li><p>Ajax POST默认contentType: application/x-www-form-urlencoded;charset=UTF-8。</p></li><li><p>form POST默认的contentType: application/x-www-form-urlencoded</p><p><strong>form POST的编码也是UTF-8，但是不会在Content-Type中声明</strong></p></li></ul></li><li><p>GET请求的编码：默认UTF-8（不指定Content-Type，一般传输不了中文）</p></li></ul><h3 id="服务器解码顺序："><a href="#服务器解码顺序：" class="headerlink" title="服务器解码顺序："></a>服务器解码顺序：</h3><ol><li><p>使用requst.setCharactorEncoding( )指定的编码解码。</p></li><li><p>根据客户端发送的Content-Type中的编码解码。</p></li><li><p>使用默认的UTF-8解码</p></li></ol><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml">// 设置Content-Type作用与于GET请求<br><span class="hljs-tag">&lt;<span class="hljs-name">Connector</span> <span class="hljs-attr">useBodyEncodingForURI</span> = <span class="hljs-string">&quot;true&quot;</span> &gt;</span> <br> // 设置GET请求使用UTF-8解码, Tomcat 8以后这个默认值已经是UTF-8，<br> // 注意：request.setCharactorEncoding对GET请求不生效。<br><span class="hljs-tag">&lt;<span class="hljs-name">Connector</span> <span class="hljs-attr">URIEncoding</span> =<span class="hljs-string">&quot;UTF-8&quot;</span> &gt;</span> <br></code></pre></td></tr></table></figure><h3 id="服务器编码顺序和Content-Type："><a href="#服务器编码顺序和Content-Type：" class="headerlink" title="服务器编码顺序和Content-Type："></a>服务器编码顺序和Content-Type：</h3><ol><li><p>response.setContentType(“application/json; charset=UTF-8”)，respnse.setCharactorEncoding()</p></li><li><p>Servlet response的默认编码是UTF-8</p></li><li><p>JSP会默认Content-Type：</p><p>JSP的编码只受到Page指令的contentType/pageEncoding命令约束，而且这两个命令对于JSP生成的Content-Type决定权最高。</p><p>response.setCharactorEncoding方法：设置返回数据的编码</p><p>response.setContentType方法：设置Servlet返回数据的编码和返回数据的Content-Type。<strong>setContentType方法优先级最高</strong>，在此方法前后出现setCharactorEncoding()，数据会按照Content-Type编码。</p></li></ol><ul><li>注解设置注解设置：@RequestMapping(value = “”, <strong>produces=”application/json;charset=UTF-8”</strong>)</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>其他</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>乱码</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
   
 </search>
