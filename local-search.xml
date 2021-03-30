@@ -4,11 +4,62 @@
   
   
   <entry>
-    <title>前端工具和服务配置问题</title>
-    <link href="/2021/03/29/pro/0329/"/>
-    <url>/2021/03/29/pro/0329/</url>
+    <title></title>
+    <link href="/2021/03/30/life/%E5%86%99%E5%8D%9A%E5%AE%A2%E6%80%9D%E8%B7%AF/"/>
+    <url>/2021/03/30/life/%E5%86%99%E5%8D%9A%E5%AE%A2%E6%80%9D%E8%B7%AF/</url>
     
-    <content type="html"><![CDATA[<p>改变写博客的思路。</p><h4 id="前端工具和服务配置问题"><a href="#前端工具和服务配置问题" class="headerlink" title="前端工具和服务配置问题"></a>前端工具和服务配置问题</h4><ol><li><p>关于包管理器npm和yarn</p><p>yarn是在npm的基础之上的包管理器，根据情况选用一个工具即可，都是去读取package.json文件，在一个项目中两者可以同时存在，但是每次构建项目后（初次npm install后），需要固定使用yarn，或者或者npm，当要切换包管理器管理项目时，需要删除node_modules文件夹。</p><p>不同版本的npm管理同一个项目，一般不会出现太大的问题，但是遇到构建问题时，也可以选择删除node_module文件夹和package-lock.json文件。</p><p>遇到一个问题，npm 7构建node旧项目时，会出现构建依赖树冲突问题。</p></li><li><p>node-sass在离线机器上的安装问题</p><p>node-sass还会绕过设置的本地仓库去GitHub去获取，获取不到时会在本地编译，本地编译在win下又依赖python和C++环境，这个问题给我整吐了，怎么也不好解决，尝试过多种方法也无济于事后，找同事在能运行的机器上，拷贝了整个项目先启动看看，后期再去解决npm install安装的问题。</p></li><li><p>vue-cli工具：vue-cli、@vue/cli。</p><ul><li>vue init webpack demo。npm run dev</li><li>vue create demo。@vue/cli构建的项目，会在本地加入vue-cli-serivice这样的依赖npm serve</li></ul></li><li><p>vue前端的启动逻辑（要点）</p></li></ol><h4 id="js语法要点"><a href="#js语法要点" class="headerlink" title="js语法要点"></a>js语法要点</h4><ol><li>var、let、const的区别。</li></ol><ul><li><p>声明变量作用域方面，var定义的变量作用域是函数级，但是代码块里声明的var变量，代码块外又允许访问（所以var有很多不合理的地方）。let是升级版的var，用来代替var，作用域为标准的代码块级。const是代码块级作用域的常量。</p></li><li><p>var能够重复声明变量，而let和const不允许被重复声明。</p></li><li><p>并且var声明的变量存在<strong>变量提升</strong>，即在用var声明变量代码之前，函数就可以调用这个变量，默认值为undefined，而let/const声明的变量，则会提示变量not defined（let）或者error（const）。</p></li></ul><ol start="2"><li>import、require、export在JS模块化中的作用（要点）</li></ol><p>什么是组件、熟悉使用elementUI</p><p>vuex和router是什么</p><p>代理？</p><p>script中的vue对象（vue实例）</p><p>Vue.component 全局注册的vue组件（一般包含模板），使用组件时，需要template于Vue的根实例el绑定后，使用全局组件。</p>]]></content>
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>3约30日学习前端杂记</title>
+    <link href="/2021/03/30/pro/2.%20%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E6%9D%82%E8%AE%B0/"/>
+    <url>/2021/03/30/pro/2.%20%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E6%9D%82%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<ol><li>var、let、const的区别。</li></ol><ul><li><p>声明变量作用域方面，var定义的变量作用域是函数级，但是代码块里声明的var变量，代码块外又允许访问（所以var有很多不合理的地方）。let是升级版的var，用来代替var，作用域为标准的代码块级。const是代码块级作用域的常量。</p></li><li><p>var能够重复声明变量，而let和const不允许被重复声明。</p></li><li><p>并且var声明的变量存在<strong>变量提升</strong>，即在用var声明变量代码之前，函数就可以调用这个变量，默认值为undefined，而let/const声明的变量，则会提示变量not defined（let）或者error（const）。</p></li></ul><h4 id="JS的模块化"><a href="#JS的模块化" class="headerlink" title="JS的模块化"></a>JS的模块化</h4><p>exports</p><p>组件、熟悉使用elementUI</p><p>vuex和router是什么</p><p>代理？</p><p>script中的vue对象（vue实例）</p><p>Vue.component 全局注册的vue组件（一般包含模板），使用组件时，需要template于Vue的根实例el绑定后，使用全局组件。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>前端</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>vue的启动逻辑</title>
+    <link href="/2021/03/29/pro/3.%20vue%E7%9A%84%E5%90%AF%E5%8A%A8%E9%80%BB%E8%BE%91/"/>
+    <url>/2021/03/29/pro/3.%20vue%E7%9A%84%E5%90%AF%E5%8A%A8%E9%80%BB%E8%BE%91/</url>
+    
+    <content type="html"><![CDATA[<p>通过NODE_MODULE</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>前端</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>前端工程化</title>
+    <link href="/2021/03/29/pro/1.%20%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/"/>
+    <url>/2021/03/29/pro/1.%20%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<h4 id="使用npm和yarn遇到的问题"><a href="#使用npm和yarn遇到的问题" class="headerlink" title="使用npm和yarn遇到的问题"></a>使用npm和yarn遇到的问题</h4><ol><li><p>关于包管理器npm和yarn</p><p>yarn是在npm的基础之上的包管理器，根据情况选用一个工具即可，都是去读取package.json文件，在一个项目中两者可以同时存在，但是每次构建项目后（初次npm install后），需要固定使用yarn，或者或者npm，当要切换包管理器管理项目时，需要删除node_modules文件夹。</p><p>不同版本的npm管理同一个项目，一般不会出现太大的问题，但是遇到构建问题时，也可以选择删除node_module文件夹和package-lock.json文件。</p><p>遇到一个问题，npm 7构建node旧项目时，会出现构建依赖树冲突问题。</p></li><li><p>node-sass在离线机器上的安装问题</p><p>node-sass还会绕过设置的本地仓库去GitHub去获取，获取不到时会在本地编译，本地编译在win下又依赖python和C++环境，这个问题给我整吐了，怎么也不好解决，尝试过多种方法也无济于事后，找同事在能运行的机器上，拷贝了整个项目先启动看看，后期再去解决npm install安装的问题。</p></li><li><p>vue-cli工具：vue-cli、@vue/cli。</p><ul><li>vue init webpack demo。npm run dev</li><li>vue create demo。@vue/cli构建的项目，会在本地加入vue-cli-serivice这样的依赖npm serve</li></ul></li></ol>]]></content>
     
     
     <categories>
