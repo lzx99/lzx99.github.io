@@ -8,15 +8,18 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://s3.ax1x.com/2021/01/12/sJsf0O.png">
-  <link rel="icon" type="image/png" href="https://s3.ax1x.com/2021/01/12/sJsf0O.png">
+  <link rel="icon" href="https://s3.ax1x.com/2021/01/12/sJsf0O.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  
+    <meta name="description" content="">
+  
   <meta name="author" content="新新">
   <meta name="keywords" content="">
+  
   <title>文件上传下载 - 新新&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -55,11 +58,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"AxRSoPrgAA1n3akIHe4aBQ2Y-gzGzoHsz","app_key":"CYOBLQ2l1KRnfhA3E4xX91CI","server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"AxRSoPrgAA1n3akIHe4aBQ2Y-gzGzoHsz","app_key":"CYOBLQ2l1KRnfhA3E4xX91CI","server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -219,25 +222,30 @@
 </li>
 <li><p>ajax上传：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript">$(<span class="hljs-string">&quot;#myinput&quot;</span>).ajax(&#123;<br>  <span class="hljs-comment">// 这两个必写</span><br>  data: <span class="hljs-keyword">new</span> FormData($(<span class="hljs-string">&#x27;#uploadForm&#x27;</span>)[<span class="hljs-number">0</span>]),<br>	processData: <span class="hljs-literal">false</span>,<br>&#125;)<br></code></pre></td></tr></table></figure>
-<h4 id="1-Servlet纯流方式-SmartUpload或Apache-FileUpload"><a href="#1-Servlet纯流方式-SmartUpload或Apache-FileUpload" class="headerlink" title="1. Servlet纯流方式/. SmartUpload或Apache FileUpload"></a>1. Servlet纯流方式/. SmartUpload或Apache FileUpload</h4></li>
+
+</li>
 </ul>
-<p>Servlet直接读区获取字节流存储在文件夹，但是无法同时区分普通控件和上传文件</p>
+<h4 id="1-Servlet纯流方式-SmartUpload或Apache-FileUpload"><a href="#1-Servlet纯流方式-SmartUpload或Apache-FileUpload" class="headerlink" title="1. Servlet纯流方式/. SmartUpload或Apache FileUpload"></a>1. Servlet纯流方式/. SmartUpload或Apache FileUpload</h4><p>Servlet直接读区获取字节流存储在文件夹，但是无法同时区分普通控件和上传文件</p>
 <p>在Servlet中都能实现上传文件功能简化，实现业务数据和上传的文件同时获取，并且直接write（不需要手动outputStream）</p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e7837435bf4c">FileUpload文件上传参考</a>：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">service</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;<br>  <span class="hljs-comment">// 验证请求是否满足要求（post 请求 / enctype 是否以multipart打头</span><br>  <span class="hljs-keyword">boolean</span> isMultipart = ServletFileUpload.isMultipartContent(req);<br>  <span class="hljs-comment">// 如果不满足要求就立即结束对该请求的处理</span><br>  <span class="hljs-keyword">if</span> (!isMultipart) &#123;<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br><br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-comment">// FileItem 是表单中的每一个元素的封装</span><br>    <span class="hljs-comment">// 创建一个 FileItem 的工厂类</span><br>    FileItemFactory factory = <span class="hljs-keyword">new</span> DiskFileItemFactory();<br>    <span class="hljs-comment">// 创建一个文件上传处理器（装饰设计模式）</span><br>    ServletFileUpload upload = <span class="hljs-keyword">new</span> ServletFileUpload(factory);<br>    <span class="hljs-comment">// 解析请求</span><br>    List&lt;FileItem&gt; items = upload.parseRequest(req);<br>    <span class="hljs-keyword">for</span> (FileItem fileItem : items) &#123;<br>      <span class="hljs-comment">// 判断空间是否是普通控件</span><br>      <span class="hljs-keyword">if</span> (fileItem.isFormField()) &#123;<br>        <span class="hljs-comment">// 普通控件</span><br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">// 上传控件</span><br>        String contentType = fileItem.getContentType();<br>        <span class="hljs-keyword">if</span> (!contentType.startsWith(<span class="hljs-string">&quot;image/&quot;</span>)) &#123;<br>          <span class="hljs-comment">// 实现简单的错误提示</span><br>          req.setAttribute(<span class="hljs-string">&quot;errorMsg&quot;</span>, <span class="hljs-string">&quot;亲，您上传的文件格式不正确，请重新上传！&quot;</span>);<br>          req.getRequestDispatcher(<span class="hljs-string">&quot;upload.jsp&quot;</span>).forward(req, resp);<br>          <span class="hljs-keyword">return</span>;  <span class="hljs-comment">// 如果不是图片类型则不再对请求进行处理</span><br>        &#125;<br>        <span class="hljs-comment">// 随机命名文件名</span><br>        String fileName = UUID.randomUUID().toString() + <span class="hljs-string">&quot;.&quot;</span> + FilenameUtils.getExtension(fileItem.getName());<br>        <span class="hljs-comment">// 将上传的文件保存到服务器</span><br>        fileItem.write(<span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;C:/&quot;</span>, fileName));<br>      &#125;<br>    &#125;<br>  &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>    e.printStackTrace();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h4 id="2-SpringMVC文件上传"><a href="#2-SpringMVC文件上传" class="headerlink" title="2. SpringMVC文件上传"></a>2. SpringMVC文件上传</h4><p>SpringMVC的上传功能封装了FileUpload组件的功能</p>
 <ol>
 <li>配置FileUpload和common-io的依赖、在SpringMVC配置文件中配置MultipartResover（上传解析器）</li>
 <li>SpringMVC Controller：</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/upload&quot;)</span><br><span class="hljs-comment">// 使用MultipartFile类，String ename是其他控件信息，request用于获取绝对路径</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">upload</span><span class="hljs-params">(MultipartFile img, Emp emp ,String ename, HttpServletRequest request)</span></span>&#123;<br>	<span class="hljs-comment">// img存储到文件夹相对路径(Web程序的部署路径)</span><br>	<span class="hljs-comment">//1. 获得上传文件的名字,方便在下载时还原这个名字（3.jpg）</span><br>	String name = img.getOriginalFilename(); <br>	<span class="hljs-comment">//.当前应用程序的部署绝对路径下的upload文件夹</span><br>	String path = request.getServletContext().getRealPath(<span class="hljs-string">&quot;/upload&quot;</span>);<br>  <span class="hljs-comment">// 判断文件夹是否存在</span><br>  File file = <span class="hljs-keyword">new</span> File(path);<br>	<span class="hljs-keyword">if</span>(!file.exists())&#123;<br>		file.mkdir(); <br>  &#125;<br> <br>  <span class="hljs-comment">//3.应付存储文件的名字重复，为文件重命名</span><br>  <span class="hljs-comment">// 先获得文件的后缀名</span><br>  String extendsName = <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">int</span> index = name.lastIndexOf(<span class="hljs-string">&quot;.&quot;</span>); <br>  <span class="hljs-keyword">if</span>(index!=-<span class="hljs-number">1</span>)&#123;<br>  	extendsName = name.substring(index); <br>  &#125;<br>  <span class="hljs-comment">// 生成唯一的名字</span><br>  String fileName = UUID.randomUUID().toString()+extendsName; <br>  <br>  <span class="hljs-comment">//4.MultipartFile.transferTo方法代替流输入</span><br>  File savePath = <span class="hljs-keyword">new</span> File(file,fileName);<br>  <span class="hljs-keyword">try</span> &#123;<br>    img.transferTo(savePath); <br>  &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>    e.printStackTrace(); <br>  &#125;<br>	<span class="hljs-comment">// 5 存储数据库，这个照片是员工的属性</span><br>  <span class="hljs-comment">// 保存到相对路径</span><br>  emp.setFilePath(<span class="hljs-string">&quot;/upload/&quot;</span>+fileName); <br>  emp.setFileName(name);<br>	empService.save(emp);<br>	<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;succ&quot;</span>; <br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h2 id="文件下载："><a href="#文件下载：" class="headerlink" title="文件下载："></a>文件下载：</h2><p>a标签在h5的download属性可以通过URL访问到，单独的用控制器下载其实比价少用，真的用的时候可以用流下载</p>
 <p>FormData两种方式定义，append(“myimage”, $(“#myfile”).get(0).files[0]) ）<a target="_blank" rel="noopener" href="https://harttle.land/2016/07/04/jquery-file-upload.html">异步上传</a></p>
 <p>cache、processData和contentType为false，防止JQ转码</p>
 <h4 id="1-Servlet纯流方式"><a href="#1-Servlet纯流方式" class="headerlink" title="1. Servlet纯流方式"></a>1. Servlet纯流方式</h4><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f450da30f594">纯流文件下载参考</a></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java">String dataDirectory=req.getServletContext().getRealPath(<span class="hljs-string">&quot;/WEB-INF/data&quot;</span>);<br><span class="hljs-comment">// 通过service查询到</span><br>File file=<span class="hljs-keyword">new</span> File(dataDirectory, <span class="hljs-string">&quot;secret.pdf&quot;</span>);<br><span class="hljs-keyword">if</span>(file.exists())&#123;<br>  resp.setContentType(<span class="hljs-string">&quot;application/pdf&quot;</span>);<br>  resp.addHeader(<span class="hljs-string">&quot;Content-Disposition&quot;</span>, <span class="hljs-string">&quot;attachment;filename=secret.pdf&quot;</span>);<br>  <span class="hljs-keyword">byte</span>[] buffer=<span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];<br>  FileInputStream fis=<span class="hljs-keyword">null</span>;<br>  BufferedInputStream bis=<span class="hljs-keyword">null</span>;<br>  <span class="hljs-keyword">try</span>&#123;  <br>    <span class="hljs-comment">// BufferInputStream每次读一块字节相比读一个字节对于文件速度更快。</span><br>    fis=<span class="hljs-keyword">new</span> FileInputStream(file);<br>    bis=<span class="hljs-keyword">new</span> BufferedInputStream(fis);<br>    OutputStream os = resp.getOutputStream();<br>    <span class="hljs-keyword">int</span> i=bis.read(buffer);<br>    <span class="hljs-keyword">while</span>(i!=-<span class="hljs-number">1</span>)&#123;<br>      os.write(buffer,<span class="hljs-number">0</span>,i);<br>      i=bis.read(buffer);<br>    &#125;<br>  &#125;<span class="hljs-keyword">catch</span>(IOException ioe)&#123;<br>    System.out.println(ioe.toString());<br>  &#125;<span class="hljs-keyword">finally</span>&#123;<br>    <span class="hljs-keyword">if</span>(bis!=<span class="hljs-keyword">null</span>)&#123;<br>      bis.close();<br>    &#125;<br>    <span class="hljs-keyword">if</span>(fis!=<span class="hljs-keyword">null</span>)&#123;<br>      fis.close();<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h4 id="2-SpringMVC文件下载"><a href="#2-SpringMVC文件下载" class="headerlink" title="2. SpringMVC文件下载"></a>2. SpringMVC文件下载</h4><p> 使用spirng 自带的<strong>ResponseEntity</strong>实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/download&quot;)</span><br><span class="hljs-keyword">public</span> ResponseEntity&lt;<span class="hljs-keyword">byte</span>[]&gt; download(HttpServletRequest request) <span class="hljs-keyword">throws</span> IOException&#123;<br>  <span class="hljs-comment">//	获取你文件的文件夹，一般从数据库读区，这里模拟service已经取到路径</span><br>  String path = request.getSession().getServletContext().getRealPath(<span class="hljs-string">&quot;/upload&quot;</span>);<br>  String filename = <span class="hljs-string">&quot;/1168701023208865792.jpg&quot;</span>; <br>  <span class="hljs-comment">// 1. 获取文件路径</span><br>  File file = <span class="hljs-keyword">new</span> File(path,filename); <br>  <span class="hljs-comment">//设置header里的ContentDisposition字段，以attachment(下载框方式)打开图</span><br>  HttpHeaders headers = <span class="hljs-keyword">new</span> HttpHeaders(); <br>  headers.setContentDispositionFormData(<span class="hljs-string">&quot;attachment&quot;</span>, downloadFielName);<br>  <span class="hljs-comment">// 2. ResponseEntity返回，返回application/octet-stream : 二进制流数据(最常见的文件下载)。</span><br>  headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ResponseEntity&lt;<span class="hljs-keyword">byte</span>[]&gt;(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
             </div>
             <hr>
@@ -259,7 +267,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/23/6.%20%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/">
+                      <a href="/2021/03/29/5.%20%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">最近</span>
                         <span class="visible-mobile">上一篇</span>
@@ -269,7 +277,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/15/4.%20MySQL/">
+                      <a href="/2020/10/15/3.%20%E6%95%B0%E6%8D%AE%E5%BA%93/">
                         <span class="hidden-mobile">数据库</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -283,6 +291,8 @@
             
               <!-- Comments -->
               <article class="comments" id="comments">
+                
+                  
                 
                 
   <div id="vcomments"></div>
@@ -467,11 +477,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
