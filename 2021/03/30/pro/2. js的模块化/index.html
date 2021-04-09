@@ -20,7 +20,7 @@
   <meta name="author" content="新新">
   <meta name="keywords" content="">
   
-  <title>vue的启动逻辑 - 新新&#39;s Blog</title>
+  <title>学习前端杂记 - 新新&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -153,7 +153,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="vue的启动逻辑">
+            <span class="h2" id="subtitle" title="学习前端杂记">
               
             </span>
 
@@ -163,8 +163,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-29 00:00" pubdate>
-        2021年3月29日 凌晨
+      <time datetime="2021-03-30 00:00" pubdate>
+        2021年3月30日 凌晨
       </time>
     </span>
   
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3 字
+      802 字
     </span>
   
 
@@ -214,10 +214,37 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vue的启动逻辑</h1>
+            <h1 style="display: none">学习前端杂记</h1>
             
             <div class="markdown-body">
-              <p>通过NODE_MODULE</p>
+              <h4 id="var、let、const的区别"><a href="#var、let、const的区别" class="headerlink" title="var、let、const的区别"></a>var、let、const的区别</h4><ol>
+<li>声明变量作用域方面，var定义的变量作用域是函数级，但是代码块里声明的var变量，代码块外又允许访问（所以var有很多不合理的地方）。let是升级版的var，用来代替var，作用域为标准的代码块级。const是代码块级作用域的常量。</li>
+<li>var能够重复声明变量，而let和const不允许被重复声明。</li>
+<li>并且var声明的变量存在<strong>变量提升</strong>，即在用var声明变量代码之前，函数就可以调用这个变量，默认值为undefined，而let/const声明的变量，则会提示变量not defined（let）或者error（const）。</li>
+</ol>
+<h4 id="JS的模块化"><a href="#JS的模块化" class="headerlink" title="JS的模块化"></a>JS的模块化</h4><p>在模块化出现之前，js通过script标签直接引入另一个js，引入顺序必须固定，而维护成本高，现在主要的两种js模块化规范。</p>
+<ul>
+<li><p>Common JS模块化规范（nodejs）：require/exports</p>
+</li>
+<li><p>ES6模块化规范：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/541256d8abb3">import/export</a>。</p>
+</li>
+</ul>
+<p>export你需要导出的变量或者函数，import时需要带{}，而export default导出的变量不需要带{}。export可以导出未声明变量或者函数，export default只能导出已声明的变量、函数、或者匿名模块，一个文件中只能使用一次。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript">a.js<br>---<br><span class="hljs-keyword">var</span> name = <span class="hljs-number">1</span><br><span class="hljs-keyword">export</span> name;<br><span class="hljs-keyword">export</span> age = <span class="hljs-number">10</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span>&#123;<br>  data : &#123;<br>    name:<span class="hljs-number">10</span>;<br>  &#125;<br>&#125;<br>---<br>b.js<br>---<br><span class="hljs-keyword">import</span> random,&#123;name&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;a&quot;</span><br><span class="hljs-built_in">console</span>.log(name);<br><span class="hljs-built_in">console</span>.log(random.data.name);<br></code></pre></td></tr></table></figure>
+
+<h4 id="Vue组件"><a href="#Vue组件" class="headerlink" title="Vue组件"></a>Vue组件</h4><p>在学习vue或者初次看到vue项目时，有一些疑问，比如vue组件、实例、vue文件之间的区别是什么new Vue()操作产生vue实例，组件类似于是可被Vue实例反复引用的。</p>
+<p>vue组件是可复用的vue实例。类似于自定义标签，template属性为编写组件的必须项，props和data属性也较为常用。</p>
+<p>注意编写vue组件时，因为html的自定义属性不能大写，会自动转化成小写，所以注册组件props中的变量，要用小写。</p>
+<p>Vue.component()方法用于全局注册的vue组件，全局组件可以用于所有文件中的new Vue()创建的Vue根实例</p>
+<h5 id="JS驱动vue-js"><a href="#JS驱动vue-js" class="headerlink" title="JS驱动vue.js"></a>JS驱动vue.js</h5><p>此时Vue实例用el元素直接绑定HTML。引入vue.js文件，通过js去直接驱动。用component注册全局组件，组件包含template。</p>
+<p>template中的内容是需要有根节点的</p>
+<h5 id="模块化驱动vue-js"><a href="#模块化驱动vue-js" class="headerlink" title="模块化驱动vue.js"></a>模块化驱动vue.js</h5><p>在js文件中可以import单Vue文件，将Vue文件渲染到的Vue实例上，挂载到指定的HTML上。一般模块化开发中我们只写一个vue根实例。</p>
+<h5 id="单文件组件的优势"><a href="#单文件组件的优势" class="headerlink" title="单文件组件的优势"></a>单文件组件的优势</h5><p>模版语法高亮、全局定义命名不能重复、不支持CSS，而单文件的设置stype的scope属性，css只对单文件生效</p>
+<h5 id="slot"><a href="#slot" class="headerlink" title="slot"></a>slot</h5><p>默认插槽、具名插槽、作用域插槽</p>
+<p>将内容分发权限放到调用的父级，将复杂内容放到父级。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html">---vue 2.6之前:<br><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;pre-icon&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>---vue 2.6后:<br><span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">v-slot:pre-icon</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> <br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br>--- 子组件中预设位置<br><span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">pre-icon</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="compute、method、watch"><a href="#compute、method、watch" class="headerlink" title="compute、method、watch"></a>compute、method、watch</h5><p>计算属性能做的，watch都能做。</p>
 
             </div>
             <hr>
@@ -239,9 +266,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/30/pro/2.%20%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E6%9D%82%E8%AE%B0/">
+                      <a href="/2021/03/30/life/%E5%86%99%E5%8D%9A%E5%AE%A2%E6%80%9D%E8%B7%AF/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">3约30日学习前端杂记</span>
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -250,7 +277,7 @@
                     
                     
                       <a href="/2021/03/29/pro/1.%20%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">
-                        <span class="hidden-mobile">前端工程化</span>
+                        <span class="hidden-mobile">使用npm和yarn遇到的问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
