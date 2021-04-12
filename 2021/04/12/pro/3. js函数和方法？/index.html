@@ -20,7 +20,7 @@
   <meta name="author" content="新新">
   <meta name="keywords" content="">
   
-  <title>谈打游戏 - 新新&#39;s Blog</title>
+  <title>js的函数方法还有区别？？ - 新新&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -153,7 +153,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="谈打游戏">
+            <span class="h2" id="subtitle" title="js的函数方法还有区别？？">
               
             </span>
 
@@ -163,8 +163,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-12 00:00" pubdate>
-        2021年4月12日 凌晨
+      <time datetime="2021-04-12 10:22" pubdate>
+        2021年4月12日 上午
       </time>
     </span>
   
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      410 字
+      226 字
     </span>
   
 
@@ -214,25 +214,21 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">谈打游戏</h1>
+            <h1 style="display: none">js的函数方法还有区别？？</h1>
             
             <div class="markdown-body">
-              <p>生气！新哥真是打游戏就停不下来，分析下为啥，好好反省下吧傻子。</p>
-<p>打游戏，就容易有目标，有目标的好处是，赢了有很强的快感，但是呢，容易停不下来，比如今晚一定要上多少颗星，这把一定要赢，但是游戏本身输赢很正常，但自己心态就容易在目标感中崩掉，越打越差，似乎违背打游戏的初衷。</p>
-<p>大脑好像习惯于给自己制定任务，尤其是低等级任务，比如周末看几部电视剧，不看完都不舒服。当脑子里存在很多任务时，人脑会选择一个完成这个任务过程中，或者完成后多巴胺分泌更多的任务，但是往往就会由于这个多巴胺分泌多的任务，耽误了正事！</p>
-<p>打游戏过程中，就需要个自己强化打这把游戏不要在乎输赢，越想赢，越想多赢，你就越会想开下一吧，这和陷入爱的大脑机制是一样的，不是你本身想去开下一吧，而是你脑子里不断闪现的想赢，应该赢，觉得下一吧会赢，让你想去开下一吧，你应该打开游戏的那一刻开始就不断强化，输赢不重要，不重要，不重要，赢得概率还会大点。而我经常打开游戏就是，娱乐一局，顺带上一颗星，然后输了，不甘心，心态炸裂的开好几局，最后没得到娱乐的快乐，星也没上的很好。</p>
+              <p>今天偶尔看到，JS中的函数和方法这两个概念竟然有些许差别😅，在我印象中，大部分编程语言里，函数和方法没有任何区别，大概的意思就是通过名字调用的一段代码，只是C/C++中，习惯称为函数（function），Java中习惯称方法（method），而在JS中，我们知道也习惯称function，即函数。</p>
+<p>在vue.js中，经常的一种写法就是，将函数绑定到对象上，大概就是这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> hua = &#123;<br>  name: <span class="hljs-string">&quot;hua&quot;</span>,<br>  getMessage: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;He is cute&quot;</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里的<code>getMessage</code>就是对象hua的一个函数，更确切的，这种<strong>绑定到对象上的函数就是方法</strong>，需要通过<code>hua.getMessage</code>或者<code>hua.getMessage()</code>去调用。ES6对于书写这种函数，推荐写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> hua = &#123;<br>  name: <span class="hljs-string">&quot;hua&quot;</span>,<br>  <span class="hljs-function"><span class="hljs-title">getMessage</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;He is cute&quot;</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E6%97%A5%E5%BF%97/">日志</a>
-                    
-                  </div>
                 
                 
               </div>
@@ -242,18 +238,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/12/pro/3.%20js%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95%EF%BC%9F/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">js的函数方法还有区别？？</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/12/life/%E5%8D%8E/">
-                        <span class="hidden-mobile">顺其自然的想</span>
+                      <a href="/2021/04/12/life/%E8%B0%88%E6%89%93%E6%B8%B8%E6%88%8F/">
+                        <span class="hidden-mobile">谈打游戏</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

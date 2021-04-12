@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>js的函数方法还有区别？？</title>
+    <link href="/2021/04/12/pro/3.%20js%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95%EF%BC%9F/"/>
+    <url>/2021/04/12/pro/3.%20js%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95%EF%BC%9F/</url>
+    
+    <content type="html"><![CDATA[<p>今天偶尔看到，JS中的函数和方法这两个概念竟然有些许差别😅，在我印象中，大部分编程语言里，函数和方法没有任何区别，大概的意思就是通过名字调用的一段代码，只是C/C++中，习惯称为函数（function），Java中习惯称方法（method），而在JS中，我们知道也习惯称function，即函数。</p><p>在vue.js中，经常的一种写法就是，将函数绑定到对象上，大概就是这样：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> hua = &#123;<br>  name: <span class="hljs-string">&quot;hua&quot;</span>,<br>  getMessage: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;He is cute&quot;</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>这里的<code>getMessage</code>就是对象hua的一个函数，更确切的，这种<strong>绑定到对象上的函数就是方法</strong>，需要通过<code>hua.getMessage</code>或者<code>hua.getMessage()</code>去调用。ES6对于书写这种函数，推荐写法：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> hua = &#123;<br>  name: <span class="hljs-string">&quot;hua&quot;</span>,<br>  <span class="hljs-function"><span class="hljs-title">getMessage</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;He is cute&quot;</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>谈打游戏</title>
     <link href="/2021/04/12/life/%E8%B0%88%E6%89%93%E6%B8%B8%E6%88%8F/"/>
     <url>/2021/04/12/life/%E8%B0%88%E6%89%93%E6%B8%B8%E6%88%8F/</url>
@@ -61,7 +74,7 @@
   
   
   <entry>
-    <title>学习前端杂记</title>
+    <title>今日学习随机</title>
     <link href="/2021/03/30/pro/2.%20js%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
     <url>/2021/03/30/pro/2.%20js%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
     
