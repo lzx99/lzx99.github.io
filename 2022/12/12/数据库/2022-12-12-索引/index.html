@@ -16,21 +16,21 @@
   <meta name="author" content="新">
   <meta name="keywords" content="">
   
-    <meta name="description" content="今天偶尔看到，JS中的函数和方法这两个概念竟然有些许差别😅，在我印象中，大部分编程语言里，函数和方法没有任何区别，大概的意思就是通过名字调用的一段代码，只是C&#x2F;C++中，习惯称为函数（function），Java中习惯称方法（method），而在JS中，我们知道也习惯称function，即函数。 在vue.js中，经常的一种写法就是，将函数绑定到对象上，大概就是这样： 123456va">
+    <meta name="description" content="数据库有3种方式创建索引: 12345# 这种方式建立索引最简单，但是表中需要有数据，否则索引建立失败ALTER table lmt_crdt_app ADD INDEX idx_cust_name(cust_name);# 通过create INDEXCREATE INDEX idx_cust_name ON lmt_crdt_app(cust_name);# 可以在建表时，在所有字段的最后，加">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js的函数和方法的区别">
-<meta property="og:url" content="http://example.com/2021/04/12/front/3.%20js%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:title" content="数据库加索引">
+<meta property="og:url" content="http://example.com/2022/12/12/%E6%95%B0%E6%8D%AE%E5%BA%93/2022-12-12-%E7%B4%A2%E5%BC%95/index.html">
 <meta property="og:site_name" content="新&#39;s Blog">
-<meta property="og:description" content="今天偶尔看到，JS中的函数和方法这两个概念竟然有些许差别😅，在我印象中，大部分编程语言里，函数和方法没有任何区别，大概的意思就是通过名字调用的一段代码，只是C&#x2F;C++中，习惯称为函数（function），Java中习惯称方法（method），而在JS中，我们知道也习惯称function，即函数。 在vue.js中，经常的一种写法就是，将函数绑定到对象上，大概就是这样： 123456va">
+<meta property="og:description" content="数据库有3种方式创建索引: 12345# 这种方式建立索引最简单，但是表中需要有数据，否则索引建立失败ALTER table lmt_crdt_app ADD INDEX idx_cust_name(cust_name);# 通过create INDEXCREATE INDEX idx_cust_name ON lmt_crdt_app(cust_name);# 可以在建表时，在所有字段的最后，加">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-04-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-12-12T04:24:24.000Z">
+<meta property="article:published_time" content="2022-12-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-12T16:59:42.000Z">
 <meta property="article:author" content="新">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>js的函数和方法的区别 - 新&#39;s Blog</title>
+  <title>数据库加索引 - 新&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="js的函数和方法的区别"></span>
+            <span id="subtitle" data-typed-text="数据库加索引"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-04-12 00:00" pubdate>
-          2021年4月12日 凌晨
+        <time datetime="2022-12-12 00:00" pubdate>
+          2022年12月12日 凌晨
         </time>
       </span>
     
@@ -224,7 +224,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          509 字
+          353 字
         
       </span>
     
@@ -272,17 +272,16 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">js的函数和方法的区别</h1>
+            <h1 style="display: none">数据库加索引</h1>
             
             
               <div class="markdown-body">
                 
-                <p>今天偶尔看到，JS中的函数和方法这两个概念竟然有些许差别😅，在我印象中，大部分编程语言里，函数和方法没有任何区别，大概的意思就是通过名字调用的一段代码，只是C&#x2F;C++中，习惯称为函数（function），Java中习惯称方法（method），而在JS中，我们知道也习惯称function，即函数。</p>
-<p>在vue.js中，经常的一种写法就是，将函数绑定到对象上，大概就是这样：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> hua = &#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;hua&quot;</span>,<br>  <span class="hljs-attr">getMessage</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;He is cute&quot;</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <p>数据库有3种方式创建索引:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"># 这种方式建立索引最简单，但是表中需要有数据，否则索引建立失败<br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">table</span> lmt_crdt_app <span class="hljs-keyword">ADD</span> INDEX idx_cust_name(cust_name);<br># 通过<span class="hljs-keyword">create</span> INDEX<br><span class="hljs-keyword">CREATE</span> INDEX idx_cust_name <span class="hljs-keyword">ON</span> lmt_crdt_app(cust_name);<br># 可以在建表时，在所有字段的最后，加上索引 INDEX idx_cust_name(cust_name);<br></code></pre></td></tr></table></figure>
 
-<p>这里的<code>getMessage</code>就是对象hua的一个函数，更确切的，这种<strong>绑定到对象上的函数就是方法</strong>，需要通过<code>hua.getMessage</code>或者<code>hua.getMessage()</code>去调用。ES6对于书写这种函数，推荐写法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> hua = &#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;hua&quot;</span>,<br>  <span class="hljs-title function_">getMessage</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;He is cute&quot;</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>最常见的是普通索引（<strong>INDEX</strong>），上面代码中创建的就全是普通索引</p>
+<p>还有一种索引是唯一索引（<strong>UNIQUE INDEX</strong>），创建唯一索引在普通索引的INDEX前加一个UNIQUE标识就行了。他的值必须要唯一，如给“电子邮件”这个字段加上唯一索引，那么每一个电子邮件都不能够重复。</p>
 
                 
               </div>
@@ -301,7 +300,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%89%8D%E7%AB%AF/" class="category-chain-item">前端</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
   
   
 
@@ -323,9 +322,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/01/%E6%95%B0%E6%8D%AE%E5%BA%93/mybatis/" title="Mybatis">
+                      <a href="/2023/02/21/%E5%85%B6%E4%BB%96/9.%20%E7%BC%96%E7%A8%8B%E5%A4%84%E7%90%86%E6%80%9D%E8%80%83/" title="">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Mybatis</span>
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -333,8 +332,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/12/front/4.%20%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="浅谈函数式编程">
-                        <span class="hidden-mobile">浅谈函数式编程</span>
+                      <a href="/2022/11/14/Java/SSM/" title="">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
