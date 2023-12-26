@@ -1,0 +1,718 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.ax1x.com/2021/01/12/sJsf0O.png">
+  <link rel="icon" href="https://s3.ax1x.com/2021/01/12/sJsf0O.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="新">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Java有三种类型的集合，插入有序且元素可重复的List、插入无序且元素不可重复的Set、键值对形式的Map。其中List和Set都继承自Collection，他们公共的且最常用的方法都来自于Collection接口，例如add、remove、isEmpty、contains。 关于集合插入null值：大部分集合类都允许元素为null，List支持插入多个null值、HashSet、HashMap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集合">
+<meta property="og:url" content="http://example.com/2023/03/07/Java/%E6%96%B0blog/2.Java%E9%9B%86%E5%90%88/index.html">
+<meta property="og:site_name" content="新&#39;s Blog">
+<meta property="og:description" content="Java有三种类型的集合，插入有序且元素可重复的List、插入无序且元素不可重复的Set、键值对形式的Map。其中List和Set都继承自Collection，他们公共的且最常用的方法都来自于Collection接口，例如add、remove、isEmpty、contains。 关于集合插入null值：大部分集合类都允许元素为null，List支持插入多个null值、HashSet、HashMap">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-07T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-26T17:19:54.237Z">
+<meta property="article:author" content="新">
+<meta property="article:tag" content="Knowledge&#x2F;Java">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>集合 - 新&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"AxRSoPrgAA1n3akIHe4aBQ2Y-gzGzoHsz","app_key":"CYOBLQ2l1KRnfhA3E4xX91CI","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>新&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="集合"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-07 23:00" pubdate>
+          2023年3月7日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          8.2k 字
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">集合</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Java有三种类型的集合，插入有序且元素可重复的List、插入无序且元素不可重复的Set、键值对形式的Map。其中List和Set都继承自Collection，他们公共的且最常用的方法都来自于Collection接口，例如add、remove、isEmpty、contains。</p>
+<p>关于集合插入null值：大部分集合类都允许元素为null，List支持插入多个null值、HashSet、HashMap支持一个null值，TreeSet、TreeMap等要排序的集合不支持插入null值</p>
+<h2 id="泛型（Generic）"><a href="#泛型（Generic）" class="headerlink" title="泛型（Generic）"></a>泛型（Generic）</h2><p>集合是Java提供的一组泛型类，所以讲集合之前，我们先讲一下什么是泛型。</p>
+<p>泛型在集合源码中非常常见，假设我们设计集合不用泛型，要让一个集合类能够兼容所有数据类型，那集合元素就必须设计成是Object类型，通过“向上转型”来接收所有类型数据，但每一次获取数据，需要向下转型，需要强转；要么就为每一种数据类型写一个集合类，就增加了类的编写数量。<br>所以集合引用了泛型，让集合类一种<strong>模板代码</strong>，来适应任意的数据类型，<strong>让我们在实例化的时候才决定了参数的数据类型</strong>，不需要为每一种数据类型都写一个集合类。</p>
+<p>Java的泛型是“擦拭法”实现的，无论实例化成什么类，编译后泛型类中的数据通过Object对象保存，所以泛型类型不能为<code>int</code>等基础数据类型，要使用他们的包装器对象例如<code>Integer</code>；用反射或者Class，<code>List&lt;number&gt;</code>和<code>List&lt;Integer&gt;</code>是同一个Class，他们不存在子父类关系。</p>
+<h4 id="代码引入泛型类型的几种方式"><a href="#代码引入泛型类型的几种方式" class="headerlink" title="代码引入泛型类型的几种方式"></a>代码引入泛型类型的几种方式</h4><ol>
+<li>泛型类：比如ArrayList类，在类的签名中引入泛型<code>&lt;E&gt;</code>，泛型类<strong>在创建对象时指定泛型类型</strong>，不指定泛型类型就默认为Object类型。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArrayList</span>&lt;E&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">AbstractList</span>&lt;E&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">List</span>&lt;E&gt;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>泛型接口：比如Comparable接口，和泛型类一样，在接口签名中引入泛型。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Comparable</span>&lt;T&gt;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 当类继承泛型类或实现泛型接口时，有两种指定泛型类型的时机，第一种是<strong>在类的声明处指定泛型接口的类型</strong>，例如类实现Comparable接口的用法；另一种形式，类变成泛型类，后期实例化再决定数据类型，取决于具体的设计来选择。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Comparable</span>&lt;Student&gt;  <span class="hljs-comment">//类实现泛型接口需要指定数据类型</span><br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>泛型方法：<strong>在方法签名的返回值前用<code>&lt;T&gt;</code>单独声明泛型类型</strong>，不依赖于类或者接口带来的泛型类型。泛型方法被调用时，可以显示声明泛型方法的类型，如 <code>demo.&lt;String&gt;run(str1,str2)</code> ，也可以不声明参数类型，编译器会根据你传入的参数类型自行推断<br>静态方法不能通过泛型类和泛型接口引入来的泛型类型，编译会报错，必须使用泛型方法才能引入泛型</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-keyword">void</span> <span class="hljs-title function_">copy</span><span class="hljs-params">(List&lt;? <span class="hljs-built_in">super</span> T&gt; dest, List&lt;? extends T&gt; src)</span> <br></code></pre></td></tr></table></figure>
+<h4 id="类型参数边界（type-parameter-bound）"><a href="#类型参数边界（type-parameter-bound）" class="headerlink" title="类型参数边界（type parameter bound）"></a>类型参数边界（type parameter bound）</h4><p>当我们的设计的API，让泛型类&#x2F;泛型接口引用作为方法的参数，通常来说我们要指定泛型引用具体的类型，例如<code>List&lt;Number&gt;</code>，但我们很多时候设计API，想让API中传入泛型类型<strong>适用于某一个基类及其派生类或者他的超类</strong>。由于泛型类型不存在子父类关系，例如虽然Integer是Number的子类，但<code>List&lt;Number&gt;</code>和<code>List&lt;Integer&gt;</code>这两种泛型类型并不存在父子类关系，所以我们不能够通过向上转型，让<code>List&lt;Number&gt;</code>接收<code>List&lt;Integer&gt;</code>，我们想要API的编写支持这样的形式，需要使用<strong>通配符”?“，搭配extends关键字或者super确认泛型的上下界</strong>，例如<code>List&lt; ? extends Numbers&gt;</code>就可以达到我们接受子类的要求。</p>
+<p><strong>泛型的上下界</strong>，参考：<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1252599548343744/1265105920586976">廖雪峰的泛型上下界</a></p>
+<ul>
+<li>上界：<code>? extends Number</code>，传入的泛型数据类型必须为Number类或他的下级类。<strong>extends上界在方法内允许泛型类的读取方法，但不允许调用泛型类的写入类方法（除非写入null）</strong>，否则编译无法通过。<br>因为Number可以安全的接收传入的任意下界类数据，但是写入，就算方法内写入的是比较小的Integer类型数据，但是传入的泛型类型，可能是和Integer平级的Double，甚至是更下级的数据类型，Integer无法安全的写入到泛型类型数据中。</li>
+<li>下界：<code>? super Integer</code>，传入的泛型数据类型必须为Integer类或他的上级类。<strong>super下界允许在方法内调用泛型类的写入方法，但不允许泛型类读取类方法（除非使用Object类接受）</strong>，否则编译无法通过。<br>不能被读取的原因是，Integer类来接受，但是我们泛型类的读取方法，返回的类型会是任意上界类数据，Integer无法接收比他上级的类的；可以写入，因为泛型类的写入方法可以接受Integer类型。<br>总结就是，上界（extends）用于读取，下界用于写入（super），其实核心原因是因为Java向上转型安全，向下转型不安全的。通过上下界，可以更加精巧的设计API，让编译器来保证数据不被进行写入或读取等我们不想要的操作，Collections类中关于List复制的Copy方法就是源码中最好的一个实现，我们当然可以不用super或extends，但是会让你的API更加高级，健壮度更高。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Collections</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-keyword">void</span> <span class="hljs-title function_">copy</span><span class="hljs-params">(List&lt;? <span class="hljs-built_in">super</span> T&gt; dest, List&lt;? extends T&gt; src)</span> &#123;<br>          <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;src.size(); i++) &#123;<br>              <span class="hljs-type">T</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> src.get(i); <span class="hljs-comment">// src是producer</span><br>              dest.add(t); <span class="hljs-comment">// dest是consumer</span><br>          &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="List类集合"><a href="#List类集合" class="headerlink" title="List类集合"></a>List类集合</h2><p>List类集合是用的最多的集合，相当于可变长的数组，元素有序可重复，当list里的元素是对象，如果要确保集合contains()方法的有效性，要重写对象equals()方法。</p>
+<h4 id="1-ArrayList"><a href="#1-ArrayList" class="headerlink" title="1. ArrayList"></a>1. ArrayList</h4><p>ArrayList底层采用数组，从JDK 8开始，默认数组长度从10变到了0，由于底层是数组，所以ArrayList读取快，但在开头或者中间位置插入或删除数据，后面元素位置都要移动，所以相比于LinkedList，ArrayList整体进行增删的效率低一些，但是通常对集合开始和中间段的修改比较少，进行最多就是add和遍历，所以ArrayList仍然是使用最频繁的List。</p>
+<p>ArrayList的线程是不安全的，容易出现两种情况：</p>
+<ul>
+<li>致元素覆盖和有元素为null值。add()方法中的<code>elmentData[size++] = e</code>导致</li>
+<li>数据越界异常。add()方法中同时判断数组长度无需拓容</li>
+</ul>
+<h4 id="2-LinkedList（双向链表实现）："><a href="#2-LinkedList（双向链表实现）：" class="headerlink" title="2. LinkedList（双向链表实现）："></a>2. LinkedList（双向链表实现）：</h4><p>LinkedList底层采用双向链表，实现了Deque接口（双向队列），所以也就<strong>实现了队列</strong>（FIFO，先进先出线性表）<strong>和栈</strong>（LIFO，后进先出线性表）两种数据结构。插入和删除操作快，但读取遍历慢</p>
+<p>LinkedList当成普通List来使用时，推荐使用add()&#x2F;remove()等方法；LinkedList当成stack栈使用时，push()栈顶压栈，pop()栈顶出栈；当成queue队列使用时，offer()队尾入队，poll()队头出队，peek()取列表头部元素；当成双向队列Deque使用时，可以操作两头，offerLast()&#x2F;offerFirst()，pollFirst()&#x2F;pollLast()。</p>
+<h4 id="3-其他List接口实现类"><a href="#3-其他List接口实现类" class="headerlink" title="3. 其他List接口实现类"></a>3. 其他List接口实现类</h4><p>Vector类：相当于方法<strong>同步版的ArrayList</strong>，所以也是一种数组型的集合</p>
+<p>Stack类：基于Vector类动态数组实现的Java栈类，有锁的开销，用Deque的实现类代替Stack类实现更高效率的栈</p>
+<p>Deque接口，是Queue接口的子接口，的实现类有两个常用的，基于循环数组实现的<strong>ArrayDeque</strong>，和基于双向链表实现的<strong>LinkedList</strong></p>
+<h2 id="Set类集合"><a href="#Set类集合" class="headerlink" title="Set类集合"></a>Set类集合</h2><p>当我们存储数据时，如果要求数据不能重复，或者需要存储大量数据，再或者需要进行很多的排序，这个时候用Set集合</p>
+<h4 id="1-HashSet"><a href="#1-HashSet" class="headerlink" title="1. HashSet"></a>1. HashSet</h4><p>HashSet底层基于HashMap，也就是HashMap-Key的存储形式，可以当成没有value的HashMap。集合元素为自定义对象时，需要重写元素类的hashCode()和equals()方法，HashSet重写频率会比HashMap高，因为HashMap的key一般是String不需要重写，而HashSet有更大概率存储自定义实体类。</p>
+<ul>
+<li>重写hashcode()方法：可以取成员属性的值作为hashcode，如<code>this.name.hashcode()</code>。String的hashcode是通过String每一个字符✖️31计算。</li>
+<li>重写equals()方法：参考String的写法，先判断内存地址，在instance of判断属于的类，再比较每个属性的值，如<code>this.name.equals(obj.name)&amp;&amp;this.no==obj.no</code></li>
+</ul>
+<p>HashSet add元素，首先根据hashCode值和数组的长度进行计算出存储的下标；如果下标的位置无元素，那么直接存储；如果有元素，那么使用要存入的元素和该元素进行equals方法，如果结果为真，哈希表对应位置上的Set元素被替换了（不管相不相等）；如果不相等，以链表形式新加节点存储。</p>
+<h4 id="2-TreeSet"><a href="#2-TreeSet" class="headerlink" title="2. TreeSet"></a>2. TreeSet</h4><p>TreeSet基于TreeMap，存储形式为二叉树，适合大量数据的存储。</p>
+<p>Tree类型的Set或者Map，都需要强制排序，意味着使用TreeSet存储类型为对象时，要么这个<strong>类继承Comparable接口，重写compareTo()方法</strong>；要么在<strong>实例化集合的过程中</strong>，构造方法传入一个的<strong>Comparator比较器对象</strong>。默认<code>o1-o2</code>这种形式呢，就是升序排列</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 实例化Tree型集合，元素需要强制排序，使用Lambda表达式推断匿名内部类，然后实例化了一个Comparator对象 </span><br>TreeSet&lt;Student&gt; studentSet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeSet</span>&lt;&gt;((o1, o2) -&gt; o1.getAge()- o2.getAge());<br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_25827845/article/details/53870329">Java 8 String的compareTo()</a>：返回从左到右第一个不同的字符的ASCII码差，长字符和短字符相同，返回两个字符的length差。</p>
+<h2 id="Map类集合"><a href="#Map类集合" class="headerlink" title="Map类集合"></a>Map类集合</h2><h4 id="1-HashMap"><a href="#1-HashMap" class="headerlink" title="1. HashMap"></a>1. HashMap</h4><p>HashMap是一个<strong>储存Entry对象的数组</strong>，在数组的基础上是链表+红黑树的组合（Java 8后）。HashMap插入hashcode相等并且equlas放回返回true的key值时，此时新<strong>Entry会替换</strong>老Entry元素，在HashMap体现为value值被替换，HashSet中元素被替换。而LinkedHashMap相比HashMap，底层用链表代替数组，按顺序存储，迭代顺序与存储顺序一致，而HashMap随机存储，也导致LinkedHashMap读写性能差一点。</p>
+<p>HashMap底层是哈希表，值的位置是算出来的，数组桶的数量有限的，所以经过了扰动函数让哈希值尽可能的均匀，也会冲突，哈希表解决冲突有三种，再哈希法、开放寻址法和<strong>分离链表法</strong>，HashMap采用最后一种。</p>
+<p>同ArrayList一样，在 Java 8后，只有当HashMap调用put()方法时，才将HashMap数组长度初始化为16；当链表长度大于等于8时，当前桶的链表将转成红黑树，红黑树元素小于等于6时，转化成链表，除此之外链表转红黑树实际还有一个隐性条件，就是Node数组长度要大于等于64，在64之前，会有限哈希表数组拓容</p>
+<p>调用put()方法的源码过程：首先会调用扰动函数，右移使将高位值参与计算，让哈希值分布更均匀：<code>（h = key.hashCode()) ^ (h &gt;&gt;&gt; 16)</code>作为最后的哈希值，然后根据常规的哈希规则去插入，插入桶的位置通过按位与运算（取余运算）获取，即<code>index = hash&amp;(length-1)</code>，使得高位参与运算，等同于十进制取余hash%length。length-1&#x3D;2^n-1，二进制是n个1，这样取余，结果取决于hashcode，而不是链表，高位hashcode取余完全等于hashcode最后几位。</p>
+<blockquote>
+<p>[!question] 二进制运算复盘：右移和左移、按位运算、逻辑运算、异或运算的学习</p>
+</blockquote>
+<p>插入后，进行判断，当<code>++size &gt; thresholds</code>时（threshold等于capacity✖️loadfactory），执行resize()方法拓容，拓容2倍，反正数组的长度会是2的幂。拓容后调用transfer方法，将元素rehash到新数组中。<br>关于size++和++size的区别：++size会返回size+1后的值，而size++的返回值是size，虽然两者都实现了size加1，再执行判断或者返回的时候，请使用++size。</p>
+<h4 id="2-TreeMap"><a href="#2-TreeMap" class="headerlink" title="2. TreeMap"></a>2. TreeMap</h4><p>TreeMap就是一个树结构，每一个树节点都是Entry对象，Entry类型成员变量除了本身的key和value以外，还包括左节点、右节点和父节点三个同为Entry类型的成员变量，这样从根节点Entry对象开始，逐步递归存储，这种存储形式可以叫做“<strong>自引用</strong>”，自树和链表的数据结构中，经常使用。</p>
+<p>TreeMap底层是红黑树（二叉查找树），自定义对象作为key时，需要重写compareTo()方法或者给TreeMap集合传递一个Comparator对象。需要排序时，用TreeMap结构，迭代器输出默认就是自然排序。在这里引申了解几个树相关的概念，满二叉树：一共有2^K-1个节点。完全二叉树：满二叉树基础上，只有h-1可以度小于2，只有一个叶必须在最左边。红黑树的性质：和前两种树一样也是一种二叉树，根和叶（NIL节点）是黑色节点，路径上两个红色节点点不能相连，<strong>根节点到所有NIL节点经过的黑色节点相同</strong>，这种规格使得树的高度维持，查询的最差时间复杂度控制在logn。</p>
+<p>put()时源码解析：首先判断根是否为空，为空则将元素放到根节点，不是则元素从根节点开始compare()，如大于0，继续和根的右子树比较，直至取不到右子树了，就放到当前比较节点的右节点了，remove()整体流程也差不多，插入或者删除节点以后，会调用fixAfterInsertion()进行节点的变色、左旋和右旋完成红黑树调整。一般简单了解红黑树会进行变色、左旋（A左旋，相当于A变成右子节点的左节点，原右子节点的左节点变为A的右节点）、右旋是怎么回事就行了，详细的红黑树调整规则，插入后的调整规则已经清楚了，删除一般会转化成叶子节点，然后再用规则进行删除，如果想要详细了解调整规则，参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/166319823">插入和删除后红黑树的修复</a>。</p>
+<h2 id="集合的处理"><a href="#集合的处理" class="headerlink" title="集合的处理"></a>集合的处理</h2><h4 id="并发Map"><a href="#并发Map" class="headerlink" title="并发Map"></a>并发Map</h4><p>高并发下的HashMap线程并不安全，高并发下，很多场景都会有线程安全问题，例如一个线程还未插入完成，另一个线程刚好resize到新的数组，元素可能就会覆盖；再比如rehash阶段两个线程并发可能会形成<strong>链表环</strong>，此时get()某元素到环状链表所在的桶，但并不存在equals相等的元素时，会出现死循环，会一直遍历链表去查找。</p>
+<p>给每个Segment上锁，size()方法，所有segment的元素加起来，所有segment的修改次数加起来，Java 8已经不用segment了。</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/31614308">ConcurrentHashMap</a>是高并发的，就使用HashTable（同步版HashMap，性能低较少使用）</p>
+<p>ConcrrentHashMap用了Segment，将HashMap分块，降低了锁的粒度。</p>
+<h4 id="布隆过滤器（Bloom-Filter）"><a href="#布隆过滤器（Bloom-Filter）" class="headerlink" title="布隆过滤器（Bloom Filter）"></a>布隆过滤器（Bloom Filter）</h4><p>不存储元素，只用于判断元素是否存在过。加入元素时，多个哈希函数计算后映射到位数组上的位置，值设置为“1”，判断元素是否存在过时，必须满足三个哈希值在位数组上的映射都为1。网络爬虫是一个最常见的场景，因为网页中有很多重复URL，需要判断是否已经爬取过。谷歌的Guava BloomFilter是一个常见的实现。</p>
+<h4 id="集合的创建"><a href="#集合的创建" class="headerlink" title="集合的创建"></a>集合的创建</h4><p>创建集合是一个泛型类的实例化，<strong>在JDK 1.7以后，泛型类实例化，右边的构造方法不再需要指定泛型的类型</strong>，编译器会根据上下文推断类型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">ArrayList&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br></code></pre></td></tr></table></figure>
+<h4 id="集合的遍历"><a href="#集合的遍历" class="headerlink" title="集合的遍历"></a>集合的遍历</h4><p>集合通过增强for和迭代器遍历集合。List和Set集合都继承自Collection接口，他们的实现类重写了Collection借口中的iterator()方法，所以他们都可以通过iterator()方法获取自身的迭代器；而Map的遍历，无法直接使用增强for或者iterator迭代器，需要现将map转化成**entrySet()、keySet()或values()**，然后再使用迭代器&#x2F;增强for，实现Map的循环</p>
+<p>在增强for循环体中，不允许add或者remove元素，如果我们要在遍历过程中增删元素，需要使用迭代器提供的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">Iterator&lt;String&gt; iterator = list.iterator();<br><span class="hljs-keyword">while</span>(iterator.hasNext())&#123;<br>  System.out.println(iterator.next(););<br>  it.remove();<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="集合的排序"><a href="#集合的排序" class="headerlink" title="集合的排序"></a>集合的排序</h4><p>List和Set集合需要排序，如果存储的元素本身就是支持排序的基础数据类型，直接调用Collections.sort()方法，就能对list&#x2F;set&#x2F;map集合实现排序；如果集合元素是对象，如果需要实现排序，就有两种方式</p>
+<ol>
+<li>使用两个参数的Collections.sort()重载方法，第二个参数中<strong>传入一个Comparator比较器，充血比较器的compare()方法</strong>，通常来说，会写成匿名内部类的实现</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">Collections.sort(students, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Comparator</span>&lt;Student&gt;() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compare</span><span class="hljs-params">(Student o1, Student o2)</span> &#123;<br>                <span class="hljs-keyword">return</span> o1.getAge()-o2.getAge();<br>            &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>另一种方法是是<strong>对象类实现Comparable接口，重写compareTo()方法</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Student类中实现Comparable接口，重写compareTo方法</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Comparable</span>&lt;Student&gt;&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(Student o)</span> &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.age-o.age;<br>    &#125;<br>  &#125;<br>  <span class="hljs-comment">// 使用排序</span><br>  List&lt;Student&gt; students = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>  students.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Student</span>(<span class="hljs-string">&quot;Lee&quot;</span>,<span class="hljs-number">3</span>));<br>  students.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Student</span>(<span class="hljs-string">&quot;Jackson&quot;</span>,<span class="hljs-number">5</span>));<br>  students.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Student</span>(<span class="hljs-string">&quot;Jessi&quot;</span>,<span class="hljs-number">1</span>));<br>  <span class="hljs-comment">// students集合将会被排序</span><br>  Collections.sort(students);<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Knowledge-Java/">#Knowledge/Java</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/06/Java/%E6%96%B0blog/1.Java%E7%9A%84%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%B3%96/" title="Java基础语法糖">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java基础语法糖</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/04/%E6%95%B0%E6%8D%AE%E5%BA%93/2.%E9%94%81%E5%92%8C%E4%BA%8B%E5%8A%A1/" title="数据库锁和事务">
+                        <span class="hidden-mobile">数据库锁和事务</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"AxRSoPrgAA1n3akIHe4aBQ2Y-gzGzoHsz","appKey":"CYOBLQ2l1KRnfhA3E4xX91CI","path":"window.location.pathname","placeholder":"给我评论点啥","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"enable":true,"appid":"AxRSoPrgAA1n3akIHe4aBQ2Y-gzGzoHsz","appkey":"CYOBLQ2l1KRnfhA3E4xX91CI"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

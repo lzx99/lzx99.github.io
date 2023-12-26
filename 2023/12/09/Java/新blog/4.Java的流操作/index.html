@@ -1,0 +1,716 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.ax1x.com/2021/01/12/sJsf0O.png">
+  <link rel="icon" href="https://s3.ax1x.com/2021/01/12/sJsf0O.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="新">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="[!question]- 带着问题因为属于复习了，先思考并整理完我的笔记，再带着具体的问题，向ChatGPT提问，不要没有想清楚自己内心的疑问是什么，就急着让ChatGPT把答案告诉你。甚至你可以带着答案提问，看你的理解，和ChatGPT的理解，有没有思维的碰撞  Java中的流，也就是InputStreat、OutputStream，到底是什么样的概念，可以对Java中的这些API进行分类吗？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流">
+<meta property="og:url" content="http://example.com/2023/12/09/Java/%E6%96%B0blog/4.Java%E7%9A%84%E6%B5%81%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="新&#39;s Blog">
+<meta property="og:description" content="[!question]- 带着问题因为属于复习了，先思考并整理完我的笔记，再带着具体的问题，向ChatGPT提问，不要没有想清楚自己内心的疑问是什么，就急着让ChatGPT把答案告诉你。甚至你可以带着答案提问，看你的理解，和ChatGPT的理解，有没有思维的碰撞  Java中的流，也就是InputStreat、OutputStream，到底是什么样的概念，可以对Java中的这些API进行分类吗？">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-26T17:20:34.399Z">
+<meta property="article:author" content="新">
+<meta property="article:tag" content="Knowledge&#x2F;Java">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>流 - 新&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"AxRSoPrgAA1n3akIHe4aBQ2Y-gzGzoHsz","app_key":"CYOBLQ2l1KRnfhA3E4xX91CI","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>新&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="流"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-09 00:00" pubdate>
+          2023年12月9日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          6.1k 字
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">流</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>[!question]- 带着问题<br>因为属于复习了，先思考并整理完我的笔记，再带着具体的问题，向ChatGPT提问，不要没有想清楚自己内心的疑问是什么，就急着让ChatGPT把答案告诉你。甚至你可以带着答案提问，看你的理解，和ChatGPT的理解，有没有思维的碰撞</p>
+<ol>
+<li>Java中的流，也就是InputStreat、OutputStream，到底是什么样的概念，可以对Java中的这些API进行分类吗？</li>
+<li>InputStream或者说Reader中的read()方法，如何完整的将文件读取，如果多次读取，如何拼接读取到的字符或者字节？</li>
+</ol>
+</blockquote>
+<p>“流”是<strong>程序与目标数据源</strong>之间，高效读取和写入的一个抽象概念。建立一个流，具体在Java中的就是建立了一个流的对象，如new FileInputStream(“file”)。<br>流基于程序和目标数据源，那他所有的“输入流”其实都是针对于程序内存，目标数据源有几种</p>
+<ul>
+<li>目标数据源为文件的<strong>文件流</strong>；</li>
+<li>还有一种<strong>网络流</strong>，目标数据源是TCP的客户端或者服务端，如socket、url等API连接产生的流。</li>
+<li>无需存储在磁盘时，在Java程序虚拟出输入流输出流，目标数据源在程序内存的<strong>内存流</strong>（ByteArray流）</li>
+</ul>
+<h4 id="操作流需要注意的几个问题"><a href="#操作流需要注意的几个问题" class="headerlink" title="操作流需要注意的几个问题"></a>操作流需要注意的几个问题</h4><ol>
+<li>IO流无论是**输入流或者输出流结束后都需要手动调用close()**，除非使用了 <strong>try-with-resource</strong> 这个Java 7以后提供的API开启的流，如果不关流，会一直占用操作系统资源，例如文件资源和网络资源。保持最后打开的流先关闭，例如要先关buffered流，再关掉buffered关联的File流，推荐使用try-with-resource。</li>
+<li>需要注意**输出流写入完成后需要进行flush()**，否则有可能出现写入不成功的情况，因为在write时，为减少IO次数，会将数据写入至缓冲区中，只有当写满了缓冲区或者调用flush才会正式将文件写入，即使close流时最后会将缓存中还未完成真正写入的进行文件写入，但是可能close抛出异常导致文件写入不全，反正从规范性上来说，强烈推荐在输出流write()后调用flush()。</li>
+<li>流是单向的，虽然<strong>网络流有两条双工的单向流</strong>，包含流实际操作也是单向的，inputStream就只能read。在网络连接中，可以关闭一条流保持半关闭，而不关闭整个TCP连接，例如使用socket.shutdownOutput()这样就是服务器关闭输出流，保持一种半关闭状态。</li>
+</ol>
+<h2 id="基本IO流"><a href="#基本IO流" class="headerlink" title="基本IO流"></a>基本IO流</h2><p>字节流InputStream和OutputStream，字符流Reader和Writer是Java IO中最重要的基类，而FileInputStream&#x2F;FileOutputStream 与 FileReader&#x2F;FileWriter是他们最重要的子类，操作目标为“文件”，他们的构造方法，需要指定操作的文件，传入<strong>File类对象或者字符串</strong>都可以完成指定，传入字符串会自动转化成File类对象；在输出流的构造方法中，可以传入第二个是否append的参数，为true时，文件追加写入，第二个参数为false或者不传时，文件覆盖写入。<br>基本上所有的IO流都可以用下面的通用API。</p>
+<h4 id="1-核心读取方法："><a href="#1-核心读取方法：" class="headerlink" title="1. 核心读取方法："></a>1. 核心读取方法：</h4><p>通常读取数组后，要将byte数组或char数组转化成String，<strong>请使用String的构造方法将2种数组转化成String</strong>，不要使用数组的toString方法，这是Object方法，会返回类名和哈希值的信息，并不会转化成String。<br>而且推荐使用<code>new String(buffer, 0, readLength)</code>这个构造方法，这样而不是<code>new String(buffer)</code>，这样buffer没有读满时，buffer写入String中不会包含多余的空格。第二个参数代表“读取偏移量”，通常是0，代表从buffer数组的第1个字节开始写入，写入整个buffer，如果你不需要写入整个buffer，可以更改。<br>如果。<br>转化成String时，可能需要多次读取，来拼接最终的数组，拼接字符串一般就使用StringBuilder和StringBuffer，不是多线程环境或者没有线程安全问题，使用StringBuilder的性能略高。</p>
+<ol>
+<li>无参read()，每次读取1个字节&#x2F;字符到返回值，读到末尾会返回-1。使用while循环读取，可以</li>
+<li>有参read(buffer数组)，方法参数传入指定长度的字节数组或字符数组，按数组长度读取字节或字符，同时返回实际读取的字节或字符数，读到末尾时返回-1。这个利用缓冲区来读，一般用这个会更多一点点，但是在边读边写的时候，搭配write(byte[ ] b, int off, int len)使用</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">StringBuilder</span> <span class="hljs-variable">stringBuilder</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span> Builder();<br><span class="hljs-type">byte</span>[ ] buffer =<span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br><span class="hljs-type">int</span> <span class="hljs-variable">bufferLength</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">while</span>( ( bufferlength = inputstream.read(buffer) ) != -<span class="hljs-number">1</span> )&#123;<br>	 <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(buffer,<span class="hljs-number">0</span>,bufferLength);<br>	 stringBuilder.append(str);<br>&#125;<br>System.out.println(stringBuilder.toString());<br><br></code></pre></td></tr></table></figure>
+<h4 id="2-核心写入方法"><a href="#2-核心写入方法" class="headerlink" title="2. 核心写入方法"></a>2. 核心写入方法</h4><p>通常写入前需要将String转化成数组，请使用String的实例方法getBytes()和toCharArray()进行转化。这里提一个热知识，编写原生JSON串时，编辑器要求写很多转义符“\”，转义符只存在于Java代码层面，在编译成字节码就不存在了，在内存中处理和控制台打印都是不存在转义符的。</p>
+<p>输出流也有两个常用写入方法，字节流写入byte数组，字符流同理写入char数组，但字符流可以write(String str)：</p>
+<ol>
+<li>write(byte[ ] b)，写入整个数组。</li>
+<li>write(byte[ ] b, int off, int len)，指定写入数组的偏移量和长度，例如写入byte数组，从第10个字节开始，写20个字节。</li>
+</ol>
+<p>日常用普通的write方法足够，但是，和上面的String情况相似，当你的输入流是通过buffer去读取的，而你想直接将读到的buffer块写入时，请搭配可以指定偏移量的write方法，防止在buffer没有读满时，write了我们不需要的空字符串导致问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>Byte[] buffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Byte</span>[<span class="hljs-number">1024</span>];<br><span class="hljs-keyword">while</span>((size = in.read(buffer))!= -<span class="hljs-number">1</span>)&#123;<br>  out.write(buffer,<span class="hljs-number">0</span>,size);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="3-字节字符转化流"><a href="#3-字节字符转化流" class="headerlink" title="3. 字节字符转化流"></a>3. 字节字符转化流</h4><p><code>InputStreamReader</code>、<code>OutputStreamWriter</code>是FileWriter&#x2F;FileReader是的父类，<strong>将字节流转化成字符流</strong>，不能使用FileReader&#x2F;FileWriter接收，可以用Writer&#x2F;Reader或者本身引用接收，将字节流转化成字符流后搭配BufferReader或BufferWriter，进一步使用readLine或者newLine方法，尤其是搭配BuffedReader非常常见。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">BufferedReader</span> <span class="hljs-variable">consoleReader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedReader</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InputStreamReader</span>(System.in));<br>consoleReader.readLine();<span class="hljs-comment">//和scanner.nextLine()类似</span><br></code></pre></td></tr></table></figure>
+
+<p><code>PrintWriter</code>也是在网络流中常用的字节字符转化流，字节输出流转Writer，用PrinWriter类接收，独有的封装方法println()，等同使用BufferedWriter的write()加newLine()，抽象程度更高，既有缓存装饰，也能够直接完成字节流转成Writer，他的构造方法可以是File类、Writer、OutputStream。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PrintWriter</span>(outputStream, <span class="hljs-literal">true</span>);<br>writer.println(userInput);<br></code></pre></td></tr></table></figure>
+<h4 id="4-内存流"><a href="#4-内存流" class="headerlink" title="4. 内存流"></a>4. 内存流</h4><p>ByteArrayInputStream&#x2F;ByteArrayOutputStream也就是内存流，不同于一般的目标数据源是“文件”或者“网络”，在Java程序中，我们虚拟的构造出一个字节流，我们需要借助流操作，就使用内存流。使用场景：</p>
+<ol>
+<li>我个人的理解的第一种用法是临时存储，通过网络输入流或者文件输入流read数据时，有一种后续处理，是我们同步使用输出流write，例如服务器文件的上传与保存；还有一种后续处理，是read后将数据先在Java程序程序，如果是文本数据，我们可以通过StringBuffer来拼接多次read的数据，但如果是二进制数据，我们一般在Java程序中构建一个虚拟的输出流，即<code>ByteArrayOutputStream</code>，read的同时同步write数据，最后使用<code>toByteArray()</code>转化成完整的byte数组，达到临时存储的作用，再统一处理的作用，例如进行加密或者解密等操作。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">FileInputStream</span> <span class="hljs-variable">fis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;input.txt&quot;</span>);<br><span class="hljs-type">ByteArrayOutputStream</span> <span class="hljs-variable">bos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayOutputStream</span>();<br><span class="hljs-type">byte</span>[] buffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br><span class="hljs-type">int</span> len;<br><span class="hljs-keyword">while</span> ((len = fis.read(buffer)) != -<span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-comment">// 对读取到的数据进行加密</span><br>    <span class="hljs-type">byte</span>[] encryptedData = encryptData(buffer, len);<br>    bos.write(encryptedData, <span class="hljs-number">0</span>, encryptedData.length);<br>&#125;<br><span class="hljs-type">byte</span>[] data = bos.toByteArray();<br>fis.close();<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>搭配对象流，不借助文件在内存中完成对象序列化和反序列化，实现clone()深拷贝，参考下边“装饰流的对象流部分”</li>
+</ol>
+<h2 id="装饰流"><a href="#装饰流" class="headerlink" title="装饰流"></a>装饰流</h2><p>使用装饰流，传入普通的输入流和输出流，让输入输入流有更多的API功能，例如字符缓冲、读写对象和读写二进制。</p>
+<h4 id="1-缓冲流"><a href="#1-缓冲流" class="headerlink" title="1. 缓冲流"></a>1. 缓冲流</h4><p>BufferedInputStream&#x2F;BufferedOutputStream 与 BufferedReader&#x2F;BufferedWriter这几个类是缓冲流，Buffered流是字节流字符流基类的装饰器，<strong>他们的构造方法需要接收字节流字符流基类对象</strong>来实现自身实例化，也就是说在使用装饰流时，；相比普通File流，方法使用上没什么区别，但增加了内存缓冲区，多次读取和写入时，减少了IO的次数，尤其可以提高大文件的读写效率。要使用他们本身引用来接受缓冲流对象，会增加一些独有方法：</p>
+<ol>
+<li>BufferedReader中的readline()方法读取一行，返回String，没有下一行返回null</li>
+<li>BufferedWriter的newLine()方法，换行</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">InputStreamReader</span> <span class="hljs-variable">inputStreamReader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">InputStreamReader</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;test.conf&quot;</span>),<span class="hljs-string">&quot;GBK&quot;</span>);<br><span class="hljs-type">BufferedReader</span> <span class="hljs-variable">bufferedReader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedReader</span>(inputStreamReader);<br>  <span class="hljs-type">String</span> <span class="hljs-variable">line</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">while</span>((line=bfr.readLine())!=<span class="hljs-literal">null</span>)&#123;<br>	bufferWriter.write(line);<br>    bufferWriter.newLine();<br>  &#125;<br></code></pre></td></tr></table></figure>
+<h4 id="2-对象流"><a href="#2-对象流" class="headerlink" title="2. 对象流"></a>2. 对象流</h4><p>对象流就是ObjectOutputStream和ObjectInputStream，对象想要能够通过对象流持久化保存，需要实现下面两种接口，transient关键字用于申明属性不应该被序列化，序列化以后会用默认值序列化。</p>
+<ul>
+<li>实现Serializable空接口，就对对象进行序列化，如果属性是类，也需要实现serializable接口才能完成序列化，序列化版本号用于标记对象版本，不写继承Serializable会根据类的属性进行哈希计算一个。</li>
+<li>实现Externalizable接口，重写writeExternal和readExternal方法，能够更精细化控制序列化的属性，较少使用。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>; <span class="hljs-comment">// 序列化版本号，建议显式声明</span><br>    <span class="hljs-keyword">private</span> String name;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> age;<br>    <span class="hljs-comment">// ...</span><br>&#125;<br><br><span class="hljs-comment">// 序列化对象</span><br><span class="hljs-type">Student</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Student</span>(<span class="hljs-string">&quot;Tom&quot;</span>, <span class="hljs-number">18</span>);<br><span class="hljs-type">ByteArrayOutputStream</span> <span class="hljs-variable">bos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayOutputStream</span>();<br><span class="hljs-type">ObjectOutputStream</span> <span class="hljs-variable">oos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectOutputStream</span>(bos);<br>oos.writeObject(s);<br>oos.close();<br><br><span class="hljs-comment">// 反序列化对象</span><br><span class="hljs-type">ByteArrayInputStream</span> <span class="hljs-variable">bis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayInputStream</span>(bos.toByteArray());<br><span class="hljs-type">ObjectInputStream</span> <span class="hljs-variable">ois</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectInputStream</span>(bis);<br><span class="hljs-type">Student</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> (Student) ois.readObject();<br>ois.close();<br>bis.close();<br>bos.close();<br></code></pre></td></tr></table></figure>
+<h4 id="3-数据流"><a href="#3-数据流" class="headerlink" title="3. 数据流"></a>3. 数据流</h4><p>数据流是DataInputStream和DataOutputStream，数据不通过原始字节保存，使用<code>writeInt(1999)、WriteUTF(&quot;String&quot;)、readUTF()</code>等方法，将数据以Java二进制的形式保存或读取，使用方式上和各类装饰流大同小异。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">try</span> ( <span class="hljs-type">DataOutputStream</span> <span class="hljs-variable">dos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataOutputStream</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(<span class="hljs-string">&quot;/file&quot;</span>)) ) &#123; <br>	dos.writeInt(<span class="hljs-number">123</span>); <br>	dos.writeFloat(<span class="hljs-number">123.45f</span>); <br>	dos.writeUTF(<span class="hljs-string">&quot;Java数据流&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Knowledge-Java/">#Knowledge/Java</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/12/18/Java/%E6%96%B0blog/5.Java%E7%9A%84%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" title="网络编程">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">网络编程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/06/Java/%E6%96%B0blog/3.Java%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="函数式编程">
+                        <span class="hidden-mobile">函数式编程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"AxRSoPrgAA1n3akIHe4aBQ2Y-gzGzoHsz","appKey":"CYOBLQ2l1KRnfhA3E4xX91CI","path":"window.location.pathname","placeholder":"给我评论点啥","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"enable":true,"appid":"AxRSoPrgAA1n3akIHe4aBQ2Y-gzGzoHsz","appkey":"CYOBLQ2l1KRnfhA3E4xX91CI"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

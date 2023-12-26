@@ -1,0 +1,689 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://s3.ax1x.com/2021/01/12/sJsf0O.png">
+  <link rel="icon" href="https://s3.ax1x.com/2021/01/12/sJsf0O.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="新">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在计算机网络中，IP协议是网络层， 用于数据转发，路由器就是工作在这一层，网络层可以说是与IP相关的，我们使用ping命令的时候，就是工作在这一层；TCP协议是传输层的一种协议，用于建立数据连接、保证传输可靠性，传输层其实就是一个关于端口的通信连接协议，所以我们如果要看服务器的端口是否正常，这个时候我们应该使用telnet命令。 程序实现数据通信的核心是建立了TCP连接，无论哪种编程语言都是去调用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络编程">
+<meta property="og:url" content="http://example.com/2023/12/18/Java/%E6%96%B0blog/5.Java%E7%9A%84%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="新&#39;s Blog">
+<meta property="og:description" content="在计算机网络中，IP协议是网络层， 用于数据转发，路由器就是工作在这一层，网络层可以说是与IP相关的，我们使用ping命令的时候，就是工作在这一层；TCP协议是传输层的一种协议，用于建立数据连接、保证传输可靠性，传输层其实就是一个关于端口的通信连接协议，所以我们如果要看服务器的端口是否正常，这个时候我们应该使用telnet命令。 程序实现数据通信的核心是建立了TCP连接，无论哪种编程语言都是去调用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-26T17:20:46.887Z">
+<meta property="article:author" content="新">
+<meta property="article:tag" content="Knowledge&#x2F;Java">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>网络编程 - 新&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"AxRSoPrgAA1n3akIHe4aBQ2Y-gzGzoHsz","app_key":"CYOBLQ2l1KRnfhA3E4xX91CI","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>新&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="网络编程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-18 00:00" pubdate>
+          2023年12月18日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          7k 字
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">网络编程</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>在计算机网络中，IP协议是网络层， 用于数据转发，路由器就是工作在这一层，网络层可以说是与IP相关的，我们使用<code>ping</code>命令的时候，就是工作在这一层；TCP协议是传输层的一种协议，用于建立数据连接、保证传输可靠性，传输层其实就是一个关于端口的通信连接协议，所以我们如果要看服务器的端口是否正常，这个时候我们应该使用<code>telnet</code>命令。</p>
+<p>程序实现数据通信的核心是建立了TCP连接，无论哪种编程语言都是去调用操作系统的Socket建立，而在Java中，用Socket API封装了操作系统套接字以快速建立TCP请求，底层调用了<code>native socket0()</code>创建操作系统套接字；这些Java网络API提供了一系列方便的方法来创建和管理TCP网络连接，封装了底层TCP&#x2F;UDP网络细节，使得网络编程变得更加容易和高效。我们在Socket API上的编程，其实就是应用层编程了，你在TCP报文中所传输的内容就相当于应用层报文，当你制定一个的报文传输和解析的标准与服务，就应用层协议。</p>
+<p>TCP的报文头包含源端口、目标端口、ACK和检验和等等，设计复杂而且与上层应用相关度低，报文的设计为了保障报文传输的安全和可靠，HTTP报文就是TCP报文的正文部分，具体在Java API中的体现就是，Java Socket的inputstream()是TCP的数据报文，或者说TCP报文的正文部分，即应用层报文的全部内容；而HttpURLConnection中的inputstream是HTTP报文的正文部分。</p>
+<p>Tomcat服务器或者说应用层服务器做了什么呢？第一当然是接收TCP请求；第二解析应用层报文；第三提供一组API，让用户方便的获取报文的某个部分，组装报文发送。</p>
+<h4 id="TCP-UDP编程"><a href="#TCP-UDP编程" class="headerlink" title="TCP&#x2F;UDP编程"></a>TCP&#x2F;UDP编程</h4><p>TCP&#x2F;UDP即<strong>传输控制协议</strong>和<strong>用户数据报协议</strong><br>互联网建立在<strong>TCP&#x2F;IP</strong>协议族（包含TCP、IP、UDP、ICMP等协议）基础上，<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26816591/article/details/53022183">网络报文图</a>，路由器只工作在网络层，只处理IP数据报的分发；<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/53374516">TCP协议</a>通过三次握手建立连接，四次挥手关闭连接。TCP和UDP是两套端口，在TCP连接的建立过程中，客户端（本地浏览器）和服务器端（HTTPS网站）都需要分配一个端口。服务器端通常使用预定义的端口（在HTTPS的情况下是端口443），而客户端则使用一个临时的、动态分配的端口。</p>
+<p>Java TCP&#x2F;UDP编程 API：<code>ServerSocket、Socket</code>；<code>DatagramSocket、DataGramPacket</code></p>
+<p>TCP编程使用<strong>流</strong>来处理数据，因为它提供了可靠的、有序的数据传输，当客户端<code>new Socket(host, port)</code>时，就建立TCP连接，服务器每<code>serversocket.accpet()</code>到一个新连接，就会开启一个线程，处理socket。而<strong>UDP不使用流</strong>，因为它是基于独立数据包的无连接通信，datagramsocket.send()和receive()方法直接实现用户数据报的收发。</p>
+<h4 id="HTTP客户端的使用"><a href="#HTTP客户端的使用" class="headerlink" title="HTTP客户端的使用"></a>HTTP客户端的使用</h4><p>HTTP是建立在TCP基础上应用层协议，HTTP的端口实际就是指的TCP端口，HTTP报文由<strong>起始行、头部、正文</strong>三部分组成，然后头部和正文之间有空行，请求报文的起始行教请求行，响应报文的起始行叫状态行，常用的头比如Cache-Control、Content-Type、Accept、Cookie、Authorization等</p>
+<p>请求报文示例：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/mix/76.html</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>www.fishbay.cn<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) <br><span class="hljs-attribute">Conetent-Type</span><span class="hljs-punctuation">: </span>application/x-www-form-urlencoded<br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>JASSDHUHFUBSIUFHI=232DWUFHI<br><br><span class="language-ini"><span class="hljs-attr">username</span>=jinqiao&amp;password=<span class="hljs-number">1234</span></span><br></code></pre></td></tr></table></figure>
+
+<p>响应报文示例：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-meta">HTTP/1.1</span> <span class="hljs-number">200</span> OK<br><span class="hljs-attribute">Server</span><span class="hljs-punctuation">: </span>nginx<br><span class="hljs-attribute">Date</span><span class="hljs-punctuation">: </span>Mon, 20 Feb 2017 09:13:59 GMT<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>text/plain;charset=UTF-8<br><span class="hljs-attribute">Vary</span><span class="hljs-punctuation">: </span>Accept-Encoding<br><span class="hljs-attribute">Cache-Control</span><span class="hljs-punctuation">: </span>no-store<br><br><span class="language-css">&#123;&quot;<span class="hljs-selector-tag">code</span>&quot;:<span class="hljs-number">200</span>,<span class="hljs-string">&quot;notice&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-string">&quot;follow&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-string">&quot;forward&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-string">&quot;msg&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-string">&quot;comment&quot;</span>:<span class="hljs-number">0</span>&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>HTTP的特性：</p>
+<ol>
+<li><strong>无连接</strong>；即请求时连接，返回响应就释放连接。多次连接降低了网络效率，所以在HTTP 1.1时，产生了<strong>Connection: Keep-Alive</strong>，默认开启，使客户端和服务器在keep-alive规定时间内保持连接TCP连接，只有设置Connecttion：false时取消。</li>
+<li><strong>无状态</strong>：每个HTTP请求是独立的，服务器不会记住之前的请求和响应的状态。所以用<strong>Cookie和Session</strong>来模拟状态信息。</li>
+</ol>
+<p>GET请求参数放在URL中，这部分参数也称params，如果参数是中文，中文字符要编码成UTF-8的字节码，Java中使用<code>URLEncoder.encode(keyword, &quot;UTF-8&quot;)</code>，POST请求：post请求的参数放在报文体中</p>
+<p><code>URL</code>和<code>HttpUrlConnection</code>是Java的HTTP客户端编程传统API，实现了使用HTTP协议的诸多特性，而服务器端HTTP编程是编写Web服务器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">URLPostExample</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">urlString</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;https://jsonplaceholder.typicode.com/posts&quot;</span>;<br><br>        <span class="hljs-type">URL</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">URL</span>(urlString);<br>        <span class="hljs-type">HttpURLConnection</span> <span class="hljs-variable">connection</span> <span class="hljs-operator">=</span> (HttpURLConnection) url.openConnection();<br>        <span class="hljs-comment">// 设置请求方法为POST</span><br>        connection.setRequestMethod(<span class="hljs-string">&quot;POST&quot;</span>);<br>        <span class="hljs-comment">// 设置请求头内容类型为JSON</span><br>        connection.setRequestProperty(<span class="hljs-string">&quot;Content-Type&quot;</span>, <span class="hljs-string">&quot;application/json; utf-8&quot;</span>);<br>        <span class="hljs-comment">// 设置请求头接受内容类型为JSON</span><br>        connection.setRequestProperty(<span class="hljs-string">&quot;Accept&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);<br>        <span class="hljs-comment">// 允许输出，以便可以发送请求正文</span><br>        connection.setDoOutput(<span class="hljs-literal">true</span>);<br>        <span class="hljs-comment">// 创建请求正文</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">jsonInputString</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&#123;\&quot;title\&quot;: \&quot;Sample Post\&quot;, \&quot;body\&quot;: \&quot;This is a sample post.\&quot;, \&quot;userId\&quot;: 1&#125;&quot;</span>;<br><br>        <span class="hljs-comment">// 将请求正文写入输出流</span><br>        <span class="hljs-keyword">try</span> (<span class="hljs-type">OutputStream</span> <span class="hljs-variable">outputStream</span> <span class="hljs-operator">=</span> connection.getOutputStream()) &#123;<br>            <span class="hljs-type">byte</span>[] input = jsonInputString.getBytes(<span class="hljs-string">&quot;utf-8&quot;</span>);<br>            outputStream.write(input, <span class="hljs-number">0</span>, input.length);<br>        &#125;<br><br>        <span class="hljs-comment">// 读取响应状态码</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">responseCode</span> <span class="hljs-operator">=</span> connection.getResponseCode();<br>        System.out.println(<span class="hljs-string">&quot;Response code: &quot;</span> + responseCode);<br><br>        <span class="hljs-comment">// 如果响应状态码为201（HTTP_CREATED），则读取响应内容</span><br>        <span class="hljs-keyword">if</span> (responseCode == HttpURLConnection.HTTP_CREATED) &#123;<br>            <span class="hljs-type">BufferedReader</span> <span class="hljs-variable">reader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedReader</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InputStreamReader</span>(connection.getInputStream()));<br>            String line;<br>            <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">responseContent</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br><br>            <span class="hljs-keyword">while</span> ((line = reader.readLine()) != <span class="hljs-literal">null</span>) &#123;<br>                responseContent.append(line);<br>            &#125;<br><br>            reader.close();<br><br>            System.out.println(<span class="hljs-string">&quot;Response content: &quot;</span> + responseContent.toString());<br>        &#125;<br><br>        <span class="hljs-comment">// 关闭连接</span><br>        connection.disconnect();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Java 11引如了 <code>HttpClient</code> API，基于NIO实现，所以相比基于传统IO实现的HttpURLConnection，HttpClient具有更好的性能和更丰富的功能，如支持HTTP&#x2F;2、自动管理连接池和响应式流等。</p>
+<h4 id="邮件协议（SMTP）"><a href="#邮件协议（SMTP）" class="headerlink" title="邮件协议（SMTP）"></a>邮件协议（SMTP）</h4><p>邮件客户端MUA（Main User Agent）通过<strong>SMTP</strong>协议与自己邮件系统的MTA服务器（Mail Transfer Agent）交互，MTA是SMTP服务器，MTA继续通过SMTP协议传输至收件系统的MTA。</p>
+<p>进入收件人邮件系统后，MTA服务器先投递给MDA服务器（Mail Deliver Agent），MDA将邮件存储到用户的“Mail Box”中，有专门的<strong>IMAP</strong>或<strong>POP3</strong>收件服务器，与收件人邮件客户端直接交互。</p>
+<p>![[邮件协议.png|500]]<br>javax.mail实现了MUA客户端的功能，能够实现收发邮件</p>
+<h4 id="NIO和AIO和操作系统IO模型"><a href="#NIO和AIO和操作系统IO模型" class="headerlink" title="NIO和AIO和操作系统IO模型"></a>NIO和AIO和操作系统IO模型</h4><p>传统TCP编程Socket基于IO流进行数据传输，IO流读写操作是阻塞的，传统IO的read方法，会先让数据在内核缓冲区完全就绪，然后在Memory Copy到Java内存中，整个过程可能随着read的数据大，而导致阻塞时间过长。</p>
+<p>例如，在单线程BIO Socket服务器中，如果客户端数据很大，或者客户端没有关流，这样read或者write过程，网络可能占据更长的耗时，而操作系统进行真正IO的时间其实很少，线程阻塞时间长，其他客户端暂时无法与服务器建立TCP连接。BIO下，如果要实现1个服务器同时处理多个客户端数据，只能增加线程数提高响应性能，这种模式成为<strong>thread-based architecture</strong>。</p>
+<p>NIO（New IO）是从Java 1.4开始的一种<strong>非阻塞IO</strong> API和网络API，相当于传统IO流和传统Socket API的进化版本，应对<strong>高并发</strong>的网络编程出现的，是<strong>事件驱动架构</strong>（event-driven architecture），在API使用上的体现是，Selector去监听系统事件。NIO事件驱动的实现基于操作系统多路复用API（如epoll等），可以在操作系统层面注册四种事件，connect、accept、read、write，如读事件和写事件,只有当操作系统<strong>内核缓冲区内的数据完全就绪</strong>，也就是程序真正可读或者真正可写了，才会被Java程序所监听到，直接进行memory copy，这种就是非阻塞IO，这种事件驱动机制，使得在单个线程可以处理大量的并发连接。</p>
+<p>API方面，NIO使用channel通道和buffer缓冲区进行数据传输，搭配selector轮询器，使单个线程处理多个数据通道；共有4种channel，即SocketChannel、ServerSocketChannel、DatagramChannel、FileChannel。要注意两点的是：</p>
+<ol>
+<li>可以使用FileInputStream.getChannel()获得FileChannel，通过channel去操作文件，如果要进行读写，就需要在inputstream和outputstream的基础上构建两个FileChannel对象，而socketChannel是双通道的，一个socketChannel对象可以进行读和写；</li>
+<li>另外，FileChannel不能切换到非阻塞模式，不能搭配selector使用，而<strong>socketChannel必须使用非阻塞模式搭配selector</strong>。</li>
+</ol>
+<p>简单NIOserver中，selector.register()监听serverSocketChannel的accept事件；轮训selector.select()，没有监听事件时select()会一直阻塞，监听到任意事件，使用selectedKeys()取所有的事件处理；acceptable时，accept()建立新的socketChannel通道，并register监听新socketChannel的READ事件。</p>
+<h4 id="Reactor和Proactor"><a href="#Reactor和Proactor" class="headerlink" title="Reactor和Proactor"></a>Reactor和Proactor</h4><p>Reactor和Proactor是两种网络模型</p>
+<p>Reactor 模式也叫 Dispatcher 模式，我觉得这个名字更贴合该模式的含义，即使用I&#x2F;O多路复用API监听事件，收到事件后，根据事件类型分配（Dispatch）给某个业务线程。NIO是一组API，他可以用来设计成Reactor模式，如Netty</p>
+<ol>
+<li>单Reactor单线程，也就是工作线程直接在Reactor线程上处理，Reactor虽然解决了IO阻塞，但一旦业务操作执行时间长，例如进行部分数据库操作，就会阻塞，单工作线程也不适合CPU密集型工作。采用<strong>单Reactor单线程模式的例如Redis</strong>，业务操作简单，而且完全基于内存，响应速度很快，对CPU依赖度低。</li>
+<li>单Reactor多工作线程，单Reactor负责接收和响应操作系统的所有事件，业务逻辑通过工作线程池处理，解决了单Reactor单线程模式下，易发生业务阻塞和CPU利用率低的问题，但是单Reactor面对瞬时高并发场景，容易成为性能瓶颈，所以就将单Reactor变为多Reactor。</li>
+<li>多Reactor多线程，mainReactor只负责建立网络连接，然后将socketChannel传递给subReactor线程，进行读写响应和业务处理。如Netty、Nginx。Spring 5的异步、Dubbo、RocketMQ等等</li>
+</ol>
+<p>Proactor异步IO模型，AIO就是采用这种模型，性能不一定比NIO高，但处理长耗时IO如文件下载有一定的优势，在Reactor 同步非阻塞IO模式下，JVM会一直使用操作系统IO多路复用API轮训是否就绪可read，最后channel.read()，也就是从内核缓冲区memorycopy到jvm内存的过程是同步的，而Proactor，最后由内核缓冲区到jvm内存的过程也是由内核完成的，最后由操作系统通知。</p>
+<p>到这里，<strong>非阻塞IO是就绪读通知，异步IO是完成读通知</strong>。AIO理论性能会比NIO稍高，但应用非常少，成熟度一般，在Linux支持度一般，netty 5进行过实践弃用。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/26943938">如何深刻理解Reactor和Proactor？-小林回答</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/95662364#:~:text=Reactor%E5%AE%9E%E7%8E%B0%E4%BA%86%E4%B8%80%E4%B8%AA%E8%A2%AB%E5%8A%A8,%E6%89%A7%E8%A1%8C%EF%BC%8C%E4%BB%8E%E8%80%8C%E6%8F%90%E9%AB%98%E5%90%9E%E5%90%90%E9%87%8F%E3%80%82">高性能IO模型分析</a></p>
+<h4 id="Netty"><a href="#Netty" class="headerlink" title="Netty"></a>Netty</h4><p>Netty是JBoss基于NIO封装的开源异步网络API，源码层面很复杂，但是使用上却比NIO简单，需要处理高并发网络、实现自定义协议时更高层次抽象的Netty API，而不是直接使用传统网络编程Socket、NIO网络编程SocketChanel这些API。</p>
+<h4 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h4><p>主流的JavaWeb框架，例如SpringMVC，都是默认处理HTTP请求。</p>
+<p>HTTP服务器首先肯定基于TCP，需要服务端不断的accept()或者其他形式去监听TCP端口，Tomcat服务器就是典型的HTTP服务器，同时Tomcat也是一个Java应用程序容器，部署相应的Java程序，也就相当于服务器支持了相应的网络通讯。</p>
+<p>系统之间的交互，都可以称之为RPC，大部分情况下直接使用HTTP协议交互足够，可以自行协商交互报文，也可以在HTTP上使用标准的RESTful协议用于接口交互。很多RPC框架会觉得应用层通用的HTTP协议，用于系统间的通讯比较冗长，他们自定义了一些协议，例如sofaRPC、 Dubbo、gRPC、Spring Cloud之间，都是自定义协议，这些自定义协议其实就是基于Java Socket API开发的一套应用层协议+应用层服务器，RPC框架实现这些，其实和写一些HTTP服务器大同小异，都是在Socket API之上处理上层协议。</p>
+<ul>
+<li>实现系统间的连接通讯</li>
+<li>实现报文高效的发送、分发和解析</li>
+<li>定义易于理解和维护API规则，或者说应用层报文的规则</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Knowledge-Java/">#Knowledge/Java</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/12/19/Java/%E6%96%B0blog/6.Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="多线程">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">多线程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/09/Java/%E6%96%B0blog/4.Java%E7%9A%84%E6%B5%81%E6%93%8D%E4%BD%9C/" title="流">
+                        <span class="hidden-mobile">流</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"AxRSoPrgAA1n3akIHe4aBQ2Y-gzGzoHsz","appKey":"CYOBLQ2l1KRnfhA3E4xX91CI","path":"window.location.pathname","placeholder":"给我评论点啥","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"enable":true,"appid":"AxRSoPrgAA1n3akIHe4aBQ2Y-gzGzoHsz","appkey":"CYOBLQ2l1KRnfhA3E4xX91CI"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
